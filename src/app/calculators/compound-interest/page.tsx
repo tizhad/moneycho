@@ -22,14 +22,16 @@ function Field({ label, children }: { label: string; children: React.ReactNode }
   );
 }
 
-function NumberInput({ value, onChange, prefix, suffix }: { value: number; onChange: (v: number) => void; prefix?: string; suffix?: string }) {
+function NumberInput({ value, onChange, prefix, suffix }: { value: number | ""; onChange: (v: number | "") => void; prefix?: string; suffix?: string }) {
   return (
     <div className="relative">
       {prefix && <span className="absolute left-4 top-1/2 -translate-y-1/2 text-emerald-deep/40 font-display font-bold">{prefix}</span>}
       <input
         type="number"
         value={value}
-        onChange={(e) => onChange(Math.max(0, Number(e.target.value)))}
+        onChange={(e) => onChange(e.target.value === "" ? "" : Math.max(0, Number(e.target.value)))}
+        onFocus={(e) => e.target.select()}
+        placeholder="0"
         className={`w-full bg-paper border border-emerald-deep/20 py-3 font-display text-lg font-bold text-emerald-deep focus:outline-none focus:border-emerald-deep transition-colors ${prefix ? "pl-8" : "pl-4"} ${suffix ? "pr-10" : "pr-4"}`}
       />
       {suffix && <span className="absolute right-4 top-1/2 -translate-y-1/2 text-emerald-deep/40 font-display font-bold">{suffix}</span>}
@@ -38,20 +40,27 @@ function NumberInput({ value, onChange, prefix, suffix }: { value: number; onCha
 }
 
 export default function CompoundInterestPage() {
-  const [principal, setPrincipal] = useState(10000);
-  const [monthly, setMonthly] = useState(500);
-  const [rate, setRate] = useState(7);
-  const [years, setYears] = useState(20);
+  const [principal, setPrincipal] = useState<number | "">(10000);
+  const [monthly, setMonthly] = useState<number | "">(500);
+  const [rate, setRate] = useState<number | "">(7);
+  const [years, setYears] = useState<number | "">(20);
   const [freq, setFreq] = useState(12);
 
+  const p = typeof principal === "number" ? principal : 0;
+  const m = typeof monthly === "number" ? monthly : 0;
+  const r_ = typeof rate === "number" ? rate : 0;
+  const y = typeof years === "number" ? years : 0;
+
   const result = useMemo(() => {
-    const r = rate / 100 / freq;
-    const n = years * freq;
-    const futureValue = principal * Math.pow(1 + r, n) + monthly * (Math.pow(1 + r, n) - 1) / r;
-    const totalContributions = principal + monthly * 12 * years;
+    const r = r_ / 100 / freq;
+    const n = y * freq;
+    const futureValue = r === 0
+      ? p + m * n
+      : p * Math.pow(1 + r, n) + m * (Math.pow(1 + r, n) - 1) / r;
+    const totalContributions = p + m * 12 * y;
     const totalInterest = futureValue - totalContributions;
     return { futureValue, totalContributions, totalInterest };
-  }, [principal, monthly, rate, years, freq]);
+  }, [p, m, r_, y, freq]);
 
   return (
     <div className="grid lg:grid-cols-2 gap-16 items-start">
@@ -75,7 +84,7 @@ export default function CompoundInterestPage() {
             <NumberInput value={monthly} onChange={setMonthly} prefix="$" />
           </Field>
           <Field label="Annual Interest Rate">
-            <NumberInput value={rate} onChange={(v) => setRate(Math.min(100, v))} suffix="%" />
+            <NumberInput value={rate} onChange={(v) => setRate(v === "" ? "" : Math.min(100, v))} suffix="%" />
           </Field>
           <Field label="Time Period">
             <NumberInput value={years} onChange={setYears} suffix="yrs" />
@@ -107,7 +116,7 @@ export default function CompoundInterestPage() {
             Future Value
           </p>
           <p className="font-display text-5xl font-bold">{fmt(result.futureValue)}</p>
-          <p className="text-paper/50 text-sm mt-2">after {years} years</p>
+          <p className="text-paper/50 text-sm mt-2">after {y} years</p>
         </div>
 
         <div className="grid grid-cols-2 gap-4">
