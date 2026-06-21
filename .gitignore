@@ -24,6 +24,10 @@
 .DS_Store
 *.pem
 
+# local docs and design references — not for version control
+/docs
+src/app/Lovable-source
+
 # debug
 npm-debug.log*
 yarn-debug.log*
