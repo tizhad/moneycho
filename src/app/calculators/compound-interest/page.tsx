@@ -54,9 +54,10 @@ export default function CompoundInterestPage() {
   const result = useMemo(() => {
     const r = r_ / 100 / freq;
     const n = y * freq;
+    const mPerPeriod = m * 12 / freq; // convert monthly → per compounding period
     const futureValue = r === 0
-      ? p + m * n
-      : p * Math.pow(1 + r, n) + m * (Math.pow(1 + r, n) - 1) / r;
+      ? p + m * 12 * y
+      : p * Math.pow(1 + r, n) + mPerPeriod * (Math.pow(1 + r, n) - 1) / r;
     const totalContributions = p + m * 12 * y;
     const totalInterest = futureValue - totalContributions;
     return { futureValue, totalContributions, totalInterest };
