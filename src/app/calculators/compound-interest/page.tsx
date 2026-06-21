@@ -1,9 +1,7 @@
 "use client";
 
-import { useState, useMemo } from "react";
-
-const fmt = (n: number) =>
-  new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }).format(n);
+import { useState, useMemo, useEffect, useRef } from "react";
+import { detectCurrency, saveCurrency, formatCurrency, CURRENCIES } from "@/lib/currency";
 
 const frequencies: { label: string; value: number }[] = [
   { label: "Monthly", value: 12 },
@@ -45,6 +43,32 @@ export default function CompoundInterestPage() {
   const [rate, setRate] = useState<number | "">(7);
   const [years, setYears] = useState<number | "">(20);
   const [freq, setFreq] = useState(12);
+  const [currency, setCurrency] = useState("USD");
+  const [showSwitcher, setShowSwitcher] = useState(false);
+  const switcherRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    setCurrency(detectCurrency());
+  }, []);
+
+  useEffect(() => {
+    function handleClickOutside(e: MouseEvent) {
+      if (switcherRef.current && !switcherRef.current.contains(e.target as Node)) {
+        setShowSwitcher(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  function handleCurrencyChange(code: string) {
+    setCurrency(code);
+    saveCurrency(code);
+    setShowSwitcher(false);
+  }
+
+  const selected = CURRENCIES.find((c) => c.code === currency);
+  const fmt = useMemo(() => (n: number) => formatCurrency(n, currency), [currency]);
 
   const p = typeof principal === "number" ? principal : 0;
   const m = typeof monthly === "number" ? monthly : 0;
@@ -52,12 +76,14 @@ export default function CompoundInterestPage() {
   const y = typeof years === "number" ? years : 0;
 
   const result = useMemo(() => {
-    const r = r_ / 100 / freq;
-    const n = y * freq;
-    const mPerPeriod = m * 12 / freq; // convert monthly → per compounding period
-    const futureValue = r === 0
-      ? p + m * 12 * y
-      : p * Math.pow(1 + r, n) + mPerPeriod * (Math.pow(1 + r, n) - 1) / r;
+    // Always step monthly so contributions are deposited every month regardless
+    // of compounding frequency. Convert the periodic rate to its monthly
+    // equivalent: (1 + annual/freq)^(freq/12) - 1
+    const rMonthly = r_ === 0 ? 0 : Math.pow(1 + r_ / 100 / freq, freq / 12) - 1;
+    const n = y * 12;
+    const futureValue = rMonthly === 0
+      ? p + m * n
+      : p * Math.pow(1 + rMonthly, n) + m * (Math.pow(1 + rMonthly, n) - 1) / rMonthly;
     const totalContributions = p + m * 12 * y;
     const totalInterest = futureValue - totalContributions;
     return { futureValue, totalContributions, totalInterest };
@@ -79,13 +105,13 @@ export default function CompoundInterestPage() {
 
         <div className="space-y-6">
           <Field label="Starting Amount">
-            <NumberInput value={principal} onChange={setPrincipal} prefix="$" />
+            <NumberInput value={principal} onChange={setPrincipal} prefix={selected?.symbol ?? "$"} />
           </Field>
           <Field label="Monthly Contribution">
-            <NumberInput value={monthly} onChange={setMonthly} prefix="$" />
+            <NumberInput value={monthly} onChange={setMonthly} prefix={selected?.symbol ?? "$"} />
           </Field>
           <Field label="Annual Interest Rate">
-            <NumberInput value={rate} onChange={(v) => setRate(v === "" ? "" : Math.min(100, v))} suffix="%" />
+            <NumberInput value={rate} onChange={(v) => setRate(v === "" ? "" : Math.min(100, v as number))} suffix="%" />
           </Field>
           <Field label="Time Period">
             <NumberInput value={years} onChange={setYears} suffix="yrs" />
@@ -107,6 +133,40 @@ export default function CompoundInterestPage() {
               ))}
             </div>
           </Field>
+
+          {/* Currency switcher */}
+          <div className="relative" ref={switcherRef}>
+            <label className="block text-xs font-bold uppercase tracking-widest text-emerald-deep mb-2">
+              Currency
+            </label>
+            <button
+              onClick={() => setShowSwitcher(!showSwitcher)}
+              className="w-full flex items-center justify-between bg-paper border border-emerald-deep/20 px-4 py-3 hover:border-emerald-deep transition-colors"
+            >
+              <span className="font-display font-bold text-emerald-deep">
+                {selected?.code}{" "}
+                <span className="font-normal text-emerald-deep/50">— {selected?.name}</span>
+              </span>
+              <span className="text-emerald-deep/40 text-sm">{showSwitcher ? "▲" : "▼"}</span>
+            </button>
+            {showSwitcher && (
+              <div className="absolute z-20 top-full left-0 right-0 bg-paper border border-emerald-deep/20 border-t-0 max-h-64 overflow-y-auto shadow-lg">
+                {CURRENCIES.map((c) => (
+                  <button
+                    key={c.code}
+                    onClick={() => handleCurrencyChange(c.code)}
+                    className={`w-full flex items-center justify-between px-4 py-2.5 text-left hover:bg-emerald-deep/5 transition-colors ${
+                      c.code === currency ? "bg-emerald-deep/5" : ""
+                    }`}
+                  >
+                    <span className="text-sm font-bold text-emerald-deep">{c.code}</span>
+                    <span className="text-xs text-emerald-deep/50">{c.name}</span>
+                  </button>
+                ))}
+              </div>
+            )}
+            <p className="text-xs text-emerald-deep/30 mt-2">Auto-detected · change if incorrect</p>
+          </div>
         </div>
       </div>
 
@@ -141,9 +201,20 @@ export default function CompoundInterestPage() {
 
         {/* Bar */}
         <div className="bg-paper border border-emerald-deep/10 p-6">
-          <p className="text-xs font-bold uppercase tracking-widest text-emerald-deep/40 mb-4">
-            Breakdown
-          </p>
+          <div className="flex items-center gap-2 mb-4">
+            <p className="text-xs font-bold uppercase tracking-widest text-emerald-deep/40">
+              Breakdown
+            </p>
+            <div className="relative group">
+              <span className="flex items-center justify-center w-4 h-4 rounded-full border border-emerald-deep/30 text-emerald-deep/40 text-[10px] font-bold cursor-default select-none">
+                ?
+              </span>
+              <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-64 bg-emerald-deep text-paper text-xs leading-relaxed p-3 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity z-10">
+                This bar shows where your future value comes from. The green portion is money you actually deposited; the gold portion is interest earned by compounding. The longer you invest, the larger the gold section grows.
+                <span className="absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent border-t-emerald-deep" />
+              </div>
+            </div>
+          </div>
           <div className="flex h-3 overflow-hidden mb-3">
             <div
               className="bg-emerald-deep h-full transition-all"

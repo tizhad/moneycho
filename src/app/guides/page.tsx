@@ -41,14 +41,9 @@ export default function GuidesPage() {
                 {guide.description}
               </p>
             </div>
-            <div className="flex items-center gap-3 shrink-0">
-              <span className="font-display text-4xl font-bold text-emerald-deep/10 group-hover:text-gold transition-colors">
-                {String(i + 1).padStart(2, "0")}
-              </span>
-              <span className="text-2xl text-emerald-deep/30 group-hover:text-emerald-deep transition-colors">
-                →
-              </span>
-            </div>
+            <span className="text-2xl text-emerald-deep/30 group-hover:text-emerald-deep transition-colors shrink-0">
+              →
+            </span>
           </Link>
         ))}
       </div>

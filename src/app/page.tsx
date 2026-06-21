@@ -108,15 +108,56 @@ export default function HomePage() {
         </div>
       </header>
 
+      {/* Guides */}
+      <section className="max-w-7xl mx-auto px-6 py-24">
+        <div className={`${layout.sectionHeader}`}>
+          <h2 className={`${text.sectionHeading} text-3xl md:text-4xl`}>
+            Guides
+          </h2>
+          <Link
+            href="/guides"
+            className="text-xs font-bold uppercase tracking-widest text-emerald-deep/50 hover:text-emerald-deep transition-colors"
+          >
+            All Guides →
+          </Link>
+        </div>
+
+        <div className="grid gap-px bg-emerald-deep/10 border border-emerald-deep/10">
+          {guides.map((guide) => (
+            <Link
+              key={guide.slug}
+              href={`/guides/${guide.slug}`}
+              className="group bg-paper p-8 md:p-10 hover:bg-emerald-deep/[0.03] transition-colors flex flex-col md:flex-row md:items-center md:justify-between gap-6"
+            >
+              <div className="flex-1">
+                <div className="flex items-center gap-4 mb-3">
+                  <span className={text.eyebrow}>{guide.tag}</span>
+                  <span className="text-emerald-deep/20">·</span>
+                  <span className="text-xs text-emerald-deep/40 uppercase tracking-widest">
+                    {guide.date}
+                  </span>
+                </div>
+                <h3 className={`${text.cardTitle} text-xl md:text-2xl mb-2`}>
+                  {guide.title}
+                </h3>
+                <p className="text-emerald-deep/60 text-sm leading-relaxed max-w-xl">
+                  {guide.description}
+                </p>
+              </div>
+              <span className="text-2xl text-emerald-deep/30 group-hover:text-emerald-deep transition-colors shrink-0">
+                →
+              </span>
+            </Link>
+          ))}
+        </div>
+      </section>
+
       {/* Analytical Engines */}
       <section id="tools" className="max-w-7xl mx-auto px-6 pb-24">
         <div className="flex justify-between items-end mb-12 border-b border-emerald-deep/20 pb-8">
           <h2 className="font-display text-3xl md:text-4xl font-bold text-emerald-deep tracking-tight">
             Articles
           </h2>
-          {/* <span className="text-xs font-medium uppercase tracking-widest text-emerald-deep/50">
-            V0.6 // Stable
-          </span> */}
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-emerald-deep/10 border border-emerald-deep/10">
@@ -140,50 +181,6 @@ export default function HomePage() {
               </p>
               <span className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest border-b border-transparent group-hover:border-gold pb-1 text-emerald-deep transition-all">
                 {calc.action} →
-              </span>
-            </Link>
-          ))}
-        </div>
-      </section>
-
-      {/* Guides */}
-      <section className="max-w-7xl mx-auto px-6 py-24">
-        <div className={`${layout.sectionHeader}`}>
-          <h2 className={`${text.sectionHeading} text-3xl md:text-4xl`}>
-            Guides
-          </h2>
-          <Link
-            href="/guides"
-            className="text-xs font-bold uppercase tracking-widest text-emerald-deep/50 hover:text-emerald-deep transition-colors"
-          >
-            All Guides →
-          </Link>
-        </div>
-
-        <div className="grid gap-px bg-emerald-deep/10 border border-emerald-deep/10">
-          {guides.map((guide, i) => (
-            <Link
-              key={guide.slug}
-              href={`/guides/${guide.slug}`}
-              className="group bg-paper p-8 md:p-10 hover:bg-emerald-deep/[0.03] transition-colors flex flex-col md:flex-row md:items-center md:justify-between gap-6"
-            >
-              <div className="flex-1">
-                <div className="flex items-center gap-4 mb-3">
-                  <span className={text.eyebrow}>{guide.tag}</span>
-                  <span className="text-emerald-deep/20">·</span>
-                  <span className="text-xs text-emerald-deep/40 uppercase tracking-widest">
-                    {guide.date}
-                  </span>
-                </div>
-                <h3 className={`${text.cardTitle} text-xl md:text-2xl mb-2`}>
-                  {guide.title}
-                </h3>
-                <p className="text-emerald-deep/60 text-sm leading-relaxed max-w-xl">
-                  {guide.description}
-                </p>
-              </div>
-              <span className="font-display text-4xl font-bold text-emerald-deep/10 group-hover:text-gold transition-colors shrink-0">
-                {String(i + 1).padStart(2, '0')}
               </span>
             </Link>
           ))}

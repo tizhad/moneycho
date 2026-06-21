@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useRef, useMemo } from "react";
 import { detectCurrency, saveCurrency, formatCurrency, CURRENCIES } from "@/lib/currency";
 
 const buckets = [
@@ -13,10 +13,21 @@ export default function BudgetPage() {
   const [income, setIncome] = useState<number | "">("");
   const [currency, setCurrency] = useState("USD");
   const [showSwitcher, setShowSwitcher] = useState(false);
+  const switcherRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     setCurrency(detectCurrency());
     setIncome(5000);
+  }, []);
+
+  useEffect(() => {
+    function handleClickOutside(e: MouseEvent) {
+      if (switcherRef.current && !switcherRef.current.contains(e.target as Node)) {
+        setShowSwitcher(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
   function handleCurrencyChange(code: string) {
@@ -71,7 +82,7 @@ export default function BudgetPage() {
           </div>
 
           {/* Currency switcher */}
-          <div className="relative">
+          <div className="relative" ref={switcherRef}>
             <label className="block text-xs font-bold uppercase tracking-widest text-emerald-deep mb-2">
               Currency
             </label>

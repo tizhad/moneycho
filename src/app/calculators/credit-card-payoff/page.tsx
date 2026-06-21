@@ -1,9 +1,7 @@
 "use client";
 
-import { useState, useMemo } from "react";
-
-const fmt = (n: number) =>
-  new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }).format(n);
+import { useState, useMemo, useEffect, useRef } from "react";
+import { detectCurrency, saveCurrency, formatCurrency, CURRENCIES } from "@/lib/currency";
 
 function Field({ label, hint, children }: { label: string; hint?: string; children: React.ReactNode }) {
   return (
@@ -19,14 +17,16 @@ function Field({ label, hint, children }: { label: string; hint?: string; childr
   );
 }
 
-function NumberInput({ value, onChange, prefix, suffix }: { value: number; onChange: (v: number) => void; prefix?: string; suffix?: string }) {
+function NumberInput({ value, onChange, prefix, suffix }: { value: number | ""; onChange: (v: number | "") => void; prefix?: string; suffix?: string }) {
   return (
     <div className="relative">
       {prefix && <span className="absolute left-4 top-1/2 -translate-y-1/2 text-emerald-deep/40 font-display font-bold">{prefix}</span>}
       <input
         type="number"
         value={value}
-        onChange={(e) => onChange(Math.max(0, Number(e.target.value)))}
+        onChange={(e) => onChange(e.target.value === "" ? "" : Math.max(0, Number(e.target.value)))}
+        onFocus={(e) => e.target.select()}
+        placeholder="0"
         className={`w-full bg-paper border border-emerald-deep/20 py-3 font-display text-lg font-bold text-emerald-deep focus:outline-none focus:border-emerald-deep transition-colors ${prefix ? "pl-8" : "pl-4"} ${suffix ? "pr-10" : "pr-4"}`}
       />
       {suffix && <span className="absolute right-4 top-1/2 -translate-y-1/2 text-emerald-deep/40 font-display font-bold">{suffix}</span>}
@@ -37,8 +37,7 @@ function NumberInput({ value, onChange, prefix, suffix }: { value: number; onCha
 function calcPayoff(balance: number, apr: number, payment: number) {
   if (payment <= 0 || balance <= 0) return null;
   const monthlyRate = apr / 100 / 12;
-  const minPayment = balance * 0.02; // 2% minimum
-  if (payment <= balance * monthlyRate) return null; // payment doesn't cover interest
+  if (payment <= balance * monthlyRate) return null;
 
   let remaining = balance;
   let months = 0;
@@ -69,11 +68,42 @@ function calcPayoff(balance: number, apr: number, payment: number) {
 }
 
 export default function CreditCardPayoffPage() {
-  const [balance, setBalance] = useState(5000);
-  const [apr, setApr] = useState(22);
-  const [payment, setPayment] = useState(200);
+  const [balance, setBalance] = useState<number | "">(5000);
+  const [apr, setApr] = useState<number | "">(22);
+  const [payment, setPayment] = useState<number | "">(200);
+  const [currency, setCurrency] = useState("USD");
+  const [showSwitcher, setShowSwitcher] = useState(false);
+  const switcherRef = useRef<HTMLDivElement>(null);
 
-  const result = useMemo(() => calcPayoff(balance, apr, payment), [balance, apr, payment]);
+  useEffect(() => {
+    setCurrency(detectCurrency());
+  }, []);
+
+  useEffect(() => {
+    function handleClickOutside(e: MouseEvent) {
+      if (switcherRef.current && !switcherRef.current.contains(e.target as Node)) {
+        setShowSwitcher(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  function handleCurrencyChange(code: string) {
+    setCurrency(code);
+    saveCurrency(code);
+    setShowSwitcher(false);
+  }
+
+  const selected = CURRENCIES.find((c) => c.code === currency);
+  const fmt = useMemo(() => (n: number) => formatCurrency(n, currency), [currency]);
+  const symbol = selected?.symbol ?? "$";
+
+  const b = typeof balance === "number" ? balance : 0;
+  const a = typeof apr === "number" ? apr : 0;
+  const pmt = typeof payment === "number" ? payment : 0;
+
+  const result = useMemo(() => calcPayoff(b, a, pmt), [b, a, pmt]);
 
   const years = result ? Math.floor(result.months / 12) : 0;
   const months = result ? result.months % 12 : 0;
@@ -94,17 +124,48 @@ export default function CreditCardPayoffPage() {
 
         <div className="space-y-6">
           <Field label="Current Balance">
-            <NumberInput value={balance} onChange={setBalance} prefix="$" />
+            <NumberInput value={balance} onChange={setBalance} prefix={symbol} />
           </Field>
           <Field label="Annual Interest Rate (APR)">
-            <NumberInput value={apr} onChange={(v) => setApr(Math.min(100, v))} suffix="%" />
+            <NumberInput value={apr} onChange={(v) => setApr(v === "" ? "" : Math.min(100, v as number))} suffix="%" />
           </Field>
-          <Field
-            label="Monthly Payment"
-            hint={`Min ~${fmt(balance * 0.02)}/mo`}
-          >
-            <NumberInput value={payment} onChange={setPayment} prefix="$" />
+          <Field label="Monthly Payment" hint={`Min ~${fmt(b * 0.02)}/mo`}>
+            <NumberInput value={payment} onChange={setPayment} prefix={symbol} />
           </Field>
+
+          {/* Currency switcher */}
+          <div className="relative" ref={switcherRef}>
+            <label className="block text-xs font-bold uppercase tracking-widest text-emerald-deep mb-2">
+              Currency
+            </label>
+            <button
+              onClick={() => setShowSwitcher(!showSwitcher)}
+              className="w-full flex items-center justify-between bg-paper border border-emerald-deep/20 px-4 py-3 hover:border-emerald-deep transition-colors"
+            >
+              <span className="font-display font-bold text-emerald-deep">
+                {selected?.code}{" "}
+                <span className="font-normal text-emerald-deep/50">— {selected?.name}</span>
+              </span>
+              <span className="text-emerald-deep/40 text-sm">{showSwitcher ? "▲" : "▼"}</span>
+            </button>
+            {showSwitcher && (
+              <div className="absolute z-20 top-full left-0 right-0 bg-paper border border-emerald-deep/20 border-t-0 max-h-64 overflow-y-auto shadow-lg">
+                {CURRENCIES.map((c) => (
+                  <button
+                    key={c.code}
+                    onClick={() => handleCurrencyChange(c.code)}
+                    className={`w-full flex items-center justify-between px-4 py-2.5 text-left hover:bg-emerald-deep/5 transition-colors ${
+                      c.code === currency ? "bg-emerald-deep/5" : ""
+                    }`}
+                  >
+                    <span className="text-sm font-bold text-emerald-deep">{c.code}</span>
+                    <span className="text-xs text-emerald-deep/50">{c.name}</span>
+                  </button>
+                ))}
+              </div>
+            )}
+            <p className="text-xs text-emerald-deep/30 mt-2">Auto-detected · change if incorrect</p>
+          </div>
         </div>
       </div>
 
@@ -126,7 +187,7 @@ export default function CreditCardPayoffPage() {
                 {years > 0 ? `${years}y ` : ""}{months}mo
               </p>
               <p className="text-paper/50 text-sm mt-2">
-                paying {fmt(payment)}/month
+                paying {fmt(pmt)}/month
               </p>
             </div>
 
