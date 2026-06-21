@@ -1,62 +1,71 @@
-import Link from "next/link";
+import Link from 'next/link';
 
 const calculators = [
   {
-    index: "01",
-    title: "Budget Architect",
-    description: "Model your monthly cash flow using the 50/30/20 rule. Allocate capital across needs, wants, and savings with precision.",
-    href: "/calculators/budget",
-    action: "Build Budget",
+    index: '01',
+    title: 'Budget Architect',
+    description:
+      'Model your monthly cash flow using the 50/30/20 rule. Allocate capital across needs, wants, and savings with precision.',
+    href: '/calculators/budget',
+    action: 'Build Budget',
   },
   {
-    index: "02",
-    title: "Yield Projection",
-    description: "Visualise the velocity of capital. Compound interest modelling with inflation-adjusted real-return targets.",
-    href: "/calculators/compound-interest",
-    action: "Run Analysis",
+    index: '02',
+    title: 'Yield Projection',
+    description:
+      'Visualise the velocity of capital. Compound interest modelling with inflation-adjusted real-return targets.',
+    href: '/calculators/compound-interest',
+    action: 'Run Analysis',
   },
   {
-    index: "03",
-    title: "Debt Arbitrage",
-    description: "Comparison matrix for avalanche and snowball strategies. Real-time cost-of-capital optimisation.",
-    href: "/calculators/debt-payoff",
-    action: "Compare Rates",
+    index: '03',
+    title: 'Debt Arbitrage',
+    description:
+      'Comparison matrix for avalanche and snowball strategies. Real-time cost-of-capital optimisation.',
+    href: '/calculators/debt-payoff',
+    action: 'Compare Rates',
   },
   {
-    index: "04",
-    title: "Wealth Longevity",
-    description: "Monte Carlo simulations for retirement withdrawal rates across multiple economic cycles.",
-    href: "/calculators/retirement",
-    action: "Stress Test",
+    index: '04',
+    title: 'Wealth Longevity',
+    description:
+      'Monte Carlo simulations for retirement withdrawal rates across multiple economic cycles.',
+    href: '/calculators/retirement',
+    action: 'Stress Test',
   },
   {
-    index: "05",
-    title: "Rent vs Own",
-    description: "Dynamic net-worth modelling across renting and ownership scenarios. Factor in opportunity cost.",
-    href: "/calculators/rent-vs-buy",
-    action: "Model Scenario",
+    index: '05',
+    title: 'Rent vs Own',
+    description:
+      'Dynamic net-worth modelling across renting and ownership scenarios. Factor in opportunity cost.',
+    href: '/calculators/rent-vs-buy',
+    action: 'Model Scenario',
   },
   {
-    index: "06",
-    title: "Liquidity Shield",
-    description: "Calculate your optimal emergency reserve across income volatility, dependants, and risk tolerance.",
-    href: "/calculators/emergency-fund",
-    action: "Calculate Now",
+    index: '06',
+    title: 'Liquidity Shield',
+    description:
+      'Calculate your optimal emergency reserve across income volatility, dependants, and risk tolerance.',
+    href: '/calculators/emergency-fund',
+    action: 'Calculate Now',
   },
 ];
 
 const articles = [
   {
-    eyebrow: "FISCAL POLICY // 06·21",
-    title: "The Inverted Yield Curve Paradox: Strategies for Extended Volatility",
-    excerpt: "An exploration of historical precedence and modern risk mitigation in high-interest environments.",
-    href: "/insights/yield-curve",
+    eyebrow: 'FISCAL POLICY // 06·21',
+    title:
+      'The Inverted Yield Curve Paradox: Strategies for Extended Volatility',
+    excerpt:
+      'An exploration of historical precedence and modern risk mitigation in high-interest environments.',
+    href: '/guides/yield-curve',
   },
   {
-    eyebrow: "EQUITIES // 06·14",
-    title: "Architecture of a Private Family Office: Lessons from the 1%",
-    excerpt: "Defining the structural requirements for multi-generational wealth preservation and governance.",
-    href: "/insights/family-office",
+    eyebrow: 'EQUITIES // 06·14',
+    title: 'Architecture of a Private Family Office: Lessons from the 1%',
+    excerpt:
+      'Defining the structural requirements for multi-generational wealth preservation and governance.',
+    href: '/guides/family-office',
   },
 ];
 
@@ -71,10 +80,14 @@ export default function HomePage() {
           </span>
           <h1 className="text-5xl md:text-7xl lg:text-8xl font-display font-bold leading-[0.9] tracking-tighter text-emerald-deep mb-8">
             Precision in <br />
-            <span className="text-emerald-mid italic font-body font-normal">Every Decimal.</span>
+            <span className="text-emerald-mid italic font-body font-normal">
+              Every Decimal.
+            </span>
           </h1>
           <p className="text-lg md:text-2xl text-emerald-deep/80 max-w-xl mb-10 leading-relaxed">
-            A suite of high-fidelity financial instruments and analytical intelligence for the modern individual. Built on the principles of transparency and technical rigour.
+            A suite of high-fidelity financial instruments and analytical
+            intelligence for the modern individual. Built on the principles of
+            transparency and technical rigour.
           </p>
           <div className="flex flex-wrap gap-4">
             <Link
@@ -84,7 +97,7 @@ export default function HomePage() {
               Explore Toolkit
             </Link>
             <Link
-              href="/insights"
+              href="/guides"
               className="px-8 py-4 border border-emerald-deep text-emerald-deep font-bold uppercase tracking-widest text-xs hover:bg-emerald-deep/5 transition-colors"
             >
               View Insights
@@ -97,11 +110,11 @@ export default function HomePage() {
       <section id="tools" className="max-w-7xl mx-auto px-6 pb-24">
         <div className="flex justify-between items-end mb-12 border-b border-emerald-deep/20 pb-8">
           <h2 className="font-display text-3xl md:text-4xl font-bold text-emerald-deep tracking-tight">
-            Analytical Engines
+            Articles
           </h2>
-          <span className="text-xs font-medium uppercase tracking-widest text-emerald-deep/50">
+          {/* <span className="text-xs font-medium uppercase tracking-widest text-emerald-deep/50">
             V0.6 // Stable
-          </span>
+          </span> */}
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-emerald-deep/10 border border-emerald-deep/10">
@@ -140,10 +153,11 @@ export default function HomePage() {
                 The Moneycho Journal
               </h2>
               <p className="text-paper/60 leading-relaxed mb-8">
-                Deep technical analysis on market dynamics, fiscal policy, and the architecture of wealth.
+                Deep technical analysis on market dynamics, fiscal policy, and
+                the architecture of wealth.
               </p>
               <Link
-                href="/insights"
+                href="/guides"
                 className="text-gold font-bold uppercase tracking-widest text-xs border-b border-gold pb-1 hover:text-paper hover:border-paper transition-all"
               >
                 Browse Archives

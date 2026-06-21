@@ -12,9 +12,9 @@ const columns = [
   {
     heading: "Intelligence",
     links: [
-      { label: "The Journal", href: "/insights" },
-      { label: "Annual Reports", href: "/insights/reports" },
-      { label: "Whitepapers", href: "/insights/whitepapers" },
+      { label: "Guides", href: "/guides" },
+      { label: "Annual Reports", href: "/guides/reports" },
+      { label: "Whitepapers", href: "/guides/whitepapers" },
     ],
   },
   {
