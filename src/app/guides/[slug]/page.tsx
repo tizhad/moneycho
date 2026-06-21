@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
+import { guides } from "@/lib/guides";
 
 export const dynamicParams = false;
 
 export function generateStaticParams() {
-  return [{ slug: "introduction-to-personal-finance" }];
+  return guides.map((g) => ({ slug: g.slug }));
 }
 
 export async function generateMetadata({

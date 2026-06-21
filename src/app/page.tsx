@@ -1,4 +1,6 @@
 import Link from 'next/link';
+import { guides } from '@/lib/guides';
+import { text, layout } from '@/lib/design';
 
 const calculators = [
   {
@@ -144,13 +146,57 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* Guides */}
+      <section className="max-w-7xl mx-auto px-6 py-24">
+        <div className={`${layout.sectionHeader}`}>
+          <h2 className={`${text.sectionHeading} text-3xl md:text-4xl`}>
+            Guides
+          </h2>
+          <Link
+            href="/guides"
+            className="text-xs font-bold uppercase tracking-widest text-emerald-deep/50 hover:text-emerald-deep transition-colors"
+          >
+            All Guides →
+          </Link>
+        </div>
+
+        <div className="grid gap-px bg-emerald-deep/10 border border-emerald-deep/10">
+          {guides.map((guide, i) => (
+            <Link
+              key={guide.slug}
+              href={`/guides/${guide.slug}`}
+              className="group bg-paper p-8 md:p-10 hover:bg-emerald-deep/[0.03] transition-colors flex flex-col md:flex-row md:items-center md:justify-between gap-6"
+            >
+              <div className="flex-1">
+                <div className="flex items-center gap-4 mb-3">
+                  <span className={text.eyebrow}>{guide.tag}</span>
+                  <span className="text-emerald-deep/20">·</span>
+                  <span className="text-xs text-emerald-deep/40 uppercase tracking-widest">
+                    {guide.date}
+                  </span>
+                </div>
+                <h3 className={`${text.cardTitle} text-xl md:text-2xl mb-2`}>
+                  {guide.title}
+                </h3>
+                <p className="text-emerald-deep/60 text-sm leading-relaxed max-w-xl">
+                  {guide.description}
+                </p>
+              </div>
+              <span className="font-display text-4xl font-bold text-emerald-deep/10 group-hover:text-gold transition-colors shrink-0">
+                {String(i + 1).padStart(2, '0')}
+              </span>
+            </Link>
+          ))}
+        </div>
+      </section>
+
       {/* Journal */}
       <section id="journal" className="bg-emerald-deep text-paper py-24">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid lg:grid-cols-12 gap-12 items-start">
             <div className="lg:col-span-4 lg:sticky lg:top-32">
               <h2 className="font-display text-3xl md:text-4xl font-bold mb-6 tracking-tight">
-                The Moneycho Journal
+                The MoneyCho Journal
               </h2>
               <p className="text-paper/60 leading-relaxed mb-8">
                 Deep technical analysis on market dynamics, fiscal policy, and
