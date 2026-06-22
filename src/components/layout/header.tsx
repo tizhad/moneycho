@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { Locale } from "@/lib/i18n";
+import { LanguageSwitcher } from "@/components/layout/language-switcher";
 
 type Nav = {
   calculators: string;
@@ -44,21 +45,7 @@ export function Header({ lang, nav }: { lang: Locale; nav: Nav }) {
         </ul>
 
         <div className="flex items-center gap-3">
-          <div className="flex items-center gap-1 text-[0.75rem] font-medium">
-            {(["en", "nl"] as Locale[]).map((locale) => (
-              <Link
-                key={locale}
-                href={`/${locale}`}
-                className={`px-2 py-1 rounded transition-colors no-underline uppercase tracking-wider ${
-                  locale === lang
-                    ? "text-emerald-deep font-semibold"
-                    : "text-text-tertiary hover:text-emerald-deep"
-                }`}
-              >
-                {locale}
-              </Link>
-            ))}
-          </div>
+          <LanguageSwitcher lang={lang} />
           <Link
             href={p("/calculators")}
             className="text-[0.8rem] font-semibold tracking-[0.06em] uppercase px-5 py-2.5 border-[1.5px] border-emerald-deep rounded text-emerald-deep hover:bg-emerald-deep hover:text-paper transition-all no-underline"
