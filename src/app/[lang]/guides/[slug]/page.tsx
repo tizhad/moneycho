@@ -10,7 +10,7 @@ export function generateStaticParams() {
 export async function generateMetadata({
   params,
 }: {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ lang: string; slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
   const { metadata } = await import(`@/content/${slug}.mdx`);
@@ -20,7 +20,7 @@ export async function generateMetadata({
 export default async function ArticlePage({
   params,
 }: {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ lang: string; slug: string }>;
 }) {
   const { slug } = await params;
   const { default: Article, metadata } = await import(`@/content/${slug}.mdx`);

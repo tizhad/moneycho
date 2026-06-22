@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, DM_Serif_Display } from "next/font/google";
 import "./globals.css";
-import { Header } from "@/components/layout/header";
-import { Footer } from "@/components/layout/footer";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -39,14 +37,11 @@ export default function RootLayout({
 }>) {
   return (
     <html
-      lang="en"
       className={`${inter.variable} ${dmSerifDisplay.variable} h-full`}
       suppressHydrationWarning
     >
       <body className="min-h-full flex flex-col bg-background text-foreground">
-        <Header />
-        <main className="flex-1 min-w-0">{children}</main>
-        <Footer />
+        {children}
       </body>
     </html>
   );
