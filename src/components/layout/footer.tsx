@@ -2,55 +2,67 @@ import Link from "next/link";
 
 const columns = [
   {
-    heading: "Instruments",
+    heading: "Calculators",
     links: [
-      { label: "Calculators", href: "/calculators" },
-      { label: "Tax Engines", href: "/calculators/tax" },
-      { label: "Lending Models", href: "/calculators/lending" },
+      { label: "Budget Calculator", href: "/calculators/budget" },
+      { label: "Compound Interest", href: "/calculators/compound-interest" },
+      { label: "Debt Payoff", href: "/calculators/debt-payoff" },
+      { label: "Mortgage Calculator", href: "/calculators/mortgage" },
+      { label: "Savings Goal", href: "/calculators/savings-goal" },
+      { label: "Credit Card Payoff", href: "/calculators/credit-card-payoff" },
     ],
   },
   {
-    heading: "Intelligence",
+    heading: "Learn",
     links: [
-      { label: "Guides", href: "/guides" },
-      { label: "Annual Reports", href: "/guides/reports" },
-      { label: "Whitepapers", href: "/guides/whitepapers" },
+      { label: "All Guides", href: "/guides" },
+      { label: "Journal & Analysis", href: "/journal" },
+      { label: "Whitepapers", href: "/whitepapers" },
+      { label: "Annual Reports", href: "/annual-reports" },
+      { label: "Tax Engines", href: "/tools" },
     ],
   },
   {
     heading: "Company",
     links: [
       { label: "Our Mandate", href: "/about" },
+      { label: "Methodology", href: "/methodology" },
       { label: "Careers", href: "/careers" },
       { label: "Legal", href: "/legal" },
+      { label: "Contact", href: "/contact" },
     ],
   },
 ];
 
 export function Footer() {
   return (
-    <footer className="bg-paper border-t border-emerald-deep/10 pt-20 pb-10 text-emerald-deep">
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-12 mb-20">
-          <div className="col-span-2">
-            <div className="font-display text-2xl font-bold tracking-tight uppercase mb-6 flex items-center gap-2">
-              <span className="size-4 bg-emerald-deep" aria-hidden />
-              Moneycho
+    <footer className="bg-emerald-deep pt-16 pb-8 text-paper">
+      <div className="max-w-[1280px] mx-auto px-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[2fr_1fr_1fr_1fr] gap-12 mb-12">
+          {/* Brand */}
+          <div>
+            <div className="font-sans font-bold text-[1.1rem] tracking-[0.06em] uppercase text-paper flex items-center gap-2 mb-4">
+              <span className="w-3.5 h-3.5 bg-paper rounded-sm flex-shrink-0" aria-hidden />
+              MoneyCho
             </div>
-            <p className="text-emerald-deep/60 max-w-xs">
-              Quantitative tools for the qualitative future. Free financial clarity for everyone.
+            <p className="text-sm text-paper/70 leading-relaxed max-w-[30ch]">
+              Free financial calculators, guides, and tools helping people make smarter money decisions. No sign-up required.
             </p>
           </div>
 
+          {/* Columns */}
           {columns.map((col) => (
             <div key={col.heading}>
-              <h5 className="font-bold uppercase tracking-widest text-[10px] mb-6 text-gold">
+              <h4 className="text-[0.72rem] font-semibold tracking-[0.1em] uppercase text-gold-bright mb-4">
                 {col.heading}
-              </h5>
-              <ul className="grid gap-3 text-sm">
+              </h4>
+              <ul className="flex flex-col gap-2.5">
                 {col.links.map((link) => (
                   <li key={link.href}>
-                    <Link href={link.href} className="hover:underline">
+                    <Link
+                      href={link.href}
+                      className="text-sm text-paper/70 hover:text-paper transition-colors no-underline"
+                    >
                       {link.label}
                     </Link>
                   </li>
@@ -60,13 +72,9 @@ export function Footer() {
           ))}
         </div>
 
-        <div className="flex flex-col md:flex-row justify-between items-center pt-10 border-t border-emerald-deep/5 gap-4">
-          <p className="text-[10px] uppercase tracking-widest opacity-50">
-            © {new Date().getFullYear()} Moneycho. All rights reserved.
-          </p>
-          <p className="text-[10px] uppercase tracking-widest opacity-50">
-            No financial advice. Use at your own discretion.
-          </p>
+        <div className="border-t border-paper/10 pt-6 flex flex-col md:flex-row justify-between items-center gap-3">
+          <span className="text-[0.75rem] text-paper/50">© {new Date().getFullYear()} MoneyCho. All rights reserved.</span>
+          <span className="text-[0.75rem] text-paper/50">No financial advice. Use at your own discretion.</span>
         </div>
       </div>
     </footer>

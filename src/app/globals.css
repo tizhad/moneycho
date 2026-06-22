@@ -1,11 +1,6 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
-@import "@fontsource/space-grotesk/400.css";
-@import "@fontsource/space-grotesk/500.css";
-@import "@fontsource/space-grotesk/700.css";
-@import "@fontsource/dm-sans/400.css";
-@import "@fontsource/dm-sans/500.css";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -56,10 +51,17 @@
   --color-paper: var(--paper);
   --color-forest: var(--emerald-deep);
   --color-on-forest: var(--paper);
-  --font-sans: "DM Sans", ui-sans-serif, system-ui, sans-serif;
-  --font-display: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
-  --font-serif: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
-  --font-body: "DM Sans", ui-sans-serif, system-ui, sans-serif;
+  --color-cream-deep: var(--cream-deep);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-tertiary: var(--text-tertiary);
+  --color-border-light: var(--border-light);
+  --color-white-card: var(--white-card);
+  --color-gold-bright: var(--gold-bright);
+  --color-gold-muted: var(--gold-muted);
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-dm-serif), Georgia, serif;
+  --font-body: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
 }
 
 :root {
@@ -96,10 +98,18 @@
   --sidebar-accent-foreground: oklch(0.208 0.042 265.755);
   --sidebar-border: oklch(0.929 0.013 255.508);
   --sidebar-ring: oklch(0.704 0.04 256.788);
-  --emerald-deep: #064e3b;
-  --emerald-mid: #0d7a5f;
-  --gold: #c9a84c;
-  --paper: #f5f0e0;
+  --emerald-deep: oklch(28% 0.045 155);
+  --emerald-mid: oklch(38% 0.04 155);
+  --gold: oklch(72% 0.16 75);
+  --gold-bright: oklch(78% 0.14 75);
+  --gold-muted: oklch(85% 0.06 75);
+  --paper: oklch(96.5% 0.012 85);
+  --cream-deep: oklch(93% 0.015 85);
+  --white-card: oklch(99% 0.003 85);
+  --border-light: oklch(88% 0.01 85);
+  --text-secondary: oklch(42% 0.015 155);
+  --text-tertiary: oklch(55% 0.01 155);
+  --background: oklch(96.5% 0.012 85);
 }
 
 .dark {
@@ -146,5 +156,16 @@
     background-color: var(--color-background);
     color: var(--color-foreground);
     font-family: var(--font-body);
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.6;
+    font-optical-sizing: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-weight: inherit;
+    font-synthesis: none;
   }
 }

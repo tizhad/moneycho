@@ -40,11 +40,25 @@ const calculators = [
     action: "Calculate",
     tag: "Debt",
   },
+  {
+    index: "05",
+    title: "Savings Goal",
+    description: "Find out how long it takes to reach any savings target — or how much to save each month.",
+    href: "/calculators/savings-goal",
+    action: "Plan Goal",
+    tag: "Savings",
+  },
+  {
+    index: "06",
+    title: "Debt Payoff",
+    description: "Compare avalanche vs snowball strategies across all your debts. See which saves more and pays off faster.",
+    href: "/calculators/debt-payoff",
+    action: "Compare Strategies",
+    tag: "Debt",
+  },
 ];
 
 const comingSoon = [
-  { title: "Savings Goal", tag: "Savings", href: "#" },
-  { title: "Debt Payoff", tag: "Debt", href: "#" },
   { title: "Take-Home Pay", tag: "Income", href: "#" },
   { title: "Net Worth", tag: "Planning", href: "#" },
   { title: "Rent vs Buy", tag: "Real Estate", href: "#" },

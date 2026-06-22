@@ -3,36 +3,39 @@ import Link from "next/link";
 const navLinks = [
   { label: "Calculators", href: "/calculators" },
   { label: "Guides", href: "/guides" },
-  { label: "Advisory", href: "/advisory" },
+  { label: "Articles", href: "/articles" },
+  { label: "Tax Engines", href: "/tools" },
+  { label: "About", href: "/about" },
 ];
 
 export function Header() {
   return (
-    <nav className="sticky top-0 z-50 bg-paper/80 backdrop-blur-md border-b border-emerald-deep/10">
-      <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+    <nav className="sticky top-0 z-50 bg-paper border-b border-border-light">
+      <div className="max-w-[1280px] mx-auto px-6 flex items-center justify-between h-16">
         <Link
           href="/"
-          className="font-display text-xl font-bold tracking-tight uppercase flex items-center gap-2 text-emerald-deep"
+          className="font-sans font-bold text-[1.1rem] tracking-[0.06em] uppercase text-emerald-deep flex items-center gap-2 no-underline"
         >
-          <span className="size-3 bg-gold" aria-hidden />
-          Moneycho
+          <span className="w-3.5 h-3.5 bg-emerald-deep rounded-sm flex-shrink-0" aria-hidden />
+          MoneyCho
         </Link>
 
-        <div className="hidden md:flex gap-8 text-sm font-medium uppercase tracking-widest text-emerald-deep">
+        <ul className="hidden md:flex items-center gap-8 list-none">
           {navLinks.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className="hover:text-emerald-mid transition-colors"
-            >
-              {link.label}
-            </Link>
+            <li key={link.href}>
+              <Link
+                href={link.href}
+                className="text-sm font-medium text-text-secondary hover:text-emerald-deep tracking-[0.02em] transition-colors no-underline"
+              >
+                {link.label}
+              </Link>
+            </li>
           ))}
-        </div>
+        </ul>
 
         <Link
           href="/calculators"
-          className="px-5 py-2 bg-emerald-deep text-paper text-xs font-bold uppercase tracking-widest hover:bg-emerald-mid transition-all active:scale-95"
+          className="text-[0.8rem] font-semibold tracking-[0.06em] uppercase px-5 py-2.5 border-[1.5px] border-emerald-deep rounded text-emerald-deep hover:bg-emerald-deep hover:text-paper transition-all no-underline"
         >
           All Tools
         </Link>
