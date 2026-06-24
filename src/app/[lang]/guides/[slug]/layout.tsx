@@ -17,7 +17,7 @@ export default function ArticleLayout({
         href={`/${lang}/guides`}
         className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-emerald-deep/40 hover:text-emerald-deep transition-colors mb-12"
       >
-        ← All Guides
+        ← {lang === "nl" ? "Alle Gidsen" : "All Guides"}
       </Link>
       <div className="max-w-2xl mx-auto">{children}</div>
     </div>
