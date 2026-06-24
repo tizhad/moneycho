@@ -5,6 +5,7 @@ import { guides } from "@/lib/guides";
 import { hasLocale, type Locale } from "@/lib/i18n";
 import { text, layout } from "@/lib/design";
 
+
 export const metadata: Metadata = {
   title: "Personal Finance Guides",
   description:
@@ -23,6 +24,12 @@ export default async function GuidesPage({
 
   return (
     <div className={layout.section}>
+      <Link
+        href={`/${lang}`}
+        className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-emerald-deep/40 hover:text-emerald-deep transition-colors mb-12"
+      >
+        ← Home
+      </Link>
       <div className="mb-16 border-b border-emerald-deep/20 pb-8">
         <span className={`${text.eyebrow} block mb-4`}>Free Resources</span>
         <h1 className={`${text.sectionHeading} text-4xl md:text-5xl`}>
