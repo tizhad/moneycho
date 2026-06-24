@@ -89,7 +89,7 @@
       "heading": "Stapsgewijze Gidsen",
       "viewAll": "Alle Gidsen →",
       "items": [
-        { "tag": "Basis", "title": "Persoonlijke Financiën 101: Budgetteren, Sparen & Investeren Uitgelegd", "desc": "De fundamentele principes die iedereen moet kennen voordat hij een financiële beslissing neemt. Begin hier.", "href": "/guides/introduction-to-personal-finance" },
+        { "tag": "Sparen", "title": "Sparen en Budgetteren: Hoe Je Grip Krijgt op Je Financiële Toekomst", "desc": "Waarom budgetteren belangrijker is dan je denkt, hoe je jezelf beschermt tegen financiële tegenslag, en de eerste stap naar grip op je geld.", "href": "/guides/sparen-en-budgetteren" },
         { "tag": "Investeren", "title": "Hoe te Beginnen met Investeren met €500 of Minder", "desc": "Indexfondsen, fractionele aandelen en samengestelde groei: uw eerste portfolio in minder dan een uur.", "href": "/guides" },
         { "tag": "Schuld", "title": "Schuld Aflossen Strategieën: Sneeuwbal vs Lawine Vergeleken", "desc": "Welke methode bespaart meer geld? Welke houdt u gemotiveerd? De wiskunde en psychologie, zij aan zij.", "href": "/guides" },
         { "tag": "Veiligheidsnet", "title": "Hoeveel Noodfonds Heb Je Eigenlijk Nodig?", "desc": "De 3–6 maanden regel is te simpel. Hier is een kader gebaseerd op uw werkelijke risicoprofiel.", "href": "/guides" }

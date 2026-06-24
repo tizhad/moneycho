@@ -89,7 +89,7 @@
       "heading": "Step-by-Step Guides",
       "viewAll": "All Guides →",
       "items": [
-        { "tag": "Foundations", "title": "Personal Finance 101: Budgeting, Saving & Investing Explained", "desc": "The foundational principles every person should know before making any financial decision. Start here.", "href": "/guides/introduction-to-personal-finance" },
+        { "tag": "Saving", "title": "Saving and Budgeting: How to Take Control of Your Financial Future", "desc": "Why budgeting matters more than you think, how to protect yourself from financial disruption, and the first step to taking control.", "href": "/guides/saving-and-budgeting" },
         { "tag": "Investing", "title": "How to Start Investing with €500 or Less", "desc": "Index funds, fractional shares, and compound growth: your first portfolio in under an hour.", "href": "/guides" },
         { "tag": "Debt", "title": "Debt Payoff Strategies: Snowball vs Avalanche Compared", "desc": "Which method saves more money? Which keeps you motivated? The math and psychology, side by side.", "href": "/guides" },
         { "tag": "Safety Net", "title": "How Much Emergency Fund Do You Actually Need?", "desc": "The 3–6 month rule is too simple. Here's a framework based on your real risk profile.", "href": "/guides" }
