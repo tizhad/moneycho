@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
 const locales = ["en", "nl"];
-const defaultLocale = "en";
+const defaultLocale = "nl";
 export const LOCALE_COOKIE = "moneycho_locale";
 
 function getLocale(request: NextRequest): string {

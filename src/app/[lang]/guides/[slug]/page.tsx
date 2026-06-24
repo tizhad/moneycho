@@ -1,12 +1,40 @@
 import type { Metadata } from "next";
+import { notFound } from "next/navigation";
 import { guides } from "@/lib/guides";
+import type { Locale } from "@/lib/i18n";
 
 const BASE_URL = "https://moneycho.com";
 
+type ArticleMetadata = {
+  title?: string;
+  description?: string;
+  tag?: string;
+  date?: string;
+  author?: string;
+};
+
+type MdxModule = {
+  default: React.ComponentType;
+  metadata?: ArticleMetadata;
+};
+
+async function loadMdx(lang: string, slug: string): Promise<MdxModule> {
+  try {
+    return (await import(`@/content/${lang}/${slug}.mdx`)) as MdxModule;
+  } catch {
+    return (await import(`@/content/${slug}.mdx`)) as MdxModule;
+  }
+}
+
 export const dynamicParams = false;
 
-export function generateStaticParams() {
-  return guides.map((g) => ({ slug: g.slug }));
+export function generateStaticParams({
+  params: { lang },
+}: {
+  params: { lang: string };
+}) {
+  const langGuides = (guides as Record<string, typeof guides.en>)[lang] ?? [];
+  return langGuides.map((g) => ({ slug: g.slug }));
 }
 
 export async function generateMetadata({
@@ -15,7 +43,7 @@ export async function generateMetadata({
   params: Promise<{ lang: string; slug: string }>;
 }): Promise<Metadata> {
   const { slug, lang } = await params;
-  const { metadata } = await import(`@/content/${slug}.mdx`);
+  const { metadata } = await loadMdx(lang, slug);
   const author = metadata?.author ?? "Moneycho";
   const publishedTime = metadata?.date
     ? new Date(metadata.date).toISOString()
@@ -41,8 +69,15 @@ export default async function ArticlePage({
   params: Promise<{ lang: string; slug: string }>;
 }) {
   const { slug, lang } = await params;
-  const { default: Article, metadata } = await import(`@/content/${slug}.mdx`);
 
+  let mdxModule: MdxModule;
+  try {
+    mdxModule = await loadMdx(lang, slug);
+  } catch {
+    notFound();
+  }
+
+  const { default: Article, metadata } = mdxModule!;
   const author = metadata?.author ?? "Moneycho";
   const publishedIso = metadata?.date
     ? new Date(metadata.date).toISOString()

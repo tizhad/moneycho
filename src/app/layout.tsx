@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, DM_Serif_Display } from "next/font/google";
+import { cookies } from "next/headers";
 import "./globals.css";
 
 const inter = Inter({
@@ -30,13 +31,18 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const cookieStore = await cookies();
+  const raw = cookieStore.get("moneycho_locale")?.value ?? "nl";
+  const lang = ["en", "nl"].includes(raw) ? raw : "nl";
+
   return (
     <html
+      lang={lang}
       className={`${inter.variable} ${dmSerifDisplay.variable} h-full`}
       suppressHydrationWarning
     >

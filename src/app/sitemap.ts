@@ -15,8 +15,14 @@ function urls(path: string, priority: number, changeFrequency: MetadataRoute.Sit
 }
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const guideUrls = guides.flatMap((g) =>
-    urls(`/guides/${g.slug}`, 0.7, "monthly")
+  const guideUrls = (Object.entries(guides) as Array<[string, typeof guides.en]>).flatMap(
+    ([lang, langGuides]) =>
+      langGuides.map((g) => ({
+        url: `${BASE_URL}/${lang}/guides/${g.slug}`,
+        lastModified: now,
+        changeFrequency: "monthly" as const,
+        priority: 0.7,
+      }))
   );
 
   return [
