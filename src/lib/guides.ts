@@ -4,6 +4,7 @@ export type Guide = {
   description: string;
   tag: string;
   date: string;
+  author?: string;
 };
 
 export const guides: Guide[] = [

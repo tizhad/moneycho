@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { guides } from "@/lib/guides";
 
+const BASE_URL = "https://moneycho.com";
+
 export const dynamicParams = false;
 
 export function generateStaticParams() {
@@ -12,9 +14,25 @@ export async function generateMetadata({
 }: {
   params: Promise<{ lang: string; slug: string }>;
 }): Promise<Metadata> {
-  const { slug } = await params;
+  const { slug, lang } = await params;
   const { metadata } = await import(`@/content/${slug}.mdx`);
-  return metadata ?? {};
+  const author = metadata?.author ?? "Moneycho";
+  const publishedTime = metadata?.date
+    ? new Date(metadata.date).toISOString()
+    : undefined;
+
+  return {
+    title: metadata?.title,
+    description: metadata?.description,
+    openGraph: {
+      title: metadata?.title,
+      description: metadata?.description,
+      type: "article",
+      publishedTime,
+      authors: [author],
+      url: `${BASE_URL}/${lang}/guides/${slug}`,
+    },
+  };
 }
 
 export default async function ArticlePage({
@@ -22,18 +40,58 @@ export default async function ArticlePage({
 }: {
   params: Promise<{ lang: string; slug: string }>;
 }) {
-  const { slug } = await params;
+  const { slug, lang } = await params;
   const { default: Article, metadata } = await import(`@/content/${slug}.mdx`);
+
+  const author = metadata?.author ?? "Moneycho";
+  const publishedIso = metadata?.date
+    ? new Date(metadata.date).toISOString()
+    : new Date().toISOString();
+  const pageUrl = `${BASE_URL}/${lang}/guides/${slug}`;
+
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: metadata?.title,
+    description: metadata?.description,
+    author: {
+      "@type": "Organization",
+      name: author,
+      url: BASE_URL,
+    },
+    publisher: {
+      "@type": "Organization",
+      name: "Moneycho",
+      url: BASE_URL,
+    },
+    datePublished: publishedIso,
+    dateModified: publishedIso,
+    url: pageUrl,
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": pageUrl,
+    },
+  };
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <div className="border-b border-emerald-deep/10 mb-12">
         <span className="text-xs font-bold text-gold tracking-[0.2em] uppercase block mb-4">
           {metadata?.tag}
         </span>
-        <p className="text-xs uppercase tracking-widest text-emerald-deep/40 mb-12">
-          {metadata?.date}
-        </p>
+        <div className="flex items-center gap-3 mb-12">
+          <p className="text-xs uppercase tracking-widest text-emerald-deep/40">
+            {metadata?.date}
+          </p>
+          <span className="text-emerald-deep/20">·</span>
+          <p className="text-xs uppercase tracking-widest text-emerald-deep/40">
+            {author}
+          </p>
+        </div>
       </div>
       <Article />
     </>

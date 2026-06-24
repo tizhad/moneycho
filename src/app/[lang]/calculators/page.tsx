@@ -56,10 +56,33 @@ const calculators = [
     action: "Compare Strategies",
     tag: "Debt",
   },
+  {
+    index: "07",
+    title: "Take-Home Pay",
+    description: "Calculate your Dutch net salary after income tax and tax credits. NL 2025 tax brackets included.",
+    href: "/calculators/take-home-pay",
+    action: "Calculate",
+    tag: "Income",
+  },
+  {
+    index: "08",
+    title: "Monthly Cash Flow",
+    description: "Enter your real income and expenses to see your actual surplus or shortfall — not a plan, a snapshot.",
+    href: "/calculators/cash-flow",
+    action: "See Cash Flow",
+    tag: "Budgeting",
+  },
+  {
+    index: "09",
+    title: "Borrowing Capacity",
+    description: "How much can you borrow? Based on VFN / Nibud norms used by Dutch lenders. Accounts for income, housing costs, and existing debts.",
+    href: "/calculators/borrowing-capacity",
+    action: "Calculate",
+    tag: "Borrowing",
+  },
 ];
 
 const comingSoon = [
-  { title: "Take-Home Pay", tag: "Income", href: "#" },
   { title: "Net Worth", tag: "Planning", href: "#" },
   { title: "Rent vs Buy", tag: "Real Estate", href: "#" },
   { title: "Investment Growth", tag: "Investing", href: "#" },

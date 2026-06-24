@@ -28,6 +28,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...urls("/calculators/debt-payoff", 0.8, "monthly"),
     ...urls("/calculators/savings-goal", 0.8, "monthly"),
     ...urls("/calculators/credit-card-payoff", 0.8, "monthly"),
+    ...urls("/calculators/take-home-pay", 0.8, "monthly"),
+    ...urls("/calculators/cash-flow", 0.8, "monthly"),
+    ...urls("/calculators/borrowing-capacity", 0.8, "monthly"),
     ...urls("/guides", 0.8, "weekly"),
     ...guideUrls,
   ];
