@@ -19,7 +19,7 @@ const dmSerifDisplay = DM_Serif_Display({
 
 export const metadata: Metadata = {
   title: {
-    default: "MoneyCho — Free Personal Finance Calculators",
+    default: "Free Financial Calculators & Money Guides | MoneyCho",
     template: "%s | MoneyCho",
   },
   description:
@@ -46,7 +46,7 @@ export default async function RootLayout({
       className={`${inter.variable} ${dmSerifDisplay.variable} h-full`}
       suppressHydrationWarning
     >
-      <body className="min-h-full flex flex-col bg-background text-foreground">
+      <body className="min-h-full flex flex-col bg-background text-foreground" suppressHydrationWarning>
         {children}
       </body>
     </html>
