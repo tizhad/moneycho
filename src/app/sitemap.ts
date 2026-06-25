@@ -39,5 +39,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...urls("/calculators/borrowing-capacity", 0.8, "monthly"),
     ...urls("/guides", 0.8, "weekly"),
     ...guideUrls,
+    ...urls("/about", 0.5, "yearly"),
+    ...urls("/careers", 0.5, "monthly"),
+    ...urls("/contact", 0.4, "yearly"),
   ];
 }
