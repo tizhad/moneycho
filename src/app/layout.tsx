@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, DM_Serif_Display } from "next/font/google";
+import { Inter, Source_Serif_4, JetBrains_Mono } from "next/font/google";
 import { cookies } from "next/headers";
 import "./globals.css";
 
@@ -9,11 +9,15 @@ const inter = Inter({
   display: "swap",
 });
 
-const dmSerifDisplay = DM_Serif_Display({
-  weight: "400",
-  style: ["normal", "italic"],
+const sourceSerif4 = Source_Serif_4({
   subsets: ["latin"],
-  variable: "--font-dm-serif",
+  variable: "--font-source-serif",
+  display: "swap",
+});
+
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  variable: "--font-jetbrains",
   display: "swap",
 });
 
@@ -43,7 +47,7 @@ export default async function RootLayout({
   return (
     <html
       lang={lang}
-      className={`${inter.variable} ${dmSerifDisplay.variable} h-full`}
+      className={`${inter.variable} ${sourceSerif4.variable} ${jetbrainsMono.variable} h-full`}
       suppressHydrationWarning
     >
       <body className="min-h-full flex flex-col bg-background text-foreground" suppressHydrationWarning>
