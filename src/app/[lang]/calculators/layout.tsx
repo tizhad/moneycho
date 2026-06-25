@@ -1,7 +1,11 @@
-"use client";
+'use client';
 
-import Link from "next/link";
-import { usePathname } from "next/navigation";
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import { relatedTools, faqsBySlug } from '@/lib/related';
+import { RelatedTools } from '@/components/shared/RelatedTools';
+import { FAQ } from '@/components/shared/FAQ';
+import { EmailCapture } from '@/components/shared/EmailCapture';
 
 export default function CalculatorsLayout({
   children,
@@ -9,10 +13,13 @@ export default function CalculatorsLayout({
   children: React.ReactNode;
 }) {
   const pathname = usePathname();
-  // pathname is now /{lang}/calculators or /{lang}/calculators/...
-  const segments = pathname.split("/").filter(Boolean);
+  const segments = pathname.split('/').filter(Boolean);
   const isIndex = segments.length === 2; // ["en", "calculators"]
-  const lang = segments[0] ?? "en";
+  const lang = segments[0] ?? 'nl';
+  const slug = segments[2]; // e.g. "mortgage", "compound-interest"
+
+  const related = slug ? (relatedTools[slug] ?? []) : [];
+  const faqs = slug ? (faqsBySlug[slug] ?? []) : [];
 
   return (
     <div className="max-w-7xl mx-auto px-6 py-12 md:py-20">
@@ -20,9 +27,16 @@ export default function CalculatorsLayout({
         href={isIndex ? `/${lang}` : `/${lang}/calculators`}
         className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-emerald-deep/40 hover:text-emerald-deep transition-colors mb-12"
       >
-        ← {isIndex ? "Home" : "All Calculators"}
+        ← {isIndex ? (lang === 'nl' ? 'Home' : 'Home') : lang === 'nl' ? 'Alle Calculators' : 'All Calculators'}
       </Link>
       {children}
+      {!isIndex && (
+        <>
+          {faqs.length > 0 && <FAQ items={faqs} lang={lang} />}
+          <EmailCapture lang={lang} />
+          {related.length > 0 && <RelatedTools items={related} lang={lang} />}
+        </>
+      )}
     </div>
   );
 }
