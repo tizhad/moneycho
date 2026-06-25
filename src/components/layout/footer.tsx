@@ -28,19 +28,14 @@ export function Footer({ lang, dict }: { lang: Locale; dict: FooterDict }) {
       heading: dict.columns.learn,
       links: [
         { label: dict.links.allGuides, href: p("/guides") },
-        { label: dict.links.journal, href: p("/journal") },
-        { label: dict.links.whitepapers, href: p("/whitepapers") },
-        { label: dict.links.annualReports, href: p("/annual-reports") },
-        { label: dict.links.taxEngines, href: p("/tools") },
+        { label: dict.links.insights, href: p("/guides") },
       ],
     },
     {
       heading: dict.columns.company,
       links: [
-        { label: dict.links.mandate, href: p("/about") },
-        { label: dict.links.methodology, href: p("/methodology") },
+        { label: dict.links.about, href: p("/about") },
         { label: dict.links.careers, href: p("/careers") },
-        { label: dict.links.legal, href: p("/legal") },
         { label: dict.links.contact, href: p("/contact") },
       ],
     },
@@ -67,7 +62,7 @@ export function Footer({ lang, dict }: { lang: Locale; dict: FooterDict }) {
               </h4>
               <ul className="flex flex-col gap-2.5">
                 {col.links.map((link) => (
-                  <li key={link.href}>
+                  <li key={link.href + link.label}>
                     <Link
                       href={link.href}
                       className="text-sm text-paper/70 hover:text-paper transition-colors no-underline"
