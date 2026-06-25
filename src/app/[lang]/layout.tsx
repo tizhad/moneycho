@@ -10,21 +10,11 @@ export async function generateStaticParams() {
   return [{ lang: "en" }, { lang: "nl" }];
 }
 
-export async function generateMetadata({
-  params,
-}: {
-  params: Promise<{ lang: string }>;
-}): Promise<Metadata> {
-  const { lang } = await params;
+// Canonical and hreflang are set per-page so each URL is correct.
+// This layout only provides the fallback openGraph site name.
+export async function generateMetadata(): Promise<Metadata> {
   return {
-    alternates: {
-      canonical: `${BASE_URL}/${lang}`,
-      languages: {
-        en: `${BASE_URL}/en`,
-        nl: `${BASE_URL}/nl`,
-        "x-default": `${BASE_URL}/nl`,
-      },
-    },
+    openGraph: { siteName: "MoneyCho" },
   };
 }
 

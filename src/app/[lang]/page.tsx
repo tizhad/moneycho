@@ -6,11 +6,40 @@ import { EmailSection } from '@/components/home/EmailSection';
 import { CompoundPreview } from '@/components/home/CompoundPreview';
 import { BudgetPreview } from '@/components/home/BudgetPreview';
 
-export const metadata: Metadata = {
-  title: 'Free Financial Calculators & Money Guides | MoneyCho',
-  description:
-    'Free calculators for budget, debt, savings, mortgage, and retirement. Step-by-step guides and expert analysis. No sign-up, no fees.',
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ lang: string }>;
+}): Promise<Metadata> {
+  const { lang } = await params;
+  const BASE = 'https://moneycho.com';
+  const isNL = lang === 'nl';
+  const title = isNL
+    ? 'Gratis Financiële Calculators & Geldgidsen | MoneyCho'
+    : 'Free Financial Calculators & Money Guides | MoneyCho';
+  const description = isNL
+    ? 'Gratis calculators voor budget, schulden, sparen, hypotheek en pensioen. Stap-voor-stap gidsen. Geen aanmelding vereist.'
+    : 'Free calculators for budget, debt, savings, mortgage, and retirement. Step-by-step guides and expert analysis. No sign-up, no fees.';
+  return {
+    title,
+    description,
+    alternates: {
+      canonical: `${BASE}/${lang}`,
+      languages: {
+        en: `${BASE}/en`,
+        nl: `${BASE}/nl`,
+        'x-default': `${BASE}/nl`,
+      },
+    },
+    openGraph: {
+      title,
+      description,
+      type: 'website',
+      url: `${BASE}/${lang}`,
+    },
+    twitter: { card: 'summary', title, description },
+  };
+}
 
 export default async function HomePage({
   params,
