@@ -52,6 +52,7 @@ export function EmailSection({ lang }: { lang: string }) {
               onChange={(e) => setEmail(e.target.value)}
               placeholder={isNL ? "jij@voorbeeld.nl" : "you@example.com"}
               required
+              suppressHydrationWarning
               className="flex-1 px-4 py-3 bg-paper/10 border border-paper/20 text-paper placeholder:text-paper/40 text-sm focus:outline-none focus:border-paper/50 rounded-md"
             />
             <button

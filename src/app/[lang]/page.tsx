@@ -35,32 +35,32 @@ export default async function HomePage({
   return (
     <>
       {/* HERO — dark/light split */}
-      <section className="lg:grid lg:grid-cols-2">
+      <section className="lg:grid lg:grid-cols-2 min-h-[600px]">
         {/* Left — dark emerald */}
-        <div className="bg-emerald-deep flex items-center">
-          <div className="w-full px-8 py-20 lg:py-32 lg:pl-[max(2rem,calc((100vw-80rem)/2+2rem))] lg:pr-12 max-w-[640px] lg:ml-auto">
-            <p className="text-[0.68rem] font-bold uppercase tracking-[0.2em] text-gold-bright mb-5">
+        <div className="bg-emerald-deep flex flex-col justify-center px-8 py-16 lg:px-16 xl:px-20">
+          <div className="max-w-[480px] lg:ml-auto">
+            <p className="text-[0.65rem] font-bold uppercase tracking-[0.2em] text-gold-bright mb-5">
               {t.hero.eyebrow}
             </p>
-            <h1 className="font-serif font-bold text-[clamp(2.4rem,4.5vw,3.6rem)] leading-[1.08] text-paper mb-6">
+            <h1 className="font-serif font-bold text-[clamp(2rem,3vw,2.8rem)] leading-[1.12] text-paper mb-5">
               {t.hero.h1_1}
               <br />
               {t.hero.h1_2}{" "}
               <em className="text-gold not-italic">{t.hero.h1_em}</em>
             </h1>
-            <p className="text-[1.05rem] leading-[1.7] text-paper/70 max-w-[46ch] mb-10">
+            <p className="text-[0.95rem] leading-[1.7] text-paper/70 mb-9">
               {t.hero.body}
             </p>
             <div className="flex gap-3 flex-wrap">
               <Link
                 href={p("/calculators")}
-                className="inline-flex items-center gap-2 px-7 py-3.5 bg-paper text-emerald-deep text-[0.88rem] font-semibold rounded-md hover:bg-gold hover:text-paper transition-all no-underline"
+                className="inline-flex items-center px-6 py-3 bg-paper text-emerald-deep text-[0.85rem] font-semibold rounded-md hover:bg-gold hover:text-paper transition-all no-underline"
               >
                 {t.hero.cta_primary}
               </Link>
               <Link
                 href={p("/guides")}
-                className="inline-flex items-center gap-2 px-7 py-3.5 border border-paper/30 text-paper text-[0.88rem] font-semibold rounded-md hover:border-paper/70 transition-all no-underline"
+                className="inline-flex items-center px-6 py-3 border border-paper/30 text-paper text-[0.85rem] font-semibold rounded-md hover:bg-paper/10 transition-all no-underline"
               >
                 {t.hero.cta_secondary}
               </Link>
@@ -69,8 +69,8 @@ export default async function HomePage({
         </div>
 
         {/* Right — light */}
-        <div className="bg-cream-deep flex items-center">
-          <div className="w-full px-8 py-16 lg:py-24 lg:pr-[max(2rem,calc((100vw-80rem)/2+2rem))] lg:pl-12 max-w-[640px] lg:mr-auto">
+        <div className="bg-paper flex flex-col justify-center px-8 py-12 lg:px-12 xl:px-16">
+          <div className="max-w-[520px]">
             <HeroCalculator lang={lang} />
           </div>
         </div>

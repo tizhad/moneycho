@@ -109,7 +109,7 @@ export function GrowthChart({ schedule, height = 220 }: Props) {
         fill="url(#gc-balFill)"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ duration: 0.6 }}
+        transition={{ duration: 0.4 }}
       />
       <motion.path
         key={`contrib-${animKey}`}
@@ -118,9 +118,9 @@ export function GrowthChart({ schedule, height = 220 }: Props) {
         stroke={COLOR.muted}
         strokeWidth="1.5"
         strokeDasharray="4 4"
-        initial={{ pathLength: 0 }}
-        animate={{ pathLength: 1 }}
-        transition={{ duration: 1.1, ease: "easeOut" }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.5, delay: 0.1 }}
       />
       <motion.path
         key={`balance-${animKey}`}
@@ -129,9 +129,9 @@ export function GrowthChart({ schedule, height = 220 }: Props) {
         stroke={COLOR.primary}
         strokeWidth="2.5"
         strokeLinecap="round"
-        initial={{ pathLength: 0 }}
-        animate={{ pathLength: 1 }}
-        transition={{ duration: 1.3, ease: "easeOut" }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.5, delay: 0.15 }}
       />
     </svg>
   );

@@ -20,24 +20,23 @@ export function HeroCalculator({ lang }: { lang: string }) {
   return (
     <div className="bg-white-card border border-border-light rounded-2xl shadow-[0_30px_60px_-30px_rgba(26,61,47,0.18)] overflow-hidden">
       {/* Header row */}
-      <div className="flex items-start justify-between px-6 pt-5 pb-4 border-b border-border-light">
-        <div>
-          <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-text-tertiary">
-            Live preview · Compound interest · 7% annual
+      <div className="flex items-start justify-between px-6 pt-5 pb-4 border-b border-border-light gap-4">
+        <div className="min-w-0">
+          <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-text-tertiary whitespace-nowrap">
+            7% annual · compound
           </p>
-          <h3 className="font-serif text-base font-bold text-emerald-deep mt-0.5">
-            Projected balance after {years} years
+          <h3 className="font-serif text-[0.95rem] font-bold text-emerald-deep mt-0.5 leading-snug">
+            Projected balance after {years} yrs
           </h3>
         </div>
-        <div className="text-right shrink-0 ml-4">
-          <p className="font-serif font-bold text-3xl text-emerald-deep tracking-tight leading-none">
+        <div className="text-right shrink-0">
+          <p className="font-serif font-bold text-[2rem] text-emerald-deep tracking-tight leading-none">
             <CountUp
               value={result.finalBalance}
               format={(n) => formatCurrency(n, { compact: true })}
             />
           </p>
           <p className="text-[10px] font-mono text-text-tertiary mt-0.5">
-            of which{" "}
             {formatCurrency(result.totalInterest, { compact: true })} interest
           </p>
         </div>
