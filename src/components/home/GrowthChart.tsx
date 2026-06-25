@@ -1,6 +1,5 @@
 "use client";
 
-import { motion } from "framer-motion";
 import type { YearRow } from "@/lib/finance";
 
 // Hex approximations for our oklch palette tokens (safe for SVG attributes)
@@ -48,9 +47,6 @@ export function GrowthChart({ schedule, height = 220 }: Props) {
   const xLabels = Array.from({ length: xTickCount + 1 }, (_, i) =>
     Math.round((lastYear * i) / xTickCount)
   );
-
-  // Key changes so motion paths re-animate when data changes
-  const animKey = `${lastYear}-${Math.round(maxBal)}`;
 
   return (
     <svg
@@ -103,35 +99,20 @@ export function GrowthChart({ schedule, height = 220 }: Props) {
         </text>
       ))}
 
-      <motion.path
-        key={`fill-${animKey}`}
-        d={fillPath}
-        fill="url(#gc-balFill)"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.4 }}
-      />
-      <motion.path
-        key={`contrib-${animKey}`}
+      <path d={fillPath} fill="url(#gc-balFill)" />
+      <path
         d={contribPath}
         fill="none"
         stroke={COLOR.muted}
         strokeWidth="1.5"
         strokeDasharray="4 4"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.5, delay: 0.1 }}
       />
-      <motion.path
-        key={`balance-${animKey}`}
+      <path
         d={balancePath}
         fill="none"
         stroke={COLOR.primary}
         strokeWidth="2.5"
         strokeLinecap="round"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.5, delay: 0.15 }}
       />
     </svg>
   );
