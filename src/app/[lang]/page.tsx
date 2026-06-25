@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { hasLocale, getDictionary, type Locale } from "@/lib/i18n";
 import { HeroCalculator } from "@/components/home/HeroCalculator";
+import { EmailSection } from "@/components/home/EmailSection";
 
 export const metadata: Metadata = {
   title: "Free Financial Calculators & Money Guides | MoneyCho",
@@ -33,36 +34,46 @@ export default async function HomePage({
 
   return (
     <>
-      {/* HERO */}
-      <section className="max-w-[1280px] mx-auto px-6 py-24 lg:py-32 grid lg:grid-cols-2 gap-16 items-center">
-        <div>
-          <p className="text-xs font-semibold tracking-[0.1em] uppercase text-gold mb-4">
-            {t.hero.eyebrow}
-          </p>
-          <h1 className="font-serif font-black text-[clamp(2.8rem,5vw,4rem)] leading-[1.1] text-emerald-deep mb-6">
-            {t.hero.h1_1}
-            <br />
-            {t.hero.h1_2} <em className="text-gold">{t.hero.h1_em}</em>
-          </h1>
-          <p className="text-[1.1rem] leading-[1.7] text-text-secondary max-w-[50ch] mb-9">
-            {t.hero.body}
-          </p>
-          <div className="flex gap-4 flex-wrap">
-            <Link
-              href={p("/calculators")}
-              className="inline-flex items-center gap-2 px-7 py-3.5 bg-emerald-deep text-paper text-[0.9rem] font-semibold rounded hover:bg-emerald-mid hover:-translate-y-px transition-all no-underline"
-            >
-              {t.hero.cta_primary}
-            </Link>
-            <Link
-              href={p("/guides")}
-              className="inline-flex items-center gap-2 px-7 py-3.5 border-[1.5px] border-emerald-deep text-emerald-deep text-[0.9rem] font-semibold rounded hover:bg-emerald-deep hover:text-paper transition-all no-underline"
-            >
-              {t.hero.cta_secondary}
-            </Link>
+      {/* HERO — dark/light split */}
+      <section className="lg:grid lg:grid-cols-2">
+        {/* Left — dark emerald */}
+        <div className="bg-emerald-deep flex items-center">
+          <div className="w-full px-8 py-20 lg:py-32 lg:pl-[max(2rem,calc((100vw-80rem)/2+2rem))] lg:pr-12 max-w-[640px] lg:ml-auto">
+            <p className="text-[0.68rem] font-bold uppercase tracking-[0.2em] text-gold-bright mb-5">
+              {t.hero.eyebrow}
+            </p>
+            <h1 className="font-serif font-bold text-[clamp(2.4rem,4.5vw,3.6rem)] leading-[1.08] text-paper mb-6">
+              {t.hero.h1_1}
+              <br />
+              {t.hero.h1_2}{" "}
+              <em className="text-gold not-italic">{t.hero.h1_em}</em>
+            </h1>
+            <p className="text-[1.05rem] leading-[1.7] text-paper/70 max-w-[46ch] mb-10">
+              {t.hero.body}
+            </p>
+            <div className="flex gap-3 flex-wrap">
+              <Link
+                href={p("/calculators")}
+                className="inline-flex items-center gap-2 px-7 py-3.5 bg-paper text-emerald-deep text-[0.88rem] font-semibold rounded-md hover:bg-gold hover:text-paper transition-all no-underline"
+              >
+                {t.hero.cta_primary}
+              </Link>
+              <Link
+                href={p("/guides")}
+                className="inline-flex items-center gap-2 px-7 py-3.5 border border-paper/30 text-paper text-[0.88rem] font-semibold rounded-md hover:border-paper/70 transition-all no-underline"
+              >
+                {t.hero.cta_secondary}
+              </Link>
+            </div>
           </div>
         </div>
-        <HeroCalculator lang={lang} />
+
+        {/* Right — light */}
+        <div className="bg-cream-deep flex items-center">
+          <div className="w-full px-8 py-16 lg:py-24 lg:pr-[max(2rem,calc((100vw-80rem)/2+2rem))] lg:pl-12 max-w-[640px] lg:mr-auto">
+            <HeroCalculator lang={lang} />
+          </div>
+        </div>
       </section>
 
       {/* TRUST BAR */}
@@ -165,6 +176,9 @@ export default async function HomePage({
           ))}
         </div>
       </section>
+
+      {/* EMAIL CAPTURE */}
+      <EmailSection lang={lang} />
 
       {/* E-E-A-T */}
       <section className="bg-cream-deep py-16 px-6">
