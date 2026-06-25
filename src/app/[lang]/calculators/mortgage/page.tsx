@@ -103,7 +103,7 @@ export default function MortgagePage() {
           <Field label="Home Price">
             <NumberInput value={homePrice} onChange={setHomePrice} prefix={symbol} />
           </Field>
-          <Field label={`Down Payment — ${result.downPct.toFixed(1)}%`}>
+          <Field label={`Down Payment (${result.downPct.toFixed(1)}%)`}>
             <NumberInput value={downPayment} onChange={(v) => setDownPayment(v === "" ? "" : Math.min(hp, v))} prefix={symbol} />
           </Field>
           <Field label="Annual Interest Rate">
@@ -138,7 +138,7 @@ export default function MortgagePage() {
             >
               <span className="font-display font-bold text-emerald-deep">
                 {selected?.code}{" "}
-                <span className="font-normal text-emerald-deep/50">— {selected?.name}</span>
+                <span className="font-normal text-emerald-deep/50">· {selected?.name}</span>
               </span>
               <span className="text-emerald-deep/40 text-sm">{showSwitcher ? "▲" : "▼"}</span>
             </button>

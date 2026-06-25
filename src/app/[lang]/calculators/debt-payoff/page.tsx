@@ -203,7 +203,7 @@ export default function DebtPayoffPage() {
             Debt Payoff
           </h1>
           <p className="text-emerald-deep/60 leading-relaxed mb-10">
-            Compare avalanche (highest interest first) vs snowball (smallest balance first). Both work — the best strategy is the one you stick with.
+            Compare avalanche (highest interest first) vs snowball (smallest balance first). Both work; the best strategy is the one you stick with.
           </p>
 
           {/* Debt list */}
@@ -258,7 +258,7 @@ export default function DebtPayoffPage() {
                 Extra Monthly Payment
               </label>
               <p className="text-xs text-emerald-deep/40 mb-2">
-                Above your minimums ({fmt(totalMinimums)}/mo) — total budget: {fmt(monthlyBudget)}/mo
+                Above your minimums ({fmt(totalMinimums)}/mo). Total budget: {fmt(monthlyBudget)}/mo
               </p>
               <div className="relative">
                 <span className="absolute left-4 top-1/2 -translate-y-1/2 text-emerald-deep/40 font-display font-bold">{symbol}</span>
@@ -282,7 +282,7 @@ export default function DebtPayoffPage() {
               >
                 <span className="font-display font-bold text-emerald-deep">
                   {selected?.code}{" "}
-                  <span className="font-normal text-emerald-deep/50">— {selected?.name}</span>
+                  <span className="font-normal text-emerald-deep/50">· {selected?.name}</span>
                 </span>
                 <span className="text-emerald-deep/40 text-sm">{showSwitcher ? "▲" : "▼"}</span>
               </button>
@@ -349,7 +349,7 @@ export default function DebtPayoffPage() {
                       <>pays off <strong className="text-emerald-deep">{formatMonths(monthsFaster)}</strong> sooner</>
                     )}
                     {interestSaved === 0 && monthsFaster === 0 && "Both strategies give the same result for your debts."}
-                    {interestSaved > 0 && ". Snowball wins on motivation — paying off a small debt fast builds momentum."}
+                    {interestSaved > 0 && " Snowball wins on motivation: paying off a small debt fast builds momentum."}
                   </p>
                 </div>
               )}

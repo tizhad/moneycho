@@ -147,7 +147,7 @@ export default function SavingsGoalPage() {
           Savings Goal
         </h1>
         <p className="text-emerald-deep/60 leading-relaxed mb-10">
-          Plan your path to any financial goal — a house deposit, emergency fund, holiday, or anything else.
+          Plan your path to any financial goal: a house deposit, emergency fund, holiday, or anything else.
         </p>
 
         {/* Mode toggle */}
@@ -203,7 +203,7 @@ export default function SavingsGoalPage() {
             >
               <span className="font-display font-bold text-emerald-deep">
                 {selected?.code}{" "}
-                <span className="font-normal text-emerald-deep/50">— {selected?.name}</span>
+                <span className="font-normal text-emerald-deep/50">· {selected?.name}</span>
               </span>
               <span className="text-emerald-deep/40 text-sm">{showSwitcher ? "▲" : "▼"}</span>
             </button>

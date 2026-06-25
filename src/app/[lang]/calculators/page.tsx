@@ -11,7 +11,7 @@ const calculators = [
   {
     index: "01",
     title: "Budget Planner",
-    description: "Split your income using the 50/30/20 rule — needs, wants, and savings.",
+    description: "Split your income using the 50/30/20 rule: needs, wants, and savings.",
     href: "/calculators/budget",
     action: "Build Budget",
     tag: "Budgeting",
@@ -43,7 +43,7 @@ const calculators = [
   {
     index: "05",
     title: "Savings Goal",
-    description: "Find out how long it takes to reach any savings target — or how much to save each month.",
+    description: "Find out how long it takes to reach any savings target, or how much to save each month.",
     href: "/calculators/savings-goal",
     action: "Plan Goal",
     tag: "Savings",
@@ -67,7 +67,7 @@ const calculators = [
   {
     index: "08",
     title: "Monthly Cash Flow",
-    description: "Enter your real income and expenses to see your actual surplus or shortfall — not a plan, a snapshot.",
+    description: "Enter your real income and expenses to see your actual surplus or shortfall. Not a plan, just a snapshot.",
     href: "/calculators/cash-flow",
     action: "See Cash Flow",
     tag: "Budgeting",

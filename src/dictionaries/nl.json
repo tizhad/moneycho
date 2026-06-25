@@ -22,14 +22,9 @@
       "savingsGoal": "Spaardoel",
       "creditCard": "Creditcard Aflossen",
       "allGuides": "Alle Gidsen",
-      "journal": "Journal & Analyse",
-      "whitepapers": "Whitepapers",
-      "annualReports": "Jaarverslagen",
-      "taxEngines": "Belastingtools",
-      "mandate": "Ons Mandaat",
-      "methodology": "Methodologie",
+      "insights": "Inzichten",
+      "about": "Over ons",
       "careers": "Vacatures",
-      "legal": "Juridisch",
       "contact": "Contact"
     },
     "copyright": "Alle rechten voorbehouden.",
@@ -41,11 +36,11 @@
   },
   "home": {
     "hero": {
-      "eyebrow": "Gratis Financiële Calculators & Tools",
-      "h1_1": "Slim Geld Begint",
-      "h1_2": "met",
+      "eyebrow": "Gratis Financiële Tools · Geen Registratie",
+      "h1_1": "Budgetteren, Beleggen, Sparen.",
+      "h1_2": "onderbouwd met",
       "h1_em": "Betere Wiskunde.",
-      "body": "Gratis calculators, stapsgewijze gidsen en deskundige analyses om u te helpen budgetteren, investeren, sparen en plannen voor pensioen. Gebouwd op transparantie en technische nauwkeurigheid. Geen registratie, geen kosten.",
+      "body": "Gratis calculators voor elke geldbeslissing: budget, schulden, sparen, hypotheek en pensioen. Heldere resultaten, eerlijke wiskunde. Geen registratie, geen kosten.",
       "cta_primary": "Probeer Onze Calculators →",
       "cta_secondary": "Lees Gratis Gidsen"
     },
@@ -81,7 +76,7 @@
         { "n": "02", "name": "Samengestelde Rente Calculator", "desc": "Visualiseer de snelheid van kapitaalgroei. Maandelijkse bijdragen samengesteld over elke tijdshorizon.", "action": "Analyse Uitvoeren →", "href": "/calculators/compound-interest" },
         { "n": "03", "name": "Schuld Aflos Calculator", "desc": "Sneeuwbal vs lawine vergelijking. Zie precies hoeveel rente elke strategie bespaart.", "action": "Vergelijk Tarieven →", "href": "/calculators/debt-payoff" },
         { "n": "04", "name": "Hypotheekcalculator", "desc": "Maandlasten, totale rente en de werkelijke kosten van uw hypotheek over elke looptijd.", "action": "Bereken →", "href": "/calculators/mortgage" },
-        { "n": "05", "name": "Spaardoel Calculator", "desc": "Hoe lang duurt het om een doel te bereiken — of hoeveel moet u maandelijks sparen.", "action": "Doel Plannen →", "href": "/calculators/savings-goal" },
+        { "n": "05", "name": "Spaardoel Calculator", "desc": "Hoe lang duurt het om een doel te bereiken, of hoeveel moet u maandelijks sparen.", "action": "Doel Plannen →", "href": "/calculators/savings-goal" },
         { "n": "06", "name": "Creditcard Aflossen", "desc": "Zie hoe lang het duurt om uw saldo af te betalen en hoeveel rente u betaalt.", "action": "Nu Berekenen →", "href": "/calculators/credit-card-payoff" }
       ]
     },

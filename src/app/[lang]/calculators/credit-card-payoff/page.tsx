@@ -144,7 +144,7 @@ export default function CreditCardPayoffPage() {
             >
               <span className="font-display font-bold text-emerald-deep">
                 {selected?.code}{" "}
-                <span className="font-normal text-emerald-deep/50">— {selected?.name}</span>
+                <span className="font-normal text-emerald-deep/50">· {selected?.name}</span>
               </span>
               <span className="text-emerald-deep/40 text-sm">{showSwitcher ? "▲" : "▼"}</span>
             </button>
@@ -224,7 +224,7 @@ export default function CreditCardPayoffPage() {
                 <strong className="text-emerald-deep">
                   {fmt(result.minMonths.totalInterest)}
                 </strong>{" "}
-                in interest — {fmt(result.minMonths.totalInterest - result.totalInterest)} more than your current plan.
+                in interest, {fmt(result.minMonths.totalInterest - result.totalInterest)} more than your current plan.
               </p>
             </div>
           </>

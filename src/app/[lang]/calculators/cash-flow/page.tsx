@@ -194,7 +194,7 @@ export default function CashFlowPage() {
         </h1>
         <p className="text-emerald-deep/60 leading-relaxed mb-8">
           Enter your real income and expenses to see your actual monthly
-          surplus or shortfall — not a plan, but a snapshot.
+          surplus or shortfall. Not a plan, just a snapshot.
         </p>
 
         {/* Compact currency selector */}
@@ -203,7 +203,7 @@ export default function CashFlowPage() {
             onClick={() => setShowSwitcher(!showSwitcher)}
             className="flex items-center gap-2 text-xs font-bold text-emerald-deep/50 hover:text-emerald-deep transition-colors border border-emerald-deep/15 px-3 py-1.5 cursor-pointer"
           >
-            <span>{selected?.code} — {selected?.name}</span>
+            <span>{selected?.code} · {selected?.name}</span>
             <span className="text-emerald-deep/30">{showSwitcher ? "▲" : "▼"}</span>
           </button>
           {showSwitcher && (
@@ -281,8 +281,8 @@ export default function CashFlowPage() {
           </p>
           <p className="text-paper/50 text-sm mt-2">
             {isPositive
-              ? "surplus — unallocated money at month end"
-              : "shortfall — expenses exceed income"}
+              ? "surplus: unallocated money at month end"
+              : "shortfall: expenses exceed income"}
           </p>
         </div>
 

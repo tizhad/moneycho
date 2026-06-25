@@ -4,9 +4,9 @@ import { notFound } from "next/navigation";
 import { hasLocale, getDictionary, type Locale } from "@/lib/i18n";
 
 export const metadata: Metadata = {
-  title: "MoneyCho — Free Financial Calculators, Budget Tools & Money Guides",
+  title: "Free Financial Calculators & Money Guides | MoneyCho",
   description:
-    "Use free calculators to plan your budget, calculate compound interest, compare rent vs buy, and build your emergency fund. Step-by-step guides and expert analysis. No sign-up required.",
+    "Free calculators for budget, debt, savings, mortgage, and retirement. Step-by-step guides and expert analysis. No sign-up, no fees.",
 };
 
 export default async function HomePage({

@@ -206,7 +206,7 @@ export default function TakeHomePayPage() {
               <span className="font-bold text-emerald-deep/70">
                 Netherlands 2025
               </span>{" "}
-              — Box 1: 35.82% up to €38,441 · 49.50% above. Includes
+              · Box 1: 35.82% up to €38,441 · 49.50% above. Includes
               algemene heffingskorting and arbeidskorting. Assumes
               employed (loondienst).
             </p>

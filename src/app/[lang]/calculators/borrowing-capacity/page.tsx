@@ -220,7 +220,7 @@ export default function BorrowingCapacityPage() {
             </div>
           </Field>
 
-          <Field label={`Interest Rate — ${annualRate.toFixed(1)}% per year`}>
+          <Field label={`Interest Rate: ${annualRate.toFixed(1)}% per year`}>
             <input
               type="range"
               min={4}
