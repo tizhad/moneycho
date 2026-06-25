@@ -2,6 +2,9 @@
 
 import { useState, useEffect, useRef, useMemo } from "react";
 import { detectCurrency, saveCurrency, formatCurrency, CURRENCIES } from "@/lib/currency";
+import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from "recharts";
+
+const BUCKET_COLORS = ["#1a3d2f", "#2d5040", "#c9a230"];
 
 const buckets = [
   { label: "Needs", pct: 50, desc: "Rent, groceries, utilities, minimum debt payments", color: "bg-emerald-deep" },
@@ -44,7 +47,15 @@ export default function BudgetPage() {
   const numericIncome = typeof income === "number" ? income : 0;
   const selected = CURRENCIES.find((c) => c.code === currency);
 
+  const pieData = buckets.map((b, i) => ({
+    name: b.label,
+    value: numericIncome * (b.pct / 100),
+    pct: b.pct,
+    color: BUCKET_COLORS[i],
+  }));
+
   return (
+    <>
     <div className="grid lg:grid-cols-2 gap-16 items-start">
       {/* Left — inputs */}
       <div>
@@ -156,5 +167,62 @@ export default function BudgetPage() {
         </div>
       </div>
     </div>
+
+    {/* Allocation Donut */}
+    {numericIncome > 0 && (
+      <div className="mt-10 bg-paper border border-emerald-deep/10 p-6">
+        <p className="text-xs font-bold uppercase tracking-widest text-emerald-deep/40 mb-6">
+          Allocation Breakdown
+        </p>
+        <div className="flex flex-col sm:flex-row items-center gap-8">
+          <div className="w-full sm:w-[220px] flex-shrink-0">
+            <ResponsiveContainer width="100%" height={200}>
+              <PieChart>
+                <Pie
+                  data={pieData}
+                  cx="50%"
+                  cy="50%"
+                  innerRadius="52%"
+                  outerRadius="72%"
+                  paddingAngle={2}
+                  dataKey="value"
+                  startAngle={90}
+                  endAngle={450}
+                >
+                  {pieData.map((entry, i) => (
+                    <Cell key={i} fill={entry.color} />
+                  ))}
+                </Pie>
+                <Tooltip
+                  content={({ active, payload }) => {
+                    if (!active || !payload?.length) return null;
+                    const d = payload[0].payload as typeof pieData[0];
+                    return (
+                      <div className="bg-emerald-deep text-paper text-xs p-2.5 rounded shadow-lg">
+                        <p className="font-bold mb-0.5">{d.name}</p>
+                        <p className="text-paper/70">{d.pct}% · {fmt(d.value)}</p>
+                      </div>
+                    );
+                  }}
+                />
+              </PieChart>
+            </ResponsiveContainer>
+          </div>
+          <div className="flex-1 flex flex-col gap-3 w-full">
+            {pieData.map((d) => (
+              <div key={d.name} className="flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <div className="w-3 h-3 rounded-full flex-shrink-0" style={{ background: d.color }} />
+                  <span className="text-sm font-semibold text-emerald-deep">{d.name}</span>
+                  <span className="text-xs text-emerald-deep/40">{d.pct}%</span>
+                </div>
+                <span className="font-display font-bold text-emerald-deep">{fmt(d.value)}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    )}
+    </>
   );
 }

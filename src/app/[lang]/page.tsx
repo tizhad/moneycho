@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { hasLocale, getDictionary, type Locale } from "@/lib/i18n";
+import { HeroCalculator } from "@/components/home/HeroCalculator";
 
 export const metadata: Metadata = {
   title: "Free Financial Calculators & Money Guides | MoneyCho",
@@ -61,15 +62,7 @@ export default async function HomePage({
             </Link>
           </div>
         </div>
-        <div className="grid grid-cols-2 gap-3">
-          {t.heroGrid.map((item) => (
-            <Link key={item.label} href={p(item.href)} className="p-5 bg-white-card rounded-lg border border-border-light hover:-translate-y-0.5 hover:border-gold-muted transition-all no-underline group">
-              <span className="text-2xl mb-2 block">{item.icon}</span>
-              <span className="text-[0.82rem] font-semibold text-emerald-deep block mb-1">{item.label}</span>
-              <span className="text-[0.75rem] text-text-tertiary leading-snug">{item.desc}</span>
-            </Link>
-          ))}
-        </div>
+        <HeroCalculator lang={lang} />
       </section>
 
       {/* TRUST BAR */}

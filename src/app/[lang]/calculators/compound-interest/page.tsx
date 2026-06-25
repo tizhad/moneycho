@@ -2,6 +2,17 @@
 
 import { useState, useMemo, useEffect, useRef } from "react";
 import { detectCurrency, saveCurrency, formatCurrency, CURRENCIES } from "@/lib/currency";
+import {
+  AreaChart,
+  Area,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  ResponsiveContainer,
+} from "recharts";
+
+const CHART_COLORS = { emerald: "#1a3d2f", gold: "#c9a230" };
 
 const frequencies: { label: string; value: number }[] = [
   { label: "Monthly", value: 12 },
@@ -75,11 +86,12 @@ export default function CompoundInterestPage() {
   const r_ = typeof rate === "number" ? rate : 0;
   const y = typeof years === "number" ? years : 0;
 
+  const rMonthly = r_ === 0 ? 0 : Math.pow(1 + r_ / 100 / freq, freq / 12) - 1;
+
   const result = useMemo(() => {
     // Always step monthly so contributions are deposited every month regardless
     // of compounding frequency. Convert the periodic rate to its monthly
     // equivalent: (1 + annual/freq)^(freq/12) - 1
-    const rMonthly = r_ === 0 ? 0 : Math.pow(1 + r_ / 100 / freq, freq / 12) - 1;
     const n = y * 12;
     const futureValue = rMonthly === 0
       ? p + m * n
@@ -87,9 +99,32 @@ export default function CompoundInterestPage() {
     const totalContributions = p + m * 12 * y;
     const totalInterest = futureValue - totalContributions;
     return { futureValue, totalContributions, totalInterest };
-  }, [p, m, r_, y, freq]);
+  }, [p, m, r_, y, freq, rMonthly]);
+
+  const chartData = useMemo(() => {
+    const len = Math.min(Math.max(y, 1), 50);
+    return Array.from({ length: len + 1 }, (_, yr) => {
+      const n = yr * 12;
+      const balance = rMonthly === 0
+        ? p + m * n
+        : p * Math.pow(1 + rMonthly, n) + m * ((Math.pow(1 + rMonthly, n) - 1) / rMonthly);
+      const contributions = p + m * 12 * yr;
+      return {
+        year: yr,
+        contributions: Math.round(Math.max(0, contributions)),
+        interest: Math.round(Math.max(0, balance - contributions)),
+      };
+    });
+  }, [p, m, rMonthly, y]);
+
+  function fmtCompact(v: number) {
+    if (v >= 1_000_000) return `${(v / 1_000_000).toFixed(1)}M`;
+    if (v >= 1_000) return `${Math.round(v / 1_000)}K`;
+    return String(Math.round(v));
+  }
 
   return (
+    <>
     <div className="grid lg:grid-cols-2 gap-16 items-start">
       {/* Inputs */}
       <div>
@@ -229,5 +264,91 @@ export default function CompoundInterestPage() {
         </div>
       </div>
     </div>
+
+    {/* Growth Chart */}
+    {y > 0 && (
+      <div className="mt-10 bg-paper border border-emerald-deep/10 p-6">
+        <p className="text-xs font-bold uppercase tracking-widest text-emerald-deep/40 mb-6">
+          Growth Over Time
+        </p>
+        <ResponsiveContainer width="100%" height={220}>
+          <AreaChart data={chartData} margin={{ top: 4, right: 4, left: 0, bottom: 0 }}>
+            <defs>
+              <linearGradient id="ci-grad-contributions" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stopColor={CHART_COLORS.emerald} stopOpacity="0.25" />
+                <stop offset="100%" stopColor={CHART_COLORS.emerald} stopOpacity="0.03" />
+              </linearGradient>
+              <linearGradient id="ci-grad-interest" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stopColor={CHART_COLORS.gold} stopOpacity="0.5" />
+                <stop offset="100%" stopColor={CHART_COLORS.gold} stopOpacity="0.05" />
+              </linearGradient>
+            </defs>
+            <CartesianGrid
+              strokeDasharray="3 3"
+              stroke={CHART_COLORS.emerald}
+              strokeOpacity={0.06}
+              vertical={false}
+            />
+            <XAxis
+              dataKey="year"
+              tick={{ fontSize: 10, fill: "#7a9080" }}
+              tickLine={false}
+              axisLine={false}
+              tickFormatter={(v) => `${v}y`}
+            />
+            <YAxis
+              tick={{ fontSize: 10, fill: "#7a9080" }}
+              tickLine={false}
+              axisLine={false}
+              tickFormatter={fmtCompact}
+              width={44}
+            />
+            <Tooltip
+              cursor={{ stroke: CHART_COLORS.emerald, strokeWidth: 1, strokeOpacity: 0.2 }}
+              content={({ active, payload, label }) => {
+                if (!active || !payload?.length) return null;
+                const contrib = (payload.find((p) => p.dataKey === "contributions")?.value as number) ?? 0;
+                const interest = (payload.find((p) => p.dataKey === "interest")?.value as number) ?? 0;
+                return (
+                  <div className="bg-emerald-deep text-paper text-xs p-3 rounded shadow-lg">
+                    <p className="font-bold mb-1.5">Year {label}</p>
+                    <p className="text-paper/70">Total: {fmt(contrib + interest)}</p>
+                    <p className="text-paper/70">Contributed: {fmt(contrib)}</p>
+                    <p className="text-gold font-semibold">Interest: {fmt(interest)}</p>
+                  </div>
+                );
+              }}
+            />
+            <Area
+              type="monotone"
+              dataKey="contributions"
+              stackId="1"
+              stroke={CHART_COLORS.emerald}
+              strokeWidth={1.5}
+              fill="url(#ci-grad-contributions)"
+            />
+            <Area
+              type="monotone"
+              dataKey="interest"
+              stackId="1"
+              stroke={CHART_COLORS.gold}
+              strokeWidth={2}
+              fill="url(#ci-grad-interest)"
+            />
+          </AreaChart>
+        </ResponsiveContainer>
+        <div className="flex gap-6 mt-3">
+          <div className="flex items-center gap-2">
+            <div className="w-4 h-2 rounded-sm" style={{ background: `${CHART_COLORS.emerald}55` }} />
+            <span className="text-xs text-emerald-deep/50">Contributions</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <div className="w-4 h-2 rounded-sm" style={{ background: `${CHART_COLORS.gold}88` }} />
+            <span className="text-xs text-emerald-deep/50">Interest Earned</span>
+          </div>
+        </div>
+      </div>
+    )}
+    </>
   );
 }

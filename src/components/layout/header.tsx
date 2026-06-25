@@ -1,4 +1,8 @@
+"use client";
+
+import { useState } from "react";
 import Link from "next/link";
+import { Menu, X } from "lucide-react";
 import type { Locale } from "@/lib/i18n";
 import { LanguageSwitcher } from "@/components/layout/language-switcher";
 
@@ -12,7 +16,14 @@ type Nav = {
 };
 
 export function Header({ lang, nav }: { lang: Locale; nav: Nav }) {
+  const [open, setOpen] = useState(false);
   const p = (path: string) => `/${lang}${path}`;
+
+  const links = [
+    { label: nav.calculators, href: p("/calculators") },
+    { label: nav.guides, href: p("/guides") },
+    { label: nav.about, href: p("/about") },
+  ];
 
   return (
     <nav className="sticky top-0 z-50 bg-paper border-b border-border-light">
@@ -25,14 +36,9 @@ export function Header({ lang, nav }: { lang: Locale; nav: Nav }) {
           MoneyCho
         </Link>
 
+        {/* Desktop nav */}
         <ul className="hidden md:flex items-center gap-8 list-none">
-          {[
-            { label: nav.calculators, href: p("/calculators") },
-            { label: nav.guides, href: p("/guides") },
-            { label: nav.articles, href: p("/articles") },
-            { label: nav.taxEngines, href: p("/tools") },
-            { label: nav.about, href: p("/about") },
-          ].map((link) => (
+          {links.map((link) => (
             <li key={link.href}>
               <Link
                 href={link.href}
@@ -48,12 +54,45 @@ export function Header({ lang, nav }: { lang: Locale; nav: Nav }) {
           <LanguageSwitcher lang={lang} />
           <Link
             href={p("/calculators")}
-            className="text-[0.8rem] font-semibold tracking-[0.06em] uppercase px-5 py-2.5 border-[1.5px] border-emerald-deep rounded text-emerald-deep hover:bg-emerald-deep hover:text-paper transition-all no-underline"
+            className="hidden md:inline-flex text-[0.8rem] font-semibold tracking-[0.06em] uppercase px-5 py-2.5 border-[1.5px] border-emerald-deep rounded text-emerald-deep hover:bg-emerald-deep hover:text-paper transition-all no-underline"
           >
             {nav.allTools}
           </Link>
+          <button
+            onClick={() => setOpen(!open)}
+            className="md:hidden p-2 -mr-2 text-emerald-deep"
+            aria-label={open ? "Close menu" : "Open menu"}
+            aria-expanded={open}
+          >
+            {open ? <X size={22} strokeWidth={2} /> : <Menu size={22} strokeWidth={2} />}
+          </button>
         </div>
       </div>
+
+      {/* Mobile dropdown */}
+      {open && (
+        <div className="md:hidden bg-paper border-t border-border-light">
+          <div className="max-w-[1280px] mx-auto px-6 py-4 flex flex-col gap-1">
+            {links.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                onClick={() => setOpen(false)}
+                className="text-[0.95rem] font-medium text-emerald-deep no-underline py-3 border-b border-border-light last:border-0"
+              >
+                {link.label}
+              </Link>
+            ))}
+            <Link
+              href={p("/calculators")}
+              onClick={() => setOpen(false)}
+              className="mt-3 text-center text-[0.82rem] font-semibold tracking-[0.06em] uppercase px-5 py-3 border-[1.5px] border-emerald-deep rounded text-emerald-deep hover:bg-emerald-deep hover:text-paper transition-all no-underline"
+            >
+              {nav.allTools}
+            </Link>
+          </div>
+        </div>
+      )}
     </nav>
   );
 }
