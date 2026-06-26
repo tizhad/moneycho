@@ -1,33 +1,33 @@
-import Anthropic from '@anthropic-ai/sdk';
+import { GoogleGenerativeAI } from '@google/generative-ai';
 import { NextRequest, NextResponse } from 'next/server';
 import { nanoid } from 'nanoid';
 import type { Receipt, LineItem } from '@/lib/receipt';
 
-const client = new Anthropic();
+const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY ?? '');
 
-const SYSTEM = `You are a receipt parser. Given a receipt image, extract structured data and return ONLY valid JSON with no extra text.
+const PROMPT = `You are a receipt parser. Extract structured data from this receipt image and return ONLY valid JSON with no extra text, no markdown, no code blocks.
 
 Return this exact shape:
 {
   "storeName": "string (store/supermarket name, e.g. Albert Heijn, Dirk, Jumbo, Lidl)",
-  "date": "string (YYYY-MM-DD format, or today if not visible)",
-  "total": number (total amount paid),
+  "date": "string (YYYY-MM-DD format, or today's date if not visible)",
+  "total": number (total amount paid in euros),
   "items": [
     {
       "name": "string (exact name as printed on receipt)",
       "canonicalName": "string (normalized Dutch product name, e.g. 'Bananen', 'Volle Melk 1L', 'Kipfilet')",
       "category": "string (one of: Groente & Fruit, Zuivel, Vlees & Vis, Brood & Bakkerij, Dranken, Diepvries, Huishouden, Persoonlijke Verzorging, Snacks, Overig)",
       "quantity": number (default 1),
-      "price": number (price per unit in euros)
+      "price": number (price per unit in euros, e.g. 1.29 not 129)
     }
   ]
 }
 
 Rules:
-- canonicalName must be clean and generic so similar items across stores match (no store brand prefixes like "AH", "Jumbo")
-- Skip deposit (statiegeld), bag charges, discounts as separate items
-- price is per-unit price in euros (e.g. 1.29 not 129)
-- If quantity > 1, still record unit price`;
+- canonicalName must be clean and generic so similar items match across stores (remove store brand prefixes like "AH", "Jumbo", "Dirk")
+- Skip statiegeld, tas/bag charges, and discount lines as separate items
+- price is always per-unit in euros
+- Return ONLY the JSON object, nothing else`;
 
 export async function POST(req: NextRequest) {
   try {
@@ -40,31 +40,16 @@ export async function POST(req: NextRequest) {
 
     const bytes = await file.arrayBuffer();
     const base64 = Buffer.from(bytes).toString('base64');
-    const mediaType = (file.type || 'image/jpeg') as
-      | 'image/jpeg'
-      | 'image/png'
-      | 'image/gif'
-      | 'image/webp';
+    const mimeType = (file.type || 'image/jpeg') as string;
 
-    const message = await client.messages.create({
-      model: 'claude-haiku-4-5-20251001',
-      max_tokens: 2048,
-      system: SYSTEM,
-      messages: [
-        {
-          role: 'user',
-          content: [
-            {
-              type: 'image',
-              source: { type: 'base64', media_type: mediaType, data: base64 },
-            },
-            { type: 'text', text: 'Parse this receipt and return JSON only.' },
-          ],
-        },
-      ],
-    });
+    const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
 
-    const text = message.content[0].type === 'text' ? message.content[0].text : '';
+    const result = await model.generateContent([
+      PROMPT,
+      { inlineData: { data: base64, mimeType } },
+    ]);
+
+    const text = result.response.text().trim();
     const jsonMatch = text.match(/\{[\s\S]*\}/);
     if (!jsonMatch) {
       return NextResponse.json({ error: 'Could not parse receipt' }, { status: 422 });
