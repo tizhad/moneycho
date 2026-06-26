@@ -12,6 +12,7 @@ type Nav = {
   articles: string;
   taxEngines: string;
   about: string;
+  contact: string;
   allTools: string;
 };
 
@@ -23,6 +24,7 @@ export function Header({ lang, nav }: { lang: Locale; nav: Nav }) {
     { label: nav.calculators, href: p("/calculators") },
     { label: nav.guides, href: p("/guides") },
     { label: nav.about, href: p("/about") },
+    { label: nav.contact, href: p("/contact") },
   ];
 
   return (
