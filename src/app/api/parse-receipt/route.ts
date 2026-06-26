@@ -1,9 +1,6 @@
 import { GoogleGenerativeAI } from '@google/generative-ai';
 import { NextRequest, NextResponse } from 'next/server';
-import { nanoid } from 'nanoid';
 import type { Receipt, LineItem } from '@/lib/receipt';
-
-const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY ?? '');
 
 const PROMPT = `You are a receipt parser. Extract structured data from this receipt image and return ONLY valid JSON with no extra text, no markdown, no code blocks.
 
@@ -31,6 +28,14 @@ Rules:
 
 export async function POST(req: NextRequest) {
   try {
+    const apiKey = process.env.GEMINI_API_KEY;
+    if (!apiKey) {
+      return NextResponse.json(
+        { error: 'GEMINI_API_KEY is not set. Add it to your .env.local file.' },
+        { status: 500 },
+      );
+    }
+
     const formData = await req.formData();
     const file = formData.get('image') as File | null;
 
@@ -40,8 +45,9 @@ export async function POST(req: NextRequest) {
 
     const bytes = await file.arrayBuffer();
     const base64 = Buffer.from(bytes).toString('base64');
-    const mimeType = (file.type || 'image/jpeg') as string;
+    const mimeType = file.type || 'image/jpeg';
 
+    const genAI = new GoogleGenerativeAI(apiKey);
     const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
 
     const result = await model.generateContent([
@@ -56,7 +62,7 @@ export async function POST(req: NextRequest) {
     }
 
     const parsed = JSON.parse(jsonMatch[0]);
-    const receiptId = nanoid();
+    const receiptId = crypto.randomUUID();
 
     const receipt: Receipt = {
       id: receiptId,
@@ -65,7 +71,7 @@ export async function POST(req: NextRequest) {
       total: parsed.total ?? 0,
       createdAt: new Date().toISOString(),
       items: (parsed.items ?? []).map((item: Omit<LineItem, 'id' | 'receiptId'>) => ({
-        id: nanoid(),
+        id: crypto.randomUUID(),
         receiptId,
         name: item.name ?? '',
         canonicalName: item.canonicalName ?? item.name ?? '',
