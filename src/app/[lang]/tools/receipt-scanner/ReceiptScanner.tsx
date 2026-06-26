@@ -38,7 +38,10 @@ export default function ReceiptScanner({ lang }: { lang: string }) {
       const formData = new FormData();
       formData.append('image', file);
       const res = await fetch('/api/parse-receipt', { method: 'POST', body: formData });
-      if (!res.ok) throw new Error(await res.text());
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}));
+        throw new Error(data.error ?? 'Something went wrong. Please try again.');
+      }
       const receipt: Receipt = await res.json();
       const updated = addReceipt(receipt);
       setReceipts(updated);
