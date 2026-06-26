@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Image from 'next/image';
 import Link from 'next/link';
 
 const BASE = 'https://moneycho.com';
@@ -132,6 +133,17 @@ export default async function AboutPage({
         <p className="text-[1.05rem] leading-[1.7] text-emerald-deep/70">
           {c.intro}
         </p>
+      </div>
+
+      {/* Hero image */}
+      <div className="relative w-full h-[320px] md:h-[480px] mb-24 overflow-hidden">
+        <Image
+          src="/about-img.png"
+          alt="Person arriving in Amsterdam with a suitcase, standing on a canal bridge at sunset"
+          fill
+          className="object-cover object-center"
+          priority
+        />
       </div>
 
       {/* Story */}
