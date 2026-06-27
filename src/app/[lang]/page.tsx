@@ -191,47 +191,27 @@ export default async function HomePage({
             {t.calculators.viewAll}
           </Link>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-border-light rounded-lg overflow-hidden">
-          {t.calculators.items.map((c, idx) => {
-            const mobilePos = [0, 1, 3].indexOf(idx);
-            const showOnMobile = mobilePos !== -1;
-            const mobileN = String(mobilePos + 1).padStart(2, '0');
-            return (
-              <Link
-                key={c.href}
-                href={p(c.href)}
-                className={`bg-white-card p-9 hover:bg-cream-deep transition-colors no-underline group${!showOnMobile ? ' hidden md:block' : ''}`}
-              >
-                <span className="font-serif font-normal text-[2.2rem] text-gold leading-none block mb-4">
-                  {showOnMobile ? (
-                    <>
-                      <span className="md:hidden">{mobileN}</span>
-                      <span className="hidden md:inline">{c.n}</span>
-                    </>
-                  ) : (
-                    c.n
-                  )}
-                </span>
-                <span className="text-[0.95rem] font-bold text-emerald-deep uppercase tracking-[0.03em] block mb-2">
-                  {c.name}
-                </span>
-                <p className="text-[0.85rem] text-text-secondary leading-relaxed mb-4 max-w-[35ch]">
-                  {c.desc}
-                </p>
-                <span className="text-[0.82rem] font-semibold text-emerald-deep uppercase tracking-[0.04em] group-hover:text-gold transition-colors">
-                  {c.action}
-                </span>
-              </Link>
-            );
-          })}
-        </div>
-        <div className="mt-6 md:hidden">
-          <Link
-            href={p('/calculators')}
-            className="flex items-center justify-center w-full py-3.5 bg-emerald-deep text-paper text-[0.85rem] font-semibold rounded-md hover:bg-emerald-mid transition-colors no-underline"
-          >
-            View All Calculators &amp; Tools →
-          </Link>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {t.calculators.items.map((c) => (
+            <Link
+              key={c.href}
+              href={p(c.href)}
+              className="bg-white-card border border-border-light rounded-lg p-9 hover:bg-cream-deep hover:border-gold-muted transition-colors no-underline group"
+            >
+              <span className="font-serif font-normal text-[2.2rem] text-gold leading-none block mb-4">
+                {c.n}
+              </span>
+              <span className="text-[0.95rem] font-bold text-emerald-deep uppercase tracking-[0.03em] block mb-2">
+                {c.name}
+              </span>
+              <p className="text-[0.85rem] text-text-secondary leading-relaxed mb-4 max-w-[35ch]">
+                {c.desc}
+              </p>
+              <span className="text-[0.82rem] font-semibold text-emerald-deep uppercase tracking-[0.04em] group-hover:text-gold transition-colors">
+                {c.action}
+              </span>
+            </Link>
+          ))}
         </div>
       </section>
 
