@@ -65,6 +65,15 @@ export const guides: Record<Locale, Guide[]> = {
       date: 'June 26, 2026',
       author: 'Moneycho Editorial',
     },
+    {
+      slug: 'holiday-pay-smart-spending',
+      title: 'Holiday Pay, Spent Smart: 5 Options Your Future Self Will Thank You For',
+      description:
+        'Every May or June a lump sum lands in your account: holiday allowance. Here is how to use it strategically instead of letting it disappear without a plan.',
+      tag: 'saving',
+      date: 'June 27, 2026',
+      author: 'Moneycho Editorial',
+    },
   ],
   nl: [
     {
@@ -119,6 +128,15 @@ export const guides: Record<Locale, Guide[]> = {
         'Schulden zijn niet per definitie slecht, en het is ook geen gratis geld. Zo gebruik je krediet strategisch, begrijp je de kosten en bescherm je je financiële toekomst.',
       tag: 'lenen',
       date: '26 juni 2026',
+      author: 'Tina - Moneycho Redactie',
+    },
+    {
+      slug: 'vakantiegeld-slim-besteden',
+      title: 'Vakantiegeld Slim Besteden: 5 Opties Die Je Toekomstige Zelf Dankbaar Maken',
+      description:
+        'Elk jaar in mei of juni verschijnt je vakantiegeld op je rekening. Zo gebruik je het strategisch in plaats van het zonder plan te laten verdwijnen.',
+      tag: 'sparen',
+      date: '27 juni 2026',
       author: 'Tina - Moneycho Redactie',
     },
   ],

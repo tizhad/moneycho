@@ -209,4 +209,14 @@ export const relatedForGuide: Record<string, RelatedItem[]> = {
     { n: '04', label: 'Debt Payoff', desc: 'Avalanche vs snowball: which method wins?', href: '/calculators/debt-payoff' },
     { n: '03', label: 'Mortgage Calculator', desc: 'Calculate monthly payments and total interest.', href: '/calculators/mortgage' },
   ],
+  'vakantiegeld-slim-besteden': [
+    { n: '05', label: 'Spaardoel Calculator', desc: 'Bereken hoe snel je noodfonds op peil is.', href: '/calculators/savings-goal' },
+    { n: '04', label: 'Schulden Aflossen', desc: 'Vergelijk avalanche vs sneeuwbal methode.', href: '/calculators/debt-payoff' },
+    { n: '02', label: 'Samengestelde Rente', desc: 'Zie wat je vakantiegeld over 20 jaar oplevert.', href: '/calculators/compound-interest' },
+  ],
+  'holiday-pay-smart-spending': [
+    { n: '05', label: 'Savings Goal', desc: 'Calculate how quickly you can build your emergency fund.', href: '/calculators/savings-goal' },
+    { n: '04', label: 'Debt Payoff', desc: 'Compare the avalanche and snowball methods.', href: '/calculators/debt-payoff' },
+    { n: '02', label: 'Compound Interest', desc: 'See what your holiday pay turns into over 20 years.', href: '/calculators/compound-interest' },
+  ],
 };
