@@ -56,6 +56,15 @@ export const guides: Record<Locale, Guide[]> = {
       date: 'June 24, 2026',
       author: 'Moneycho Editorial',
     },
+    {
+      slug: 'debt-and-borrowing',
+      title: 'Debt and Borrowing: A Smart Guide to Responsible Credit',
+      description:
+        'Debt is not inherently bad — and it is not free money either. Here is how to use credit strategically, understand the real costs, and protect your financial future.',
+      tag: 'borrowing',
+      date: 'June 26, 2026',
+      author: 'Moneycho Editorial',
+    },
   ],
   nl: [
     {
@@ -102,6 +111,15 @@ export const guides: Record<Locale, Guide[]> = {
       tag: 'planning',
       date: '24 juni 2026',
       author: 'Moneycho Redactie',
+    },
+    {
+      slug: 'schulden-en-lenen',
+      title: 'Schulden en Lenen: Een Slimme Gids voor Verantwoord Krediet',
+      description:
+        'Schulden zijn niet per definitie slecht, en het is ook geen gratis geld. Zo gebruik je krediet strategisch, begrijp je de kosten en bescherm je je financiële toekomst.',
+      tag: 'lenen',
+      date: '26 juni 2026',
+      author: 'Tina - Moneycho Redactie',
     },
   ],
 };

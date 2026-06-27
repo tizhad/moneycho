@@ -48,42 +48,54 @@ export async function POST(req: NextRequest) {
     const mimeType = file.type || 'image/jpeg';
 
     const genAI = new GoogleGenerativeAI(apiKey);
-    const model = genAI.getGenerativeModel({ model: 'gemini-2.0-flash' });
-
-    const result = await model.generateContent([
-      PROMPT,
-      { inlineData: { data: base64, mimeType } },
-    ]);
-
-    const text = result.response.text().trim();
-    const jsonMatch = text.match(/\{[\s\S]*\}/);
-    if (!jsonMatch) {
-      return NextResponse.json({ error: 'Could not parse receipt' }, { status: 422 });
+    // Try models in order: 2.0-flash-lite has separate quota; fallback to 1.5-flash-8b
+    const MODELS = ['gemini-2.0-flash-lite', 'gemini-1.5-flash-8b', 'gemini-2.0-flash'];
+    let lastErr: unknown;
+    for (const modelName of MODELS) {
+      try {
+        const model = genAI.getGenerativeModel({ model: modelName });
+        const result = await model.generateContent([
+          PROMPT,
+          { inlineData: { data: base64, mimeType } },
+        ]);
+        const text = result.response.text().trim();
+        const jsonMatch = text.match(/\{[\s\S]*\}/);
+        if (!jsonMatch) {
+          return NextResponse.json({ error: 'Could not parse receipt' }, { status: 422 });
+        }
+        const parsed = JSON.parse(jsonMatch[0]);
+        const receiptId = crypto.randomUUID();
+        const receipt: Receipt = {
+          id: receiptId,
+          storeName: parsed.storeName ?? 'Unknown Store',
+          date: parsed.date ?? new Date().toISOString().slice(0, 10),
+          total: parsed.total ?? 0,
+          createdAt: new Date().toISOString(),
+          items: (parsed.items ?? []).map((item: Omit<LineItem, 'id' | 'receiptId'>) => ({
+            id: crypto.randomUUID(),
+            receiptId,
+            name: item.name ?? '',
+            canonicalName: item.canonicalName ?? item.name ?? '',
+            category: item.category ?? 'Overig',
+            quantity: item.quantity ?? 1,
+            price: item.price ?? 0,
+          })),
+        };
+        return NextResponse.json(receipt);
+      } catch (e: unknown) {
+        const msg = e instanceof Error ? e.message : String(e);
+        // Only fall through on quota/rate-limit errors
+        if (msg.includes('429') || msg.includes('quota') || msg.includes('not found') || msg.includes('404')) {
+          lastErr = e;
+          continue;
+        }
+        throw e;
+      }
     }
-
-    const parsed = JSON.parse(jsonMatch[0]);
-    const receiptId = crypto.randomUUID();
-
-    const receipt: Receipt = {
-      id: receiptId,
-      storeName: parsed.storeName ?? 'Unknown Store',
-      date: parsed.date ?? new Date().toISOString().slice(0, 10),
-      total: parsed.total ?? 0,
-      createdAt: new Date().toISOString(),
-      items: (parsed.items ?? []).map((item: Omit<LineItem, 'id' | 'receiptId'>) => ({
-        id: crypto.randomUUID(),
-        receiptId,
-        name: item.name ?? '',
-        canonicalName: item.canonicalName ?? item.name ?? '',
-        category: item.category ?? 'Overig',
-        quantity: item.quantity ?? 1,
-        price: item.price ?? 0,
-      })),
-    };
-
-    return NextResponse.json(receipt);
+    throw lastErr;
   } catch (err) {
     console.error('parse-receipt error:', err);
-    return NextResponse.json({ error: 'Failed to parse receipt' }, { status: 500 });
+    const msg = err instanceof Error ? err.message : String(err);
+    return NextResponse.json({ error: msg || 'Failed to parse receipt' }, { status: 500 });
   }
 }

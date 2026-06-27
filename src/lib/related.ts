@@ -199,4 +199,14 @@ export const relatedForGuide: Record<string, RelatedItem[]> = {
     { n: '01', label: 'Budgetcalculator', desc: 'Ken je cijfers vóór het gesprek.', href: '/calculators/budget' },
     { n: '07', label: 'Nettoloon Calculator', desc: 'Bereken je nettosalaris nauwkeurig.', href: '/calculators/take-home-pay' },
   ],
+  'schulden-en-lenen': [
+    { n: '06', label: 'Creditcard Aflossing', desc: 'Bereken hoeveel de minimale betaling je echt kost.', href: '/calculators/credit-card-payoff' },
+    { n: '04', label: 'Schulden Aflossen', desc: 'Avalanche vs sneeuwbal: welke methode wint?', href: '/calculators/debt-payoff' },
+    { n: '03', label: 'Hypotheekcalculator', desc: 'Bereken je maandlasten en totale rente.', href: '/calculators/mortgage' },
+  ],
+  'debt-and-borrowing': [
+    { n: '06', label: 'Credit Card Payoff', desc: 'See exactly what minimum payments actually cost you.', href: '/calculators/credit-card-payoff' },
+    { n: '04', label: 'Debt Payoff', desc: 'Avalanche vs snowball: which method wins?', href: '/calculators/debt-payoff' },
+    { n: '03', label: 'Mortgage Calculator', desc: 'Calculate monthly payments and total interest.', href: '/calculators/mortgage' },
+  ],
 };

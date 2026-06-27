@@ -5,6 +5,7 @@ import { hasLocale, getDictionary, type Locale } from '@/lib/i18n';
 import { EmailSection } from '@/components/home/EmailSection';
 import { CompoundPreview } from '@/components/home/CompoundPreview';
 import { BudgetPreview } from '@/components/home/BudgetPreview';
+import { guides } from '@/lib/guides';
 
 export async function generateMetadata({
   params,
@@ -53,14 +54,7 @@ export default async function HomePage({
   const t = dict.home;
   const p = (path: string) => `/${lang}${path}`;
 
-  const journal = t.journal.items as Array<{
-    featured?: boolean;
-    tag: string;
-    title: string;
-    desc: string;
-    date?: string;
-    href: string;
-  }>;
+  const latestGuides = [...(guides[lang as Locale] ?? [])].reverse().slice(0, 3);
 
   return (
     <>
@@ -112,6 +106,59 @@ export default async function HomePage({
         </div>
       </div>
 
+      {/* JOURNAL */}
+      {latestGuides.length > 0 && (
+        <section className="max-w-7xl mx-auto px-6 py-20">
+          <div className="flex items-baseline justify-between mb-10 flex-wrap gap-3">
+            <h2 className="font-serif font-black text-[clamp(1.8rem,3vw,2.4rem)] text-emerald-deep">
+              {t.journal.heading}
+            </h2>
+            <Link
+              href={p('/guides')}
+              className="text-[0.82rem] font-semibold text-gold hover:text-emerald-deep uppercase tracking-[0.04em] transition-colors no-underline"
+            >
+              {t.journal.viewAll}
+            </Link>
+          </div>
+          <div className="grid min-[930px]:grid-cols-2 gap-8">
+            <Link
+              href={p(`/guides/${latestGuides[0].slug}`)}
+              className="min-[930px]:row-span-2 p-10 bg-emerald-deep rounded-lg flex flex-col justify-end min-h-90 hover:-translate-y-0.5 transition-all no-underline"
+            >
+              <span className="text-[0.7rem] font-semibold tracking-[0.08em] uppercase text-gold-bright mb-3 block">
+                {latestGuides[0].tag}
+              </span>
+              <h3 className="font-serif font-black text-[1.6rem] text-paper leading-[1.3] mb-3">
+                {latestGuides[0].title}
+              </h3>
+              <p className="text-[0.85rem] text-paper/70 leading-relaxed max-w-[40ch]">
+                {latestGuides[0].description}
+              </p>
+            </Link>
+            {latestGuides.slice(1).map((guide) => (
+              <Link
+                key={guide.slug}
+                href={p(`/guides/${guide.slug}`)}
+                className="p-7 border border-border-light rounded-lg flex flex-col justify-center hover:border-gold-muted hover:-translate-y-px transition-all no-underline"
+              >
+                <span className="text-[0.7rem] font-semibold tracking-[0.08em] uppercase text-gold mb-2 block">
+                  {guide.tag}
+                </span>
+                <h3 className="font-serif font-black text-[1.15rem] text-emerald-deep leading-[1.3] mb-2">
+                  {guide.title}
+                </h3>
+                <p className="text-[0.82rem] text-text-secondary leading-relaxed">
+                  {guide.description}
+                </p>
+                <span className="text-[0.72rem] text-text-tertiary mt-3">
+                  {guide.date}
+                </span>
+              </Link>
+            ))}
+          </div>
+        </section>
+      )}
+
       {/* FEATURED CALCULATORS */}
       <section className="max-w-7xl mx-auto px-6 py-20">
         <div className="flex items-baseline justify-between mb-10 flex-wrap gap-3">
@@ -132,7 +179,7 @@ export default async function HomePage({
       </section>
 
       {/* CALCULATORS */}
-      <section className="max-w-[1280px] mx-auto px-6 pb-20">
+      <section className="max-w-7xl mx-auto px-6 pb-20">
         <div className="flex items-baseline justify-between mb-10 flex-wrap gap-3">
           <h2 className="font-serif font-black text-[clamp(1.8rem,3vw,2.4rem)] text-emerald-deep">
             {t.calculators.heading}
@@ -190,7 +237,7 @@ export default async function HomePage({
 
       {/* GUIDES */}
       <section className="bg-cream-deep py-20 px-6">
-        <div className="max-w-[1280px] mx-auto">
+        <div className="max-w-7xl mx-auto">
           <div className="flex items-baseline justify-between mb-10 flex-wrap gap-3">
             <h2 className="font-serif font-black text-[clamp(1.8rem,3vw,2.4rem)] text-emerald-deep">
               {t.guides.heading}
@@ -229,65 +276,12 @@ export default async function HomePage({
         </div>
       </section>
 
-      {/* JOURNAL */}
-      <section className="max-w-[1280px] mx-auto px-6 py-20">
-        <div className="flex items-baseline justify-between mb-10 flex-wrap gap-3">
-          <h2 className="font-serif font-black text-[clamp(1.8rem,3vw,2.4rem)] text-emerald-deep">
-            {t.journal.heading}
-          </h2>
-          <Link
-            href={p('/guides')}
-            className="text-[0.82rem] font-semibold text-gold hover:text-emerald-deep uppercase tracking-[0.04em] transition-colors no-underline"
-          >
-            {t.journal.viewAll}
-          </Link>
-        </div>
-        <div className="grid min-[930px]:grid-cols-2 gap-8">
-          <Link
-            href={p(journal[0].href)}
-            className="min-[930px]:row-span-2 p-10 bg-emerald-deep rounded-lg flex flex-col justify-end min-h-[360px] hover:-translate-y-0.5 transition-all no-underline"
-          >
-            <span className="text-[0.7rem] font-semibold tracking-[0.08em] uppercase text-gold-bright mb-3 block">
-              {journal[0].tag}
-            </span>
-            <h3 className="font-serif font-black text-[1.6rem] text-paper leading-[1.3] mb-3">
-              {journal[0].title}
-            </h3>
-            <p className="text-[0.85rem] text-paper/70 leading-relaxed max-w-[40ch]">
-              {journal[0].desc}
-            </p>
-          </Link>
-          {journal.slice(1).map((item) => (
-            <Link
-              key={item.title}
-              href={p(item.href)}
-              className="p-7 border border-border-light rounded-lg flex flex-col justify-center hover:border-gold-muted hover:-translate-y-px transition-all no-underline"
-            >
-              <span className="text-[0.7rem] font-semibold tracking-[0.08em] uppercase text-gold mb-2 block">
-                {item.tag}
-              </span>
-              <h3 className="font-serif font-black text-[1.15rem] text-emerald-deep leading-[1.3] mb-2">
-                {item.title}
-              </h3>
-              <p className="text-[0.82rem] text-text-secondary leading-relaxed">
-                {item.desc}
-              </p>
-              {item.date && (
-                <span className="text-[0.72rem] text-text-tertiary mt-3">
-                  {item.date}
-                </span>
-              )}
-            </Link>
-          ))}
-        </div>
-      </section>
-
       {/* EMAIL CAPTURE */}
       <EmailSection lang={lang} />
 
       {/* E-E-A-T */}
       <section className="bg-cream-deep py-16 px-6">
-        <div className="max-w-[1280px] mx-auto grid grid-cols-1 md:grid-cols-3 gap-10">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10">
           {t.eeat.map((item) => (
             <div key={item.title} className="text-center py-8 px-6">
               <span className="text-[2rem] mb-4 block">{item.icon}</span>
