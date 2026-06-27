@@ -214,6 +214,16 @@ export const relatedForGuide: Record<string, RelatedItem[]> = {
     { n: '04', label: 'Schulden Aflossen', desc: 'Vergelijk avalanche vs sneeuwbal methode.', href: '/calculators/debt-payoff' },
     { n: '02', label: 'Samengestelde Rente', desc: 'Zie wat je vakantiegeld over 20 jaar oplevert.', href: '/calculators/compound-interest' },
   ],
+  'calculating-dutch-mortgage': [
+    { n: '03', label: 'Mortgage Calculator', desc: 'Calculate monthly payments and total interest over any term.', href: '/calculators/mortgage' },
+    { n: '09', label: 'Borrowing Capacity', desc: 'See your real ceiling based on Dutch Nibud norms.', href: '/calculators/borrowing-capacity' },
+    { n: '07', label: 'Take-Home Pay', desc: 'Know your net income before you commit to a monthly payment.', href: '/calculators/take-home-pay' },
+  ],
+  'hypotheek-berekenen': [
+    { n: '03', label: 'Hypotheekcalculator', desc: 'Bereken maandlasten en totale rente over elke looptijd.', href: '/calculators/mortgage' },
+    { n: '09', label: 'Leencapaciteit', desc: 'Zie je echte plafond op basis van de Nederlandse Nibud-normen.', href: '/calculators/borrowing-capacity' },
+    { n: '07', label: 'Nettoloon Calculator', desc: 'Weet wat je netto verdient vóórdat je een maandlast aangaat.', href: '/calculators/take-home-pay' },
+  ],
   'holiday-pay-smart-spending': [
     { n: '05', label: 'Savings Goal', desc: 'Calculate how quickly you can build your emergency fund.', href: '/calculators/savings-goal' },
     { n: '04', label: 'Debt Payoff', desc: 'Compare the avalanche and snowball methods.', href: '/calculators/debt-payoff' },

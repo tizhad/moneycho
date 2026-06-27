@@ -66,6 +66,15 @@ export const guides: Record<Locale, Guide[]> = {
       author: 'Moneycho Editorial',
     },
     {
+      slug: 'calculating-dutch-mortgage',
+      title: 'Calculating Your Dutch Mortgage: What You Actually Need to Know Before You Start',
+      description:
+        'Most people start with a calculator and a number. That order is wrong. What salary, extra costs, energy labels, and contract type really mean before you buy.',
+      tag: 'mortgage',
+      date: 'June 27, 2026',
+      author: 'Moneycho Editorial',
+    },
+    {
       slug: 'holiday-pay-smart-spending',
       title: 'Holiday Pay, Spent Smart: 5 Options Your Future Self Will Thank You For',
       description:
@@ -129,6 +138,15 @@ export const guides: Record<Locale, Guide[]> = {
       tag: 'lenen',
       date: '26 juni 2026',
       author: 'Tina - Moneycho Redactie',
+    },
+    {
+      slug: 'hypotheek-berekenen',
+      title: 'Hypotheek Berekenen: Wat Je Écht Moet Weten Voordat Je Start',
+      description:
+        'De meeste mensen beginnen met een rekentool en een getal. Die volgorde klopt niet. Wat salaris, bijkomende kosten, energielabel en contractvorm echt betekenen voordat je koopt.',
+      tag: 'hypotheek',
+      date: '27 juni 2026',
+      author: 'Moneycho Redactie',
     },
     {
       slug: 'vakantiegeld-slim-besteden',
