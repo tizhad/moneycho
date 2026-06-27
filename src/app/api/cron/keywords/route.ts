@@ -81,7 +81,9 @@ export async function GET(req: NextRequest) {
   try {
     const { blobs } = await list({ prefix: blobKey(yesterday) });
     if (blobs.length > 0) {
-      const prevRes = await fetch(blobs[0].url);
+      const prevRes = await fetch(blobs[0].url, {
+        headers: { Authorization: `Bearer ${process.env.BLOB_READ_WRITE_TOKEN}` },
+      });
       const prevSnap = await prevRes.json() as DailySnapshot;
       prevRankMap = new Map(prevSnap.keywords.map((k) => [k.keyword, k.rank]));
     }
@@ -105,7 +107,7 @@ export async function GET(req: NextRequest) {
 
   // Store today's snapshot
   await put(blobKey(today), JSON.stringify(snapshot), {
-    access: 'public',
+    access: 'private',
     contentType: 'application/json',
     addRandomSuffix: false,
   });

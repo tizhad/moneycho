@@ -21,9 +21,13 @@ async function loadSnapshots(): Promise<DailySnapshot[]> {
       .sort((a, b) => b.pathname.localeCompare(a.pathname))
       .slice(0, 7);
 
+    const token = process.env.BLOB_READ_WRITE_TOKEN;
     const snapshots = await Promise.all(
       sorted.map(async (blob) => {
-        const res = await fetch(blob.url, { next: { revalidate: 3600 } });
+        const res = await fetch(blob.url, {
+          headers: token ? { Authorization: `Bearer ${token}` } : {},
+          next: { revalidate: 3600 },
+        });
         return res.json() as Promise<DailySnapshot>;
       }),
     );
