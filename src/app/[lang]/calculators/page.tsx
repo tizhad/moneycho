@@ -1,98 +1,107 @@
-import Link from "next/link";
-import type { Metadata } from "next";
+import Link from 'next/link';
+import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: "Free Personal Finance Calculators",
+  title: 'Free Personal Finance Calculators',
   description:
-    "Free calculators for budgeting, compound interest, mortgage, credit card payoff, debt, investing, and retirement planning.",
+    'Free calculators for budgeting, compound interest, mortgage, credit card payoff, debt, investing, and retirement planning.',
 };
 
 const calculators = [
   {
-    index: "01",
-    title: "Budget Planner",
-    description: "Split your income using the 50/30/20 rule: needs, wants, and savings.",
-    href: "/calculators/budget",
-    action: "Build Budget",
-    tag: "Budgeting",
+    index: '01',
+    title: 'Budget Planner',
+    description:
+      'Split your income using the 50/30/20 rule: needs, wants, and savings.',
+    href: '/calculators/budget',
+    action: 'Build Budget',
+    tag: 'Budgeting',
   },
   {
-    index: "02",
-    title: "Compound Interest",
-    description: "See how your money grows over time with contributions and compounding.",
-    href: "/calculators/compound-interest",
-    action: "Run Analysis",
-    tag: "Savings",
+    index: '02',
+    title: 'Compound Interest',
+    description:
+      'See how your money grows over time with contributions and compounding.',
+    href: '/calculators/compound-interest',
+    action: 'Run Analysis',
+    tag: 'Savings',
   },
   {
-    index: "03",
-    title: "Mortgage Calculator",
-    description: "Calculate monthly payments, total interest, and true cost of your home.",
-    href: "/calculators/mortgage",
-    action: "Calculate",
-    tag: "Real Estate",
+    index: '03',
+    title: 'Mortgage Calculator',
+    description:
+      'Calculate monthly payments, total interest, and true cost of your home.',
+    href: '/calculators/mortgage',
+    action: 'Calculate',
+    tag: 'Real Estate',
   },
   {
-    index: "04",
-    title: "Credit Card Payoff",
-    description: "See how long to pay off your balance and how much interest you'll pay.",
-    href: "/calculators/credit-card-payoff",
-    action: "Calculate",
-    tag: "Debt",
+    index: '04',
+    title: 'Credit Card Payoff',
+    description:
+      "See how long to pay off your balance and how much interest you'll pay.",
+    href: '/calculators/credit-card-payoff',
+    action: 'Calculate',
+    tag: 'Debt',
   },
   {
-    index: "05",
-    title: "Savings Goal",
-    description: "Find out how long it takes to reach any savings target, or how much to save each month.",
-    href: "/calculators/savings-goal",
-    action: "Plan Goal",
-    tag: "Savings",
+    index: '05',
+    title: 'Savings Goal',
+    description:
+      'Find out how long it takes to reach any savings target, or how much to save each month.',
+    href: '/calculators/savings-goal',
+    action: 'Plan Goal',
+    tag: 'Savings',
   },
   {
-    index: "06",
-    title: "Debt Payoff",
-    description: "Compare avalanche vs snowball strategies across all your debts. See which saves more and pays off faster.",
-    href: "/calculators/debt-payoff",
-    action: "Compare Strategies",
-    tag: "Debt",
+    index: '06',
+    title: 'Debt Payoff',
+    description:
+      'Compare avalanche vs snowball strategies across all your debts. See which saves more and pays off faster.',
+    href: '/calculators/debt-payoff',
+    action: 'Compare Strategies',
+    tag: 'Debt',
   },
   {
-    index: "07",
-    title: "Take-Home Pay",
-    description: "Calculate your Dutch net salary after income tax and tax credits. NL 2025 tax brackets included.",
-    href: "/calculators/take-home-pay",
-    action: "Calculate",
-    tag: "Income",
+    index: '07',
+    title: 'Take-Home Pay',
+    description:
+      'Calculate your Dutch net salary after income tax and tax credits. NL 2025 tax brackets included.',
+    href: '/calculators/take-home-pay',
+    action: 'Calculate',
+    tag: 'Income',
   },
   {
-    index: "08",
-    title: "Monthly Cash Flow",
-    description: "Enter your real income and expenses to see your actual surplus or shortfall. Not a plan, just a snapshot.",
-    href: "/calculators/cash-flow",
-    action: "See Cash Flow",
-    tag: "Budgeting",
+    index: '08',
+    title: 'Monthly Cash Flow',
+    description:
+      'Enter your real income and expenses to see your actual surplus or shortfall. Not a plan, just a snapshot.',
+    href: '/calculators/cash-flow',
+    action: 'See Cash Flow',
+    tag: 'Budgeting',
   },
   {
-    index: "09",
-    title: "Borrowing Capacity",
-    description: "How much can you borrow? Based on VFN / Nibud norms used by Dutch lenders. Accounts for income, housing costs, and existing debts.",
-    href: "/calculators/borrowing-capacity",
-    action: "Calculate",
-    tag: "Borrowing",
+    index: '09',
+    title: 'Borrowing Capacity',
+    description:
+      'How much can you borrow? Based on VFN / Nibud norms used by Dutch lenders. Accounts for income, housing costs, and existing debts.',
+    href: '/calculators/borrowing-capacity',
+    action: 'Calculate',
+    tag: 'Borrowing',
   },
 ];
 
 const comingSoon = [
-  { title: "Net Worth", tag: "Planning", href: "#" },
-  { title: "Rent vs Buy", tag: "Real Estate", href: "#" },
-  { title: "Investment Growth", tag: "Investing", href: "#" },
-  { title: "FIRE Number", tag: "Retirement", href: "#" },
-  { title: "Loan Calculator", tag: "Debt", href: "#" },
+  { title: 'Net Worth', tag: 'Planning', href: '#' },
+  { title: 'Rent vs Buy', tag: 'Real Estate', href: '#' },
+  { title: 'Investment Growth', tag: 'Investing', href: '#' },
+  { title: 'FIRE Number', tag: 'Retirement', href: '#' },
+  { title: 'Loan Calculator', tag: 'Debt', href: '#' },
 ];
 
 export default function CalculatorsIndexPage() {
   return (
-    <div className="max-w-7xl mx-auto px-6 py-16 md:py-24">
+    <div className="max-w-7xl mx-auto px-6 md:py-24">
       <div className="mb-16 border-b border-emerald-deep/20 pb-8">
         <span className="text-xs font-bold text-gold tracking-[0.2em] uppercase block mb-4">
           Free Tools
