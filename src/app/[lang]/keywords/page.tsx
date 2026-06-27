@@ -136,6 +136,14 @@ export default async function KeywordsPage({
                   </div>
 
                   <div className="divide-y divide-emerald-deep/[0.06] border border-emerald-deep/[0.08]">
+                    {/* Column headers */}
+                    <div className="grid grid-cols-[2rem_1fr_6rem_3rem_3rem] items-center gap-4 px-5 py-2 bg-emerald-deep/[0.03]">
+                      <span className="text-[10px] font-bold uppercase tracking-widest text-emerald-deep/30 text-right">#</span>
+                      <span className="text-[10px] font-bold uppercase tracking-widest text-emerald-deep/30">{isNL ? 'Zoekwoord' : 'Keyword'}</span>
+                      <span className="text-[10px] font-bold uppercase tracking-widest text-emerald-deep/30">{isNL ? 'Score' : 'Score'}</span>
+                      <span className="text-[10px] font-bold uppercase tracking-widest text-emerald-deep/30 text-center">{isNL ? 'Trend' : 'Trend'}</span>
+                      <span className="text-[10px] font-bold uppercase tracking-widest text-emerald-deep/30 text-center">{isNL ? 'Wijziging' : 'Change'}</span>
+                    </div>
                     {catKeywords.map((kw) => {
                       const trend = trendIndicator(kw);
                       return (
