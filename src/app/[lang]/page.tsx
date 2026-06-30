@@ -139,9 +139,9 @@ export default async function HomePage({
               <Link
                 key={guide.slug}
                 href={p(`/guides/${guide.slug}`)}
-                className="p-7 border border-border-light rounded-lg flex flex-col justify-center hover:border-gold-muted hover:-translate-y-px transition-all no-underline"
+                className="relative p-7 border border-border-light rounded-lg flex flex-col justify-center hover:border-gold-muted hover:-translate-y-px transition-all no-underline"
               >
-                <span className="text-[0.7rem] font-semibold tracking-[0.08em] uppercase text-gold mb-2 block">
+                <span className="absolute top-3 right-3 text-[0.6rem] font-semibold tracking-[0.08em] uppercase text-gold bg-gold/10 px-2 py-0.5 rounded-sm">
                   {guide.tag}
                 </span>
                 <h3 className="font-serif font-black text-[1.15rem] text-emerald-deep leading-[1.3] mb-2">
@@ -234,12 +234,9 @@ export default async function HomePage({
               <Link
                 key={g.title}
                 href={p(g.href)}
-                className="grid grid-cols-[auto_1fr_auto] gap-6 items-center px-8 py-7 bg-white-card hover:bg-cream-deep transition-colors no-underline group"
+                className="relative flex items-center gap-6 px-8 py-7 bg-white-card hover:bg-cream-deep transition-colors no-underline group"
               >
-                <span className="text-[0.7rem] font-semibold tracking-[0.08em] uppercase text-gold bg-gold/10 px-2.5 py-1 rounded-sm whitespace-nowrap">
-                  {g.tag}
-                </span>
-                <div>
+                <div className="flex-1">
                   <h3 className="font-serif font-normal text-[1.2rem] text-emerald-deep mb-1">
                     {g.title}
                   </h3>
@@ -247,8 +244,11 @@ export default async function HomePage({
                     {g.desc}
                   </p>
                 </div>
-                <span className="text-[1.2rem] text-emerald-deep opacity-40 group-hover:opacity-100 group-hover:translate-x-1 transition-all">
+                <span className="text-[1.2rem] text-emerald-deep opacity-40 group-hover:opacity-100 group-hover:translate-x-1 transition-all shrink-0">
                   →
+                </span>
+                <span className="absolute top-3 right-3 text-[0.6rem] font-semibold tracking-[0.08em] uppercase text-gold bg-gold/10 px-2 py-0.5 rounded-sm">
+                  {g.tag}
                 </span>
               </Link>
             ))}

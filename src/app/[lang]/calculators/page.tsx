@@ -89,6 +89,15 @@ const calculators = [
     action: 'Calculate',
     tag: 'Borrowing',
   },
+  {
+    index: '10',
+    title: 'Comprehensive Budget Planner',
+    description:
+      'Step-by-step budget builder: enter every income source and expense category, then see your full breakdown and a personalised tip.',
+    href: '/calculators/budget-planner',
+    action: 'Build My Budget',
+    tag: 'Budgeting',
+  },
 ];
 
 const comingSoon = [
