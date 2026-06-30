@@ -234,24 +234,24 @@ export default async function HomePage({
               <Link
                 key={g.title}
                 href={p(g.href)}
-                className="flex items-center gap-6 px-8 py-6 bg-white-card hover:bg-cream-deep transition-colors no-underline group"
+                className="grid grid-cols-[1fr_auto] gap-x-6 items-start px-8 py-6 bg-white-card hover:bg-cream-deep transition-colors no-underline group"
               >
-                <div className="flex-1">
-                  <div className="flex items-center gap-3 mb-1">
-                    <h3 className="font-serif font-normal text-[1.2rem] text-emerald-deep">
-                      {g.title}
-                    </h3>
-                    <span className="text-[0.6rem] font-semibold tracking-[0.08em] uppercase text-gold bg-gold/10 px-2 py-0.5 rounded-sm whitespace-nowrap shrink-0">
-                      {g.tag}
-                    </span>
-                  </div>
+                <div>
+                  <h3 className="font-serif font-normal text-[1.2rem] text-emerald-deep mb-1">
+                    {g.title}
+                  </h3>
                   <p className="text-[0.84rem] text-text-secondary max-w-[60ch]">
                     {g.desc}
                   </p>
                 </div>
-                <span className="text-[1.2rem] text-emerald-deep opacity-40 group-hover:opacity-100 group-hover:translate-x-1 transition-all shrink-0">
-                  →
-                </span>
+                <div className="flex flex-col items-end justify-between h-full gap-4">
+                  <span className="text-[0.6rem] font-semibold tracking-[0.08em] uppercase text-gold bg-gold/10 px-2 py-0.5 rounded-sm whitespace-nowrap">
+                    {g.tag}
+                  </span>
+                  <span className="text-[1.2rem] text-emerald-deep opacity-40 group-hover:opacity-100 group-hover:translate-x-1 transition-all">
+                    →
+                  </span>
+                </div>
               </Link>
             ))}
           </div>
