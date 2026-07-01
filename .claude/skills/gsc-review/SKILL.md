@@ -173,6 +173,12 @@ Output a short summary:
 
 ---
 
+## Related skills
+
+- `/keyword-review` — cross-references GSC data with a GKP export to map keyword clusters and find content gaps. Run after a new GKP export is dropped in `docs/seo/keywords/`.
+
+---
+
 ## Notes
 
 - GSC data has a 2–3 day lag — the most recent 2–3 days in the export are incomplete. Don't panic over drops in the last 2 days.

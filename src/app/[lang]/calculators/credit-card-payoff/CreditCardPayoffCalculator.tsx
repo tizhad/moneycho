@@ -10,7 +10,7 @@ function Field({ label, hint, children }: { label: string; hint?: string; childr
         <label className="block text-xs font-bold uppercase tracking-widest text-emerald-deep">
           {label}
         </label>
-        {hint && <span className="text-xs text-emerald-deep/40">{hint}</span>}
+        {hint && <span className="text-xs text-emerald-deep/40" suppressHydrationWarning>{hint}</span>}
       </div>
       {children}
     </div>
@@ -67,7 +67,47 @@ function calcPayoff(balance: number, apr: number, payment: number) {
   return { months, totalInterest, totalPaid: balance + totalInterest, minMonths };
 }
 
-export default function CreditCardPayoffPage() {
+const T = {
+  en: {
+    tag: 'Debt',
+    h1: 'Credit Card Payoff',
+    intro: "See exactly how long it takes to pay off your balance and how much interest you'll pay. Increase your monthly payment to see the impact.",
+    balance: 'Current Balance',
+    apr: 'Annual Interest Rate (APR)',
+    payment: 'Monthly Payment',
+    currency: 'Currency',
+    autoDetect: 'Auto-detected · change if incorrect',
+    debtFreeIn: 'Debt-Free In',
+    payingPerMonth: (amt: string) => `paying ${amt}/month`,
+    totalInterest: 'Total Interest',
+    totalPaid: 'Total Paid',
+    minWarningTitle: 'Minimum Payment Warning',
+    minWarning: (years: number, months: number, interest: string, extra: string) =>
+      `Paying only the minimum (2%) would take ${years} years ${months} months and cost ${interest} in interest, ${extra} more than your current plan.`,
+    noResult: "Your payment doesn't cover the monthly interest. Increase your monthly payment.",
+  },
+  nl: {
+    tag: 'Schuld',
+    h1: 'Creditcard Aflossen',
+    intro: 'Bereken precies hoe lang het duurt om je creditcard af te lossen en hoeveel rente je betaalt. Verhoog je maandbedrag om het verschil te zien.',
+    balance: 'Huidig Saldo',
+    apr: 'Jaarlijkse Rente (APR)',
+    payment: 'Maandbedrag',
+    currency: 'Valuta',
+    autoDetect: 'Automatisch gedetecteerd · aanpassen indien nodig',
+    debtFreeIn: 'Schuldenvrij Over',
+    payingPerMonth: (amt: string) => `bij ${amt}/maand`,
+    totalInterest: 'Totale Rente',
+    totalPaid: 'Totaal Betaald',
+    minWarningTitle: 'Let Op: Minimumbetaling',
+    minWarning: (years: number, months: number, interest: string, extra: string) =>
+      `Alleen het minimum betalen (2%) duurt ${years} jaar en ${months} maanden en kost ${interest} aan rente — ${extra} meer dan je huidige plan.`,
+    noResult: 'Je betaling dekt de maandelijkse rente niet. Verhoog je maandbedrag.',
+  },
+} as const;
+
+export default function CreditCardPayoffCalculator({ lang = 'en' }: { lang?: string }) {
+  const t = lang === 'nl' ? T.nl : T.en;
   const [balance, setBalance] = useState<number | "">(5000);
   const [apr, setApr] = useState<number | "">(22);
   const [payment, setPayment] = useState<number | "">(200);
@@ -113,30 +153,30 @@ export default function CreditCardPayoffPage() {
       {/* Inputs */}
       <div>
         <span className="text-xs font-bold text-gold tracking-[0.2em] uppercase block mb-4">
-          Debt
+          {t.tag}
         </span>
         <h1 className="font-display text-4xl md:text-5xl font-bold text-emerald-deep tracking-tight mb-4">
-          Credit Card Payoff
+          {t.h1}
         </h1>
         <p className="text-emerald-deep/60 leading-relaxed mb-12">
-          See exactly how long it takes to pay off your balance and how much interest you'll pay. Increase your monthly payment to see the impact.
+          {t.intro}
         </p>
 
         <div className="space-y-6">
-          <Field label="Current Balance">
+          <Field label={t.balance}>
             <NumberInput value={balance} onChange={setBalance} prefix={symbol} />
           </Field>
-          <Field label="Annual Interest Rate (APR)">
+          <Field label={t.apr}>
             <NumberInput value={apr} onChange={(v) => setApr(v === "" ? "" : Math.min(100, v as number))} suffix="%" />
           </Field>
-          <Field label="Monthly Payment" hint={`Min ~${fmt(b * 0.02)}/mo`}>
+          <Field label={t.payment} hint={`Min ~${fmt(b * 0.02)}/mo`}>
             <NumberInput value={payment} onChange={setPayment} prefix={symbol} />
           </Field>
 
           {/* Currency switcher */}
           <div className="relative" ref={switcherRef}>
             <label className="block text-xs font-bold uppercase tracking-widest text-emerald-deep mb-2">
-              Currency
+              {t.currency}
             </label>
             <button
               onClick={() => setShowSwitcher(!showSwitcher)}
@@ -164,7 +204,7 @@ export default function CreditCardPayoffPage() {
                 ))}
               </div>
             )}
-            <p className="text-xs text-emerald-deep/30 mt-2">Auto-detected · change if incorrect</p>
+            <p className="text-xs text-emerald-deep/30 mt-2">{t.autoDetect}</p>
           </div>
         </div>
       </div>
@@ -173,28 +213,26 @@ export default function CreditCardPayoffPage() {
       <div className="space-y-4">
         {!result ? (
           <div className="bg-paper border border-emerald-deep/10 p-8 text-center">
-            <p className="text-emerald-deep/50 text-sm">
-              Your payment doesn't cover the monthly interest. Increase your monthly payment.
-            </p>
+            <p className="text-emerald-deep/50 text-sm">{t.noResult}</p>
           </div>
         ) : (
           <>
             <div className="bg-emerald-deep text-paper p-8">
               <p className="text-xs font-bold uppercase tracking-widest text-paper/50 mb-2">
-                Debt-Free In
+                {t.debtFreeIn}
               </p>
               <p className="font-display text-5xl font-bold">
                 {years > 0 ? `${years}y ` : ""}{months}mo
               </p>
               <p className="text-paper/50 text-sm mt-2">
-                paying {fmt(pmt)}/month
+                {t.payingPerMonth(fmt(pmt))}
               </p>
             </div>
 
             <div className="grid grid-cols-2 gap-4">
               <div className="bg-paper border border-emerald-deep/10 p-6">
                 <p className="text-xs font-bold uppercase tracking-widest text-emerald-deep/40 mb-2">
-                  Total Interest
+                  {t.totalInterest}
                 </p>
                 <p className="font-display text-2xl font-bold text-emerald-deep">
                   {fmt(result.totalInterest)}
@@ -202,7 +240,7 @@ export default function CreditCardPayoffPage() {
               </div>
               <div className="bg-paper border border-emerald-deep/10 p-6">
                 <p className="text-xs font-bold uppercase tracking-widest text-emerald-deep/40 mb-2">
-                  Total Paid
+                  {t.totalPaid}
                 </p>
                 <p className="font-display text-2xl font-bold text-emerald-deep">
                   {fmt(result.totalPaid)}
@@ -213,18 +251,15 @@ export default function CreditCardPayoffPage() {
             {/* Minimum payment warning */}
             <div className="bg-paper border border-gold/40 p-6">
               <p className="text-xs font-bold uppercase tracking-widest text-gold mb-3">
-                Minimum Payment Warning
+                {t.minWarningTitle}
               </p>
               <p className="text-sm text-emerald-deep/70 leading-relaxed">
-                Paying only the minimum (2%) would take{" "}
-                <strong className="text-emerald-deep">
-                  {Math.floor(result.minMonths.months / 12)} years {result.minMonths.months % 12} months
-                </strong>{" "}
-                and cost{" "}
-                <strong className="text-emerald-deep">
-                  {fmt(result.minMonths.totalInterest)}
-                </strong>{" "}
-                in interest, {fmt(result.minMonths.totalInterest - result.totalInterest)} more than your current plan.
+                {t.minWarning(
+                  Math.floor(result.minMonths.months / 12),
+                  result.minMonths.months % 12,
+                  fmt(result.minMonths.totalInterest),
+                  fmt(result.minMonths.totalInterest - result.totalInterest)
+                )}
               </p>
             </div>
           </>

@@ -1,3 +1,5 @@
+import fs from 'fs';
+import path from 'path';
 import type { Locale } from '@/lib/i18n';
 
 export type Guide = {
@@ -9,153 +11,86 @@ export type Guide = {
   author?: string;
 };
 
-export const guides: Record<Locale, Guide[]> = {
-  en: [
-    {
-      slug: 'saving-and-budgeting',
-      title: 'Saving and Budgeting: How to Take Control of Your Financial Future',
-      description:
-        'Learn why budgeting matters more than you think, how to protect yourself from financial disruption, and the simple first step to taking control of your money.',
-      tag: 'saving',
-      date: 'June 24, 2026',
-      author: 'Moneycho Editorial',
-    },
-    {
-      slug: 'what-is-inflation',
-      title: "What Is Inflation and Why It's Quietly Eroding Your Savings",
-      description:
-        'Learn what inflation really means, why keeping money in a savings account can cost you, and how to make sure your money grows faster than prices rise.',
-      tag: 'saving',
-      date: 'June 24, 2026',
-      author: 'Moneycho Editorial',
-    },
-    {
-      slug: 'compound-interest-explained',
-      title: 'Compound Interest Explained: How Your Money Grows Over Time',
-      description:
-        'Understand the power of compound interest, the formula behind it, why starting early matters, and how to use compounding in your everyday financial decisions.',
-      tag: 'investing',
-      date: 'June 24, 2026',
-      author: 'Moneycho Editorial',
-    },
-    {
-      slug: 'understanding-risk-tolerance',
-      title: 'Understanding Your Risk Tolerance: How to Invest Without Losing Sleep',
-      description:
-        'Figure out how much investment risk is right for you, avoid common psychological mistakes, and build a strategy that matches your goals and temperament.',
-      tag: 'investing',
-      date: 'June 24, 2026',
-      author: 'Moneycho Editorial',
-    },
-    {
-      slug: 'how-to-choose-financial-advisor',
-      title: 'How to Choose a Financial Advisor You Can Actually Trust',
-      description:
-        'Learn how financial advisors get paid, what to look for, red flags to watch out for, and how to find an advisor who truly acts in your best interest.',
-      tag: 'planning',
-      date: 'June 24, 2026',
-      author: 'Moneycho Editorial',
-    },
-    {
-      slug: 'debt-and-borrowing',
-      title: 'Debt and Borrowing: A Smart Guide to Responsible Credit',
-      description:
-        'Debt is not inherently bad — and it is not free money either. Here is how to use credit strategically, understand the real costs, and protect your financial future.',
-      tag: 'borrowing',
-      date: 'June 26, 2026',
-      author: 'Moneycho Editorial',
-    },
-    {
-      slug: 'calculating-dutch-mortgage',
-      title: 'Calculating Your Dutch Mortgage: What You Actually Need to Know Before You Start',
-      description:
-        'Most people start with a calculator and a number. That order is wrong. What salary, extra costs, energy labels, and contract type really mean before you buy.',
-      tag: 'mortgage',
-      date: 'June 27, 2026',
-      author: 'Moneycho Editorial',
-    },
-    {
-      slug: 'holiday-pay-smart-spending',
-      title: 'Holiday Pay, Spent Smart: 5 Options Your Future Self Will Thank You For',
-      description:
-        'Every May or June a lump sum lands in your account: holiday allowance. Here is how to use it strategically instead of letting it disappear without a plan.',
-      tag: 'saving',
-      date: 'June 27, 2026',
-      author: 'Moneycho Editorial',
-    },
-  ],
-  nl: [
-    {
-      slug: 'sparen-en-budgetteren',
-      title: 'Sparen en Budgetteren: Hoe Je Grip Krijgt op Je Financiële Toekomst',
-      description:
-        'Ontdek waarom budgetteren belangrijker is dan je denkt, hoe je jezelf beschermt tegen financiële tegenslag, en de eerste simpele stap naar grip op je geld.',
-      tag: 'sparen',
-      date: '24 juni 2026',
-      author: 'Moneycho Redactie',
-    },
-    {
-      slug: 'wat-is-inflatie',
-      title: 'Wat Is Inflatie en Waarom Het Stilletjes Je Spaargeld Uitholt',
-      description:
-        'Leer wat inflatie echt betekent, waarom geld op een spaarrekening je geld kost, en hoe je zorgt dat je vermogen sneller groeit dan de prijzen stijgen.',
-      tag: 'sparen',
-      date: '24 juni 2026',
-      author: 'Moneycho Redactie',
-    },
-    {
-      slug: 'rente-op-rente-uitgelegd',
-      title: 'Rente op Rente Uitgelegd: Zo Groeit Je Geld Vanzelf',
-      description:
-        'Begrijp de kracht van rente op rente, de formule erachter, waarom vroeg beginnen cruciaal is, en hoe je compounding gebruikt in je dagelijkse financiële beslissingen.',
-      tag: 'beleggen',
-      date: '24 juni 2026',
-      author: 'Moneycho Redactie',
-    },
-    {
-      slug: 'risicotolerantie-begrijpen',
-      title: 'Risicotolerantie Begrijpen: Beleggen Zonder Wakker Te Liggen',
-      description:
-        'Ontdek hoeveel beleggingsrisico bij jou past, vermijd veelgemaakte psychologische fouten, en bouw een strategie die past bij je doelen en karakter.',
-      tag: 'beleggen',
-      date: '24 juni 2026',
-      author: 'Moneycho Redactie',
-    },
-    {
-      slug: 'financieel-adviseur-kiezen',
-      title: 'Hoe Kies Je een Financieel Adviseur Die Je Kunt Vertrouwen',
-      description:
-        'Leer hoe financieel adviseurs betaald worden, waar je op moet letten, rode vlaggen om op te passen, en hoe je een adviseur vindt die echt in jouw belang handelt.',
-      tag: 'planning',
-      date: '24 juni 2026',
-      author: 'Moneycho Redactie',
-    },
-    {
-      slug: 'schulden-en-lenen',
-      title: 'Schulden en Lenen: Een Slimme Gids voor Verantwoord Krediet',
-      description:
-        'Schulden zijn niet per definitie slecht, en het is ook geen gratis geld. Zo gebruik je krediet strategisch, begrijp je de kosten en bescherm je je financiële toekomst.',
-      tag: 'lenen',
-      date: '26 juni 2026',
-      author: 'Tina - Moneycho Redactie',
-    },
-    {
-      slug: 'hypotheek-berekenen',
-      title: 'Hypotheek Berekenen: Wat Je Écht Moet Weten Voordat Je Start',
-      description:
-        'De meeste mensen beginnen met een rekentool en een getal. Die volgorde klopt niet. Wat salaris, bijkomende kosten, energielabel en contractvorm echt betekenen voordat je koopt.',
-      tag: 'hypotheek',
-      date: '27 juni 2026',
-      author: 'Moneycho Redactie',
-    },
-    {
-      slug: 'vakantiegeld-slim-besteden',
-      title: 'Vakantiegeld Slim Besteden: 5 Opties Die Je Toekomstige Zelf Dankbaar Maken',
-      description:
-        'Elk jaar in mei of juni verschijnt je vakantiegeld op je rekening. Zo gebruik je het strategisch in plaats van het zonder plan te laten verdwijnen.',
-      tag: 'sparen',
-      date: '27 juni 2026',
-      author: 'Tina - Moneycho Redactie',
-    },
-  ],
-};
+function parseMetadata(src: string): Record<string, string> {
+  // Extract the export const metadata = { ... } block from MDX
+  const match = src.match(/export\s+const\s+metadata\s*=\s*\{([\s\S]*?)\};/);
+  if (!match) return {};
+
+  const block = match[1];
+  const result: Record<string, string> = {};
+
+  // Match key: 'value' or key: "value" pairs
+  const pairs = block.matchAll(/(\w+)\s*:\s*['"`]([\s\S]*?)['"`]\s*(?:,|$)/gm);
+  for (const [, key, value] of pairs) {
+    result[key] = value.trim();
+  }
+
+  return result;
+}
+
+function loadGuides(locale: Locale): Guide[] {
+  const dir = path.join(process.cwd(), 'src', 'content', locale);
+
+  if (!fs.existsSync(dir)) return [];
+
+  const files = fs.readdirSync(dir).filter(
+    (f) => f.endsWith('.mdx') && !f.startsWith('_')
+  );
+
+  const guides: Guide[] = [];
+
+  for (const file of files) {
+    const slug = file.replace(/\.mdx$/, '');
+    const src = fs.readFileSync(path.join(dir, file), 'utf-8');
+    const meta = parseMetadata(src);
+
+    if (!meta.title) continue;
+
+    guides.push({
+      slug,
+      title: meta.title,
+      description: meta.description ?? '',
+      tag: meta.tag ?? '',
+      date: meta.date ?? '',
+      author: meta.author,
+    });
+  }
+
+  // Sort by date: parse "June 30, 2026" (EN) and "30 juni 2026" (NL)
+  const NL_MONTHS: Record<string, number> = {
+    januari: 0, februari: 1, maart: 2, april: 3, mei: 4, juni: 5,
+    juli: 6, augustus: 7, september: 8, oktober: 9, november: 10, december: 11,
+  };
+
+  function parseDate(date: string): number {
+    if (!date) return 0;
+    // EN: "June 30, 2026"
+    const en = new Date(date);
+    if (!isNaN(en.getTime())) return en.getTime();
+    // NL: "30 juni 2026"
+    const nl = date.match(/(\d+)\s+(\w+)\s+(\d{4})/);
+    if (nl) {
+      const month = NL_MONTHS[nl[2].toLowerCase()];
+      if (month !== undefined) return new Date(+nl[3], month, +nl[1]).getTime();
+    }
+    return 0;
+  }
+
+  guides.sort((a, b) => parseDate(a.date) - parseDate(b.date));
+
+  return guides;
+}
+
+// Cache at module level (evaluated once per build/server start)
+const _cache: Partial<Record<Locale, Guide[]>> = {};
+
+function getGuides(locale: Locale): Guide[] {
+  if (!_cache[locale]) _cache[locale] = loadGuides(locale);
+  return _cache[locale]!;
+}
+
+export const guides: Record<Locale, Guide[]> = new Proxy({} as Record<Locale, Guide[]>, {
+  get(_target, prop: string) {
+    return getGuides(prop as Locale);
+  },
+});

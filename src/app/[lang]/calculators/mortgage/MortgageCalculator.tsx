@@ -5,6 +5,51 @@ import { detectCurrency, saveCurrency, formatCurrency, CURRENCIES } from "@/lib/
 
 const TERMS = [10, 15, 20, 25, 30];
 
+const T = {
+  en: {
+    tag: 'Real Estate',
+    h1: 'Dutch Mortgage Calculator',
+    intro: 'Calculate your monthly mortgage payment, total interest, and the true cost of your home loan. Built for Dutch mortgages.',
+    homePrice: 'Home Price',
+    downPayment: 'Down Payment',
+    rate: 'Annual Interest Rate',
+    term: 'Loan Term',
+    currency: 'Currency',
+    autoDetect: 'Auto-detected · change if incorrect',
+    monthlyPayment: 'Monthly Payment',
+    onLoan: (amt: string) => `on a ${amt} loan`,
+    totalPayment: 'Total Payment',
+    totalInterest: 'Total Interest',
+    costBreakdown: 'Cost Breakdown',
+    homePriceLabel: 'Home Price',
+    downPaymentLabel: 'Down Payment',
+    loanAmountLabel: 'Loan Amount',
+    totalCostLabel: 'Total Cost of Home',
+    defaults: { homePrice: 400000, downPayment: 40000, rate: 4.0, term: 20 },
+  },
+  nl: {
+    tag: 'Hypotheek',
+    h1: 'Hypotheek Berekenen',
+    intro: 'Bereken je maandelijkse hypotheeklasten, totale rentekosten en de werkelijke kosten van je woning. Inclusief annuïteitenhypotheek.',
+    homePrice: 'Woningwaarde',
+    downPayment: 'Eigen Inbreng',
+    rate: 'Jaarlijkse Rente',
+    term: 'Looptijd',
+    currency: 'Valuta',
+    autoDetect: 'Automatisch gedetecteerd · aanpassen indien nodig',
+    monthlyPayment: 'Maandlasten',
+    onLoan: (amt: string) => `op een hypotheek van ${amt}`,
+    totalPayment: 'Totaal Betaald',
+    totalInterest: 'Totale Rente',
+    costBreakdown: 'Kostenopbouw',
+    homePriceLabel: 'Woningwaarde',
+    downPaymentLabel: 'Eigen Inbreng',
+    loanAmountLabel: 'Hypotheekbedrag',
+    totalCostLabel: 'Totale Kosten Woning',
+    defaults: { homePrice: 400000, downPayment: 40000, rate: 4.0, term: 20 },
+  },
+} as const;
+
 function Field({ label, children }: { label: string; children: React.ReactNode }) {
   return (
     <div>
@@ -33,12 +78,13 @@ function NumberInput({ value, onChange, prefix, suffix }: { value: number | ""; 
   );
 }
 
-export default function MortgagePage() {
-  const [homePrice, setHomePrice] = useState<number | "">(400000);
-  const [downPayment, setDownPayment] = useState<number | "">(80000);
-  const [rate, setRate] = useState<number | "">(6.5);
-  const [term, setTerm] = useState(30);
-  const [currency, setCurrency] = useState("USD");
+export default function MortgageCalculator({ lang = 'en' }: { lang?: string }) {
+  const t = lang === 'nl' ? T.nl : T.en;
+  const [homePrice, setHomePrice] = useState<number | "">(t.defaults.homePrice);
+  const [downPayment, setDownPayment] = useState<number | "">(t.defaults.downPayment);
+  const [rate, setRate] = useState<number | "">(t.defaults.rate);
+  const [term, setTerm] = useState<number>(t.defaults.term);
+  const [currency, setCurrency] = useState("EUR");
   const [showSwitcher, setShowSwitcher] = useState(false);
   const switcherRef = useRef<HTMLDivElement>(null);
 
@@ -64,7 +110,7 @@ export default function MortgagePage() {
 
   const selected = CURRENCIES.find((c) => c.code === currency);
   const fmt = useMemo(() => (n: number) => formatCurrency(n, currency), [currency]);
-  const symbol = selected?.symbol ?? "$";
+  const symbol = selected?.symbol ?? "€";
 
   const hp = typeof homePrice === "number" ? homePrice : 0;
   const dp = typeof downPayment === "number" ? downPayment : 0;
@@ -90,38 +136,38 @@ export default function MortgagePage() {
       {/* Inputs */}
       <div>
         <span className="text-xs font-bold text-gold tracking-[0.2em] uppercase block mb-4">
-          Real Estate
+          {t.tag}
         </span>
         <h1 className="font-display text-4xl md:text-5xl font-bold text-emerald-deep tracking-tight mb-4">
-          Mortgage Calculator
+          {t.h1}
         </h1>
         <p className="text-emerald-deep/60 leading-relaxed mb-12">
-          Calculate your monthly payment, total interest, and the true cost of your home loan.
+          {t.intro}
         </p>
 
         <div className="space-y-6">
-          <Field label="Home Price">
+          <Field label={t.homePrice}>
             <NumberInput value={homePrice} onChange={setHomePrice} prefix={symbol} />
           </Field>
-          <Field label={`Down Payment (${result.downPct.toFixed(1)}%)`}>
+          <Field label={`${t.downPayment} (${result.downPct.toFixed(1)}%)`}>
             <NumberInput value={downPayment} onChange={(v) => setDownPayment(v === "" ? "" : Math.min(hp, v))} prefix={symbol} />
           </Field>
-          <Field label="Annual Interest Rate">
+          <Field label={t.rate}>
             <NumberInput value={rate} onChange={(v) => setRate(v === "" ? "" : Math.min(30, v as number))} suffix="%" />
           </Field>
-          <Field label="Loan Term">
+          <Field label={t.term}>
             <div className="flex gap-2">
-              {TERMS.map((t) => (
+              {TERMS.map((t_) => (
                 <button
-                  key={t}
-                  onClick={() => setTerm(t)}
+                  key={t_}
+                  onClick={() => setTerm(t_)}
                   className={`flex-1 py-3 text-xs font-bold uppercase tracking-widest border transition-colors ${
-                    term === t
+                    term === t_
                       ? "bg-emerald-deep text-paper border-emerald-deep"
                       : "bg-paper text-emerald-deep border-emerald-deep/20 hover:border-emerald-deep"
                   }`}
                 >
-                  {t}yr
+                  {t_}yr
                 </button>
               ))}
             </div>
@@ -130,7 +176,7 @@ export default function MortgagePage() {
           {/* Currency switcher */}
           <div className="relative" ref={switcherRef}>
             <label className="block text-xs font-bold uppercase tracking-widest text-emerald-deep mb-2">
-              Currency
+              {t.currency}
             </label>
             <button
               onClick={() => setShowSwitcher(!showSwitcher)}
@@ -158,7 +204,7 @@ export default function MortgagePage() {
                 ))}
               </div>
             )}
-            <p className="text-xs text-emerald-deep/30 mt-2">Auto-detected · change if incorrect</p>
+            <p className="text-xs text-emerald-deep/30 mt-2" suppressHydrationWarning>{t.autoDetect}</p>
           </div>
         </div>
       </div>
@@ -167,28 +213,28 @@ export default function MortgagePage() {
       <div className="space-y-4">
         <div className="bg-emerald-deep text-paper p-8">
           <p className="text-xs font-bold uppercase tracking-widest text-paper/50 mb-2">
-            Monthly Payment
+            {t.monthlyPayment}
           </p>
-          <p className="font-display text-5xl font-bold">{fmt(result.monthlyPayment)}</p>
-          <p className="text-paper/50 text-sm mt-2">
-            on a {fmt(result.loanAmount)} loan
+          <p className="font-display text-5xl font-bold" suppressHydrationWarning>{fmt(result.monthlyPayment)}</p>
+          <p className="text-paper/50 text-sm mt-2" suppressHydrationWarning>
+            {t.onLoan(fmt(result.loanAmount))}
           </p>
         </div>
 
         <div className="grid grid-cols-2 gap-4">
           <div className="bg-paper border border-emerald-deep/10 p-6">
             <p className="text-xs font-bold uppercase tracking-widest text-emerald-deep/40 mb-2">
-              Total Payment
+              {t.totalPayment}
             </p>
-            <p className="font-display text-2xl font-bold text-emerald-deep">
+            <p className="font-display text-2xl font-bold text-emerald-deep" suppressHydrationWarning>
               {fmt(result.totalPayment)}
             </p>
           </div>
           <div className="bg-paper border border-emerald-deep/10 p-6">
             <p className="text-xs font-bold uppercase tracking-widest text-gold mb-2">
-              Total Interest
+              {t.totalInterest}
             </p>
-            <p className="font-display text-2xl font-bold text-emerald-deep">
+            <p className="font-display text-2xl font-bold text-emerald-deep" suppressHydrationWarning>
               {fmt(result.totalInterest)}
             </p>
           </div>
@@ -196,18 +242,18 @@ export default function MortgagePage() {
 
         <div className="bg-paper border border-emerald-deep/10 p-6 space-y-3">
           <p className="text-xs font-bold uppercase tracking-widest text-emerald-deep/40 mb-4">
-            Cost Breakdown
+            {t.costBreakdown}
           </p>
           {[
-            { label: "Home Price", value: fmt(hp) },
-            { label: "Down Payment", value: fmt(dp) },
-            { label: "Loan Amount", value: fmt(result.loanAmount) },
-            { label: "Total Interest", value: fmt(result.totalInterest) },
-            { label: "Total Cost of Home", value: fmt(dp + result.totalPayment), bold: true },
+            { label: t.homePriceLabel, value: fmt(hp) },
+            { label: t.downPaymentLabel, value: fmt(dp) },
+            { label: t.loanAmountLabel, value: fmt(result.loanAmount) },
+            { label: t.totalInterest, value: fmt(result.totalInterest) },
+            { label: t.totalCostLabel, value: fmt(dp + result.totalPayment), bold: true },
           ].map((row) => (
             <div key={row.label} className={`flex justify-between items-center ${row.bold ? "border-t border-emerald-deep/10 pt-3" : ""}`}>
               <span className={`text-sm ${row.bold ? "font-bold text-emerald-deep" : "text-emerald-deep/60"}`}>{row.label}</span>
-              <span className={`font-display font-bold ${row.bold ? "text-emerald-deep text-lg" : "text-emerald-deep/80"}`}>{row.value}</span>
+              <span className={`font-display font-bold ${row.bold ? "text-emerald-deep text-lg" : "text-emerald-deep/80"}`} suppressHydrationWarning>{row.value}</span>
             </div>
           ))}
         </div>

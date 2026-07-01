@@ -6,14 +6,11 @@ const defaultLocale = "nl";
 export const LOCALE_COOKIE = "moneycho_locale";
 
 function getLocale(request: NextRequest): string {
-  // 1. Cookie takes priority (user's explicit choice)
+  // Only respect an explicit cookie set when the user clicks the language switcher.
+  // Never infer from Accept-Language — NL is the default for all new visitors.
   const cookie = request.cookies.get(LOCALE_COOKIE)?.value;
   if (cookie && locales.includes(cookie)) return cookie;
-
-  // 2. Browser Accept-Language header
-  const acceptLang = request.headers.get("accept-language") ?? "";
-  const preferred = acceptLang.split(",")[0].split("-")[0].toLowerCase().trim();
-  return locales.includes(preferred) ? preferred : defaultLocale;
+  return defaultLocale;
 }
 
 export function proxy(request: NextRequest) {
