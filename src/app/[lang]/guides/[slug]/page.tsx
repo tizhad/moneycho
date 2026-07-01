@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { guides } from "@/lib/guides";
 import type { Locale } from "@/lib/i18n";
+import { RelatedContent } from "@/components/RelatedContent";
 
 const BASE_URL = "https://moneycho.com";
 
@@ -129,6 +130,7 @@ export default async function ArticlePage({
         </div>
       </div>
       <Article />
+      <RelatedContent lang={lang} slug={slug} />
     </>
   );
 }

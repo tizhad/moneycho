@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import MortgageCalculator from './MortgageCalculator';
+import { RelatedContent } from '@/components/RelatedContent';
 
 const SLUG = 'mortgage';
 const BASE = 'https://moneycho.com';
@@ -200,6 +201,7 @@ export default async function MortgagePage({
         </section>
 
       </div>
+      <RelatedContent lang={lang} slug="calculator:mortgage" />
     </>
   );
 }

@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import BudgetPlannerCalculator from './BudgetPlannerCalculator';
+import { RelatedContent } from '@/components/RelatedContent';
 
 const BASE = 'https://moneycho.com';
 const SLUG = 'budget-planner';
@@ -46,7 +47,12 @@ export async function generateMetadata({
   };
 }
 
-export default function BudgetPlannerPage() {
+export default async function BudgetPlannerPage({
+  params,
+}: {
+  params: Promise<{ lang: string }>;
+}) {
+  const { lang } = await params;
   return (
     <>
       <BudgetPlannerCalculator />
@@ -152,6 +158,7 @@ export default function BudgetPlannerPage() {
         </section>
 
       </div>
+      <RelatedContent lang={lang} slug="calculator:budget-planner" />
     </>
   );
 }

@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import CompoundInterestCalculator from './CompoundInterestCalculator';
+import { RelatedContent } from '@/components/RelatedContent';
 
 const SLUG = 'compound-interest';
 const BASE = 'https://moneycho.com';
@@ -53,7 +54,12 @@ const RATES = [
   { label: 'Global equity index fund', rate: '7 to 8%', note: 'Higher volatility, historical average before inflation' },
 ];
 
-export default function CompoundInterestPage() {
+export default async function CompoundInterestPage({
+  params,
+}: {
+  params: Promise<{ lang: string }>;
+}) {
+  const { lang } = await params;
   return (
     <>
       <CompoundInterestCalculator />
@@ -188,6 +194,7 @@ export default function CompoundInterestPage() {
         </section>
 
       </div>
+      <RelatedContent lang={lang} slug="calculator:compound-interest" />
     </>
   );
 }

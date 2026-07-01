@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import DebtPayoffCalculator from './DebtPayoffCalculator';
+import { RelatedContent } from '@/components/RelatedContent';
 
 const SLUG = 'debt-payoff';
 const BASE = 'https://moneycho.com';
@@ -46,7 +47,12 @@ export async function generateMetadata({
   };
 }
 
-export default function DebtPayoffPage() {
+export default async function DebtPayoffPage({
+  params,
+}: {
+  params: Promise<{ lang: string }>;
+}) {
+  const { lang } = await params;
   return (
     <>
       <DebtPayoffCalculator />
@@ -147,6 +153,7 @@ export default function DebtPayoffPage() {
         </section>
 
       </div>
+      <RelatedContent lang={lang} slug="calculator:debt-payoff" />
     </>
   );
 }

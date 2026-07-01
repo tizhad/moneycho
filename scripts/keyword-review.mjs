@@ -5,7 +5,7 @@
  * cross-references with the latest GSC log, and writes docs/seo/keyword-map.md.
  *
  * Run: node scripts/keyword-review.mjs
- * Cost: ~$0.10–0.20 per run (two DataForSEO API calls)
+ * Cost: ~$0.05–0.10 per run (two DataForSEO API calls — slim mode)
  */
 
 import { readFileSync, writeFileSync, existsSync, mkdirSync } from 'fs';
@@ -228,19 +228,24 @@ function priorityScore(item) {
 async function main() {
   console.log('\n🔍 Keyword Review — moneycho.com\n');
 
-  // 1. Fetch keyword universe
+  // 1. Fetch keyword universe (2 calls to stay within budget)
   console.log('Fetching keyword data from DataForSEO...');
-  const allSeeds = CLUSTERS.flatMap((c) => c.seeds);
-  const [siteNL, siteEN, seedResults] = await Promise.all([
+  const topSeeds = [
+    'hypotheek berekenen', 'hypotheek calculator',
+    'creditcard aflossen', 'rente op rente calculator',
+    'spaardoel calculator', 'hoeveel sparen per maand',
+    'schulden aflossen calculator', 'budget planner',
+    'compound interest calculator', 'dutch mortgage calculator',
+  ];
+  const [siteNL, seedResults] = await Promise.all([
     fetchKeywordsForSite('nl'),
-    fetchKeywordsForSite('en'),
-    fetchKeywordsForKeywords(allSeeds, 'nl'),
+    fetchKeywordsForKeywords(topSeeds, 'nl'),
   ]);
 
   // 2. Merge + deduplicate
   const seen = new Set();
   const all = [];
-  for (const item of [...siteNL, ...siteEN, ...seedResults]) {
+  for (const item of [...siteNL, ...seedResults]) {
     if (!item.keyword || seen.has(item.keyword)) continue;
     seen.add(item.keyword);
     all.push(item);

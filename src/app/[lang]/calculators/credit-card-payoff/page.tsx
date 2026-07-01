@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import CreditCardPayoffCalculator from './CreditCardPayoffCalculator';
+import { RelatedContent } from '@/components/RelatedContent';
 
 const SLUG = 'credit-card-payoff';
 const BASE = 'https://moneycho.com';
@@ -230,6 +231,7 @@ export default async function CreditCardPayoffPage({
         )}
 
       </div>
+      <RelatedContent lang={lang} slug="calculator:credit-card-payoff" />
     </>
   );
 }

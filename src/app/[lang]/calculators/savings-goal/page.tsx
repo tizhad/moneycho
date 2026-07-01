@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import SavingsGoalCalculator from './SavingsGoalCalculator';
+import { RelatedContent } from '@/components/RelatedContent';
 
 const SLUG = 'savings-goal';
 const BASE = 'https://moneycho.com';
@@ -214,6 +215,7 @@ export default async function SavingsGoalPage({
         </section>
 
       </div>
+      <RelatedContent lang={lang} slug="calculator:savings-goal" />
     </>
   );
 }
