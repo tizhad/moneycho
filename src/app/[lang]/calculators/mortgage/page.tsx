@@ -69,6 +69,18 @@ const EDITORIAL = {
     nlRatesP1: 'Fixed rates in the Netherlands for a 10-year term currently sit between roughly 3.5% and 5%, depending on your lender, loan-to-value ratio, and whether you qualify for NHG (Nationale Hypotheek Garantie).',
     nlRatesP2: 'NHG is worth getting if your loan falls below the threshold (€435,000 in 2026). It reduces your interest rate by roughly 0.5 to 0.7 percentage points and protects you if you are forced to sell at a loss.',
     nlRatesP3: 'Always compare at least three lenders. A 0.5% difference in rate on a €300,000 loan over 25 years is about €23,000 in extra interest. A hypotheekadviseur can often find better rates than going directly to a bank — the fee is usually worth it.',
+    bankTitle: 'Dutch mortgage rates by lender — 2026',
+    bankIntro: 'Indicative rates from major Dutch lenders for a 10-year fixed-rate period (July 2026). Exact rates depend on your loan-to-value and NHG eligibility.',
+    banks: [
+      { name: 'ING', nhg: '3.6–4.0%', nonNhg: '4.1–4.7%', note: 'Apply directly or via a mortgage advisor' },
+      { name: 'Rabobank', nhg: '3.7–4.1%', nonNhg: '4.2–4.8%', note: 'Discounts for low LTV (< 60%)' },
+      { name: 'ABN AMRO', nhg: '3.7–4.1%', nonNhg: '4.1–4.8%', note: 'Online discount via Florius label' },
+      { name: 'Nationale Nederlanden', nhg: '3.6–4.0%', nonNhg: '4.0–4.6%', note: 'Advisor-only, no direct applications' },
+      { name: 'NIBC', nhg: '3.5–3.9%', nonNhg: '3.9–4.5%', note: 'Online mortgage, often competitive' },
+      { name: 'Florius (ABN AMRO)', nhg: '3.6–4.0%', nonNhg: '4.0–4.6%', note: 'ABN AMRO\'s online mortgage label' },
+    ] as { name: string; nhg: string; nonNhg: string; note: string }[],
+    bankNote: 'Rates are indicative based on publicly available market data (July 2026) for 10-year fixed terms. Always request quotes from at least three lenders before committing.',
+    bankCta: 'Enter any rate into the calculator above to see your exact monthly payment.',
     glossaryTitle: 'Key terms this calculator uses',
     glossary: [
       ['Loan amount', 'The total you borrow. In the Netherlands you can typically borrow up to 100% of the property value. Most advisors recommend keeping it lower if you can.'],
@@ -105,6 +117,18 @@ const EDITORIAL = {
     nlRatesP1: 'Vaste hypotheekrentes in Nederland voor een rentevaste periode van 10 jaar liggen momenteel ruwweg tussen de 3,5% en 5%, afhankelijk van je geldverstrekker, loan-to-value en of je in aanmerking komt voor NHG.',
     nlRatesP2: 'NHG (Nationale Hypotheek Garantie) is de moeite waard als je hypotheek onder de kostengrens van € 435.000 valt (2026). Het verlaagt je rente met circa 0,5 tot 0,7 procentpunt en beschermt je bij een gedwongen verkoop met restschuld.',
     nlRatesP3: 'Vergelijk altijd minstens drie geldverstrekkers. Een renteverschil van 0,5% op een hypotheek van € 300.000 over 25 jaar scheelt circa € 23.000 aan rente. Een hypotheekadviseur vindt vaak betere rentes dan direct naar de bank gaan — de advieskosten verdien je doorgaans ruimschoots terug.',
+    bankTitle: 'Hypotheekrente per geldverstrekker — 2026',
+    bankIntro: 'Indicatieve rentes van grote Nederlandse geldverstrekkers voor een rentevaste periode van 10 jaar (juli 2026). Exacte tarieven zijn afhankelijk van je loan-to-value en NHG-status.',
+    banks: [
+      { name: 'ING', nhg: '3,6–4,0%', nonNhg: '4,1–4,7%', note: 'Direct of via hypotheekadviseur' },
+      { name: 'Rabobank', nhg: '3,7–4,1%', nonNhg: '4,2–4,8%', note: 'Korting bij lage LTV (< 60%)' },
+      { name: 'ABN AMRO', nhg: '3,7–4,1%', nonNhg: '4,1–4,8%', note: 'Online korting via Florius' },
+      { name: 'Nationale Nederlanden', nhg: '3,6–4,0%', nonNhg: '4,0–4,6%', note: 'Alleen via adviseur, geen directe aanvraag' },
+      { name: 'NIBC', nhg: '3,5–3,9%', nonNhg: '3,9–4,5%', note: 'Online hypotheek, vaak scherpe tarieven' },
+      { name: 'Florius (ABN AMRO)', nhg: '3,6–4,0%', nonNhg: '4,0–4,6%', note: 'Online label van ABN AMRO' },
+    ] as { name: string; nhg: string; nonNhg: string; note: string }[],
+    bankNote: 'Tarieven zijn indicatief op basis van openbaar beschikbare marktdata (juli 2026) voor 10 jaar rentevast. Vraag altijd offertes bij minstens drie geldverstrekkers voordat je een keuze maakt.',
+    bankCta: 'Vul jouw rente in de calculator hierboven in om je exacte maandlasten te berekenen.',
     glossaryTitle: 'Begrippen in deze calculator',
     glossary: [
       ['Woningwaarde', 'De koopprijs of getaxeerde waarde van de woning. In Nederland mag je in de meeste gevallen maximaal 100% van de woningwaarde lenen (loan-to-value van 1,0).'],
@@ -174,6 +198,43 @@ export default async function MortgagePage({
           <p className="text-emerald-deep/70 leading-relaxed mb-4">{c.nlRatesP1}</p>
           <p className="text-emerald-deep/70 leading-relaxed mb-4">{c.nlRatesP2}</p>
           <p className="text-emerald-deep/70 leading-relaxed">{c.nlRatesP3}</p>
+        </section>
+
+        <section>
+          <h2 className="font-display text-2xl font-bold text-emerald-deep mb-3">{c.bankTitle}</h2>
+          <p className="text-sm text-emerald-deep/50 mb-6">{c.bankIntro}</p>
+          <div className="overflow-x-auto">
+            <table className="w-full text-sm">
+              <thead>
+                <tr className="border-b-2 border-emerald-deep/15">
+                  <th className="text-left py-3 pr-4 text-xs font-bold uppercase tracking-widest text-emerald-deep/40">
+                    {l === 'nl' ? 'Geldverstrekker' : 'Lender'}
+                  </th>
+                  <th className="text-left py-3 pr-4 text-xs font-bold uppercase tracking-widest text-emerald-deep">
+                    {l === 'nl' ? 'Met NHG' : 'With NHG'}
+                  </th>
+                  <th className="text-left py-3 pr-4 text-xs font-bold uppercase tracking-widest text-emerald-deep/60">
+                    {l === 'nl' ? 'Zonder NHG' : 'Without NHG'}
+                  </th>
+                  <th className="text-left py-3 text-xs font-bold uppercase tracking-widest text-emerald-deep/30 hidden sm:table-cell">
+                    {l === 'nl' ? 'Opmerking' : 'Note'}
+                  </th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-emerald-deep/8">
+                {c.banks.map((bank) => (
+                  <tr key={bank.name} className="hover:bg-emerald-deep/[0.02] transition-colors">
+                    <td className="py-3.5 pr-4 font-bold text-emerald-deep">{bank.name}</td>
+                    <td className="py-3.5 pr-4 font-display font-bold text-emerald-deep">{bank.nhg}</td>
+                    <td className="py-3.5 pr-4 text-emerald-deep/60">{bank.nonNhg}</td>
+                    <td className="py-3.5 text-xs text-emerald-deep/40 hidden sm:table-cell">{bank.note}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <p className="text-xs text-emerald-deep/35 mt-4 border-t border-emerald-deep/8 pt-4">{c.bankNote}</p>
+          <p className="text-sm text-emerald-deep/60 mt-3 font-medium">{c.bankCta}</p>
         </section>
 
         <section>
