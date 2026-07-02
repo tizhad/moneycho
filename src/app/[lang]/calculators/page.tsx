@@ -107,6 +107,15 @@ const calculators = [
     action: 'Bereken',
     tag: 'Lenen',
   },
+  {
+    index: '12',
+    title: 'Kosten Koper Calculator',
+    description:
+      'Bereken alle bijkomende kosten bij het kopen van een huis: overdrachtsbelasting, notariskosten, NHG en hypotheekadvies.',
+    href: '/calculators/kosten-koper',
+    action: 'Bereken kosten',
+    tag: 'Eigen woning',
+  },
 ];
 
 const comingSoon = [

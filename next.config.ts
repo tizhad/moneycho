@@ -13,6 +13,7 @@ const CALCULATOR_SLUGS = [
   'borrowing-capacity',
   'cash-flow',
   'annuiteit',
+  'kosten-koper',
 ];
 
 const nextConfig: NextConfig = {

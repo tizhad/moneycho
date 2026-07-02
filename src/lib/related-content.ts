@@ -47,6 +47,10 @@ const CALCULATORS: Record<string, Record<Locale, { title: string; description: s
     en: { title: 'Take-Home Pay Calculator', description: 'Calculate your net salary after Dutch taxes and social contributions.', tag: 'Income' },
     nl: { title: 'Nettoloon Calculator', description: 'Bereken je nettosalaris na Nederlandse belastingen en premies.', tag: 'Inkomen' },
   },
+  'kosten-koper': {
+    en: { title: "Dutch Buyer's Costs Calculator", description: 'Calculate all closing costs when buying a home in the Netherlands: transfer tax, notary, NHG, and more.', tag: 'Real Estate' },
+    nl: { title: 'Kosten Koper Calculator', description: 'Bereken alle bijkomende kosten bij het kopen van een huis: overdrachtsbelasting, notariskosten, NHG en meer.', tag: 'Eigen woning' },
+  },
 };
 
 // Related content map: article/calculator slug → related slugs (type:slug format)
@@ -166,10 +170,10 @@ const RELATED_MAP: Record<string, string[]> = {
 
   // ── NL calculators ────────────────────────────────────────────
   'calculator:mortgage': [
-    'calculator:annuiteit',
+    'calculator:kosten-koper',
     'calculator:borrowing-capacity',
     'article:hypotheek-berekenen',
-    'article:financieel-adviseur-kiezen',
+    'calculator:annuiteit',
   ],
   'calculator:credit-card-payoff': [
     'article:slim-lenen',
@@ -206,6 +210,12 @@ const RELATED_MAP: Record<string, string[]> = {
     'calculator:savings-goal',
     'article:vakantiegeld-slim-besteden',
     'article:financieel-adviseur-kiezen',
+  ],
+  'calculator:kosten-koper': [
+    'calculator:mortgage',
+    'calculator:borrowing-capacity',
+    'calculator:annuiteit',
+    'article:hypotheek-berekenen',
   ],
 };
 
