@@ -12,9 +12,9 @@ const COPY = {
       'Calculate your Dutch mortgage payments with Netherlands-specific rates, NHG guarantee, LTI norms, and hypotheekrenteaftrek. Free mortgage calculator for the Netherlands.',
   },
   nl: {
-    title: 'Hypotheek Berekenen Calculator',
+    title: 'Hypotheek Berekenen & Maximale Hypotheek Calculator',
     description:
-      'Bereken je maandelijkse hypotheeklasten, totale rentekosten en aflossingsschema. Met Nederlandse normen, NHG en hypotheekrenteaftrek. Gratis en direct.',
+      'Bereken je maximale hypotheek en maandelijkse lasten. NIBUD-normen 2026, NHG, hypotheekrenteaftrek en inkomenstafel. Gratis en direct.',
   },
 } as const;
 
@@ -46,6 +46,17 @@ export async function generateMetadata({
     twitter: { card: 'summary', title: `${title} | MoneyCho`, description },
   };
 }
+
+// NIBUD-indicative max mortgage at ~4% fixed rate, single applicant, 2026
+// Source: NIBUD woonquote tables. Updated annually; these are approximations.
+const MAX_TABLE = [
+  ['€ 30.000', '± €123.000', '4,1×'],
+  ['€ 40.000', '± €167.000', '4,2×'],
+  ['€ 50.000', '± €214.000', '4,3×'],
+  ['€ 60.000', '± €261.000', '4,4×'],
+  ['€ 75.000', '± €334.000', '4,5×'],
+  ['€ 100.000', '± €458.000', '4,6×'],
+] as const;
 
 const EDITORIAL = {
   en: {
@@ -95,6 +106,25 @@ const EDITORIAL = {
       ['What is hypotheekrenteaftrek?', 'Hypotheekrenteaftrek is Dutch mortgage interest tax deductibility. You can deduct the interest you pay on your mortgage from your taxable income, which reduces your effective interest cost. It applies for up to 30 years and only to your primary residence. The deduction rate has been gradually reduced and currently sits around 37%.'],
       ['What is a typical Dutch mortgage interest rate?', 'In 2026, Dutch fixed rates for a 10-year term run roughly 3.5%–5% depending on your LTV and NHG status. A lower LTV (more equity) and NHG eligibility both push rates down. Variable rates exist but most Dutch buyers prefer fixed-rate periods of 10–20 years for certainty.'],
     ] as [string, string][],
+    maxTitle: 'How much can you borrow? Maximum Dutch mortgage (2026)',
+    maxP1: 'Your maximum Dutch mortgage is determined by two independent limits: your income (LTI norm, via NIBUD tables) and the property value (LTV norm). Both apply simultaneously — you cannot exceed either one.',
+    maxLtiTitle: 'Income limit (LTI) — NIBUD tables',
+    maxLtiP1: 'At a fixed rate of approximately 4% (10-year term), the indicative maximum mortgage for a single applicant in the Netherlands is:',
+    maxTableIncome: 'Gross annual income',
+    maxTableMax: 'Max. mortgage',
+    maxTableMult: 'Multiplier',
+    maxTableNote: 'Indicative at ~4% fixed rate (10 yr), no other debts. NIBUD norms are revised annually and shift with interest rate levels. Your lender or mortgage advisor will apply the exact current tables.',
+    maxLtvTitle: 'Property value limit (LTV)',
+    maxLtvP1: 'In the Netherlands you can borrow up to 100% of the appraised property value. Closing costs — transfer tax (2%), notary fees, and appraisal — must come from your own savings. Budget 3%–6% in buyer\'s costs on top of the purchase price.',
+    maxTwoTitle: 'Two incomes: how much more can you borrow?',
+    maxTwoP1: 'Since 2020, both incomes are counted at 100% in Dutch mortgage calculations. Two partners each earning €40,000 can borrow approximately what someone earning €80,000 would — around €340,000–€360,000 indicatively. Check the NIBUD tables for your exact combined income.',
+    maxReduceTitle: 'What reduces your maximum mortgage?',
+    maxReduceItems: [
+      ['Student debt (DUO)', 'Every €10,000 of your original student loan reduces your maximum mortgage by roughly €20,000–€25,000 — even if the loan is largely repaid. Lenders use the original amount.'],
+      ['Other loans & credit', 'BKR-registered debts (personal loans, credit cards, overdraft facilities) reduce your borrowing capacity directly. Pay these down before applying if possible.'],
+      ['Alimony obligations', 'Partner or child support counts as a fixed monthly obligation and reduces the room available for mortgage payments.'],
+    ] as [string, string][],
+    maxCta: 'Want your exact borrowing capacity? Try our Borrowing Capacity Calculator',
   },
   nl: {
     calcSection: 'Zo worden je hypotheeklasten berekend',
@@ -144,6 +174,25 @@ const EDITORIAL = {
       ['Wat is een normale hypotheekrente in Nederland?', 'In 2026 liggen vaste rentes voor een rentevaste periode van 10 jaar ruwweg op 3,5%–5%, afhankelijk van je loan-to-value en NHG. Een lagere LTV en NHG-garantie drukken de rente. Variabele rentes bestaan, maar de meeste Nederlandse kopers kiezen voor een rentevaste periode van 10 tot 20 jaar.'],
       ['Wat zijn bijkomende kosten bij het kopen van een huis?', 'Naast de koopprijs betaal je bij aankoop van een bestaand huis 2% overdrachtsbelasting (starters tot 35 jaar met woning ≤ € 510.000 betalen 0%), notariskosten (ca. € 1.000–2.000), taxatiekosten (ca. € 500–800) en eventueel makelaarskosten. Reken op 3%–6% kosten koper bovenop de koopprijs.'],
     ] as [string, string][],
+    maxTitle: 'Maximale hypotheek berekenen in 2026',
+    maxP1: 'Je maximale hypotheek wordt bepaald door twee onafhankelijke normen: je inkomen (LTI-norm, via NIBUD-tabellen) en de woningwaarde (LTV-norm). Beide gelden tegelijk — je kunt niet meer lenen dan de laagste norm toestaat.',
+    maxLtiTitle: 'Inkomensnorm (LTI) — NIBUD-tabellen',
+    maxLtiP1: 'Bij een vaste rente van circa 4% (10 jaar rentevast) zijn onderstaande bedragen indicatief voor een alleenstaande aanvrager:',
+    maxTableIncome: 'Bruto jaarsalaris',
+    maxTableMax: 'Max. hypotheek',
+    maxTableMult: 'Factor',
+    maxTableNote: 'Indicatief bij ~4% vaste rente (10 jr), zonder overige schulden. NIBUD-normen worden jaarlijks bijgesteld en variëren met het renteniveau. Je geldverstrekker of hypotheekadviseur past de actuele tabellen toe.',
+    maxLtvTitle: 'Woningwaardenorm (LTV)',
+    maxLtvP1: 'In Nederland mag je maximaal 100% van de getaxeerde woningwaarde lenen. Bijkomende kosten — overdrachtsbelasting (2%), notariskosten en taxatiekosten — moet je altijd zelf betalen. Reken op 3%–6% kosten koper boven op de koopprijs.',
+    maxTwoTitle: 'Twee inkomens: hoeveel meer kun je lenen?',
+    maxTwoP1: 'Sinds 2020 wordt het tweede inkomen voor 100% meegeteld bij de hypotheekberekening. Twee partners die elk € 40.000 verdienen kunnen indicatief lenen wat iemand met een inkomen van € 80.000 zou kunnen — circa € 340.000–€ 360.000. Raadpleeg de NIBUD-tabellen voor jouw exacte gecombineerde inkomen.',
+    maxReduceTitle: 'Wat verlaagt je maximale hypotheek?',
+    maxReduceItems: [
+      ['Studieschuld (DUO)', 'Elke € 10.000 oorspronkelijke studieschuld verlaagt je maximale hypotheek met circa € 20.000–€ 25.000 — ook als de schuld grotendeels is afgelost. Geldverstrekkers gebruiken het oorspronkelijke leenbedrag.'],
+      ['Andere leningen en kredieten', 'BKR-geregistreerde schulden (persoonlijke lening, creditcard, roodstand) tellen direct mee en verlagen je leencapaciteit. Los deze zo mogelijk af vóór je hypotheekaanvraag.'],
+      ['Alimentatieverplichtingen', 'Partner- of kinderalimentatie telt als vaste maandlast en vermindert de ruimte die overblijft voor hypotheeklasten.'],
+    ] as [string, string][],
+    maxCta: 'Wil je je exacte leencapaciteit berekenen? Gebruik onze Maximale Hypotheek Calculator',
   },
 };
 
@@ -235,6 +284,58 @@ export default async function MortgagePage({
           </div>
           <p className="text-xs text-emerald-deep/35 mt-4 border-t border-emerald-deep/8 pt-4">{c.bankNote}</p>
           <p className="text-sm text-emerald-deep/60 mt-3 font-medium">{c.bankCta}</p>
+        </section>
+
+        <section>
+          <h2 className="font-display text-2xl font-bold text-emerald-deep mb-5">{c.maxTitle}</h2>
+          <p className="text-emerald-deep/70 leading-relaxed mb-8">{c.maxP1}</p>
+
+          <h3 className="font-display text-lg font-semibold text-emerald-deep mb-3">{c.maxLtiTitle}</h3>
+          <p className="text-emerald-deep/70 leading-relaxed mb-5">{c.maxLtiP1}</p>
+          <div className="overflow-x-auto mb-3">
+            <table className="w-full text-sm">
+              <thead>
+                <tr className="border-b-2 border-emerald-deep/15">
+                  <th className="text-left py-3 pr-4 text-xs font-bold uppercase tracking-widest text-emerald-deep/40">{c.maxTableIncome}</th>
+                  <th className="text-left py-3 pr-4 text-xs font-bold uppercase tracking-widest text-emerald-deep">{c.maxTableMax}</th>
+                  <th className="text-left py-3 text-xs font-bold uppercase tracking-widest text-emerald-deep/40">{c.maxTableMult}</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-emerald-deep/8">
+                {MAX_TABLE.map(([income, max, mult]) => (
+                  <tr key={income} className="hover:bg-emerald-deep/[0.02] transition-colors">
+                    <td className="py-3 pr-4 font-semibold text-emerald-deep">{income}</td>
+                    <td className="py-3 pr-4 font-display font-bold text-emerald-deep">{max}</td>
+                    <td className="py-3 text-emerald-deep/50">{mult}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <p className="text-xs text-emerald-deep/40 mb-8">{c.maxTableNote}</p>
+
+          <h3 className="font-display text-lg font-semibold text-emerald-deep mb-3">{c.maxLtvTitle}</h3>
+          <p className="text-emerald-deep/70 leading-relaxed mb-8">{c.maxLtvP1}</p>
+
+          <h3 className="font-display text-lg font-semibold text-emerald-deep mb-3">{c.maxTwoTitle}</h3>
+          <p className="text-emerald-deep/70 leading-relaxed mb-8">{c.maxTwoP1}</p>
+
+          <h3 className="font-display text-lg font-semibold text-emerald-deep mb-4">{c.maxReduceTitle}</h3>
+          <div className="space-y-3 mb-8">
+            {c.maxReduceItems.map(([label, desc]) => (
+              <div key={label} className="border-l-2 border-emerald-deep/20 pl-4">
+                <p className="text-sm font-semibold text-emerald-deep mb-1">{label}</p>
+                <p className="text-sm text-emerald-deep/65 leading-relaxed">{desc}</p>
+              </div>
+            ))}
+          </div>
+
+          <a
+            href={`/${lang}/calculators/borrowing-capacity`}
+            className="inline-flex items-center gap-2 text-sm font-bold text-emerald-deep border-b border-emerald-deep/30 hover:border-emerald-deep transition-colors pb-0.5"
+          >
+            {c.maxCta} →
+          </a>
         </section>
 
         <section>
