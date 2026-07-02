@@ -19,11 +19,20 @@ const CALCULATOR_SLUGS = [
 const nextConfig: NextConfig = {
   pageExtensions: ["js", "jsx", "md", "mdx", "ts", "tsx"],
   async redirects() {
-    return CALCULATOR_SLUGS.map((slug) => ({
-      source: `/${slug}`,
-      destination: `/nl/calculators/${slug}`,
-      permanent: false,
-    }));
+    return [
+      // Short URLs → NL calculator (locale prefix added by middleware after)
+      ...CALCULATOR_SLUGS.map((slug) => ({
+        source: `/${slug}`,
+        destination: `/nl/calculators/${slug}`,
+        permanent: false,
+      })),
+      // EN alias: /en/calculators/annuity → /en/calculators/annuiteit
+      {
+        source: '/en/calculators/annuity',
+        destination: '/en/calculators/annuiteit',
+        permanent: true,
+      },
+    ];
   },
 };
 
