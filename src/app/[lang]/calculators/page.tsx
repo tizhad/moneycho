@@ -98,6 +98,15 @@ const calculators = [
     action: 'Build My Budget',
     tag: 'Budgeting',
   },
+  {
+    index: '11',
+    title: 'Annuiteit Berekenen',
+    description:
+      'Bereken de vaste maandlast van een lening. Vul leenbedrag, rente en looptijd in en zie het volledige aflossingsschema.',
+    href: '/calculators/annuiteit',
+    action: 'Bereken',
+    tag: 'Lenen',
+  },
 ];
 
 const comingSoon = [

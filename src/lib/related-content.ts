@@ -39,6 +39,10 @@ const CALCULATORS: Record<string, Record<Locale, { title: string; description: s
     en: { title: 'Borrowing Capacity Calculator', description: 'Find out the maximum mortgage you can qualify for based on your income.', tag: 'Mortgage' },
     nl: { title: 'Maximale Hypotheek Calculator', description: 'Bereken hoeveel hypotheek je kunt krijgen op basis van je inkomen.', tag: 'Hypotheek' },
   },
+  'annuiteit': {
+    en: { title: 'Annuity Calculator', description: 'Calculate the fixed monthly payment for any loan using the annuity formula. Includes full amortization schedule.', tag: 'Loans' },
+    nl: { title: 'Annuiteit Berekenen', description: 'Bereken de vaste maandlast van een lening met de annuïteitsformule. Inclusief volledig aflossingsschema.', tag: 'Lenen' },
+  },
   'take-home-pay': {
     en: { title: 'Take-Home Pay Calculator', description: 'Calculate your net salary after Dutch taxes and social contributions.', tag: 'Income' },
     nl: { title: 'Nettoloon Calculator', description: 'Bereken je nettosalaris na Nederlandse belastingen en premies.', tag: 'Inkomen' },
@@ -162,10 +166,10 @@ const RELATED_MAP: Record<string, string[]> = {
 
   // ── NL calculators ────────────────────────────────────────────
   'calculator:mortgage': [
-    'article:hypotheek-berekenen',
+    'calculator:annuiteit',
     'calculator:borrowing-capacity',
+    'article:hypotheek-berekenen',
     'article:financieel-adviseur-kiezen',
-    'article:sparen-en-budgetteren',
   ],
   'calculator:credit-card-payoff': [
     'article:slim-lenen',
@@ -190,6 +194,12 @@ const RELATED_MAP: Record<string, string[]> = {
     'calculator:credit-card-payoff',
     'article:slim-lenen',
     'article:financieel-adviseur-kiezen',
+  ],
+  'calculator:annuiteit': [
+    'calculator:mortgage',
+    'calculator:debt-payoff',
+    'article:hypotheek-berekenen',
+    'article:schulden-en-lenen',
   ],
   'calculator:budget-planner': [
     'article:sparen-en-budgetteren',
