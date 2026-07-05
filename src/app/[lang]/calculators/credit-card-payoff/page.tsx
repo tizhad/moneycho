@@ -9,12 +9,12 @@ const COPY = {
   en: {
     title: 'Credit Card Payoff Calculator',
     description:
-      'See how long it really takes to pay off your credit card balance, and how much interest you will pay. Compare minimum payments vs fixed amounts.',
+      'Free credit card payoff calculator — enter your balance, APR, and monthly payment to see your exact debt-free date and total interest instantly. See how much the minimum payment trap costs you.',
   },
   nl: {
     title: 'Creditcard Aflossen Calculator',
     description:
-      'Bereken hoe lang het duurt om je creditcard af te lossen en hoeveel rente je betaalt. Vergelijk minimumbetalingen met vaste bedragen.',
+      'Gratis creditcard aflossen calculator — vul saldo, rente en maandbedrag in en zie direct wanneer je schuldenvrij bent en hoeveel rente je betaalt. Bereken ook wat alleen het minimum betalen je kost.',
   },
 } as const;
 
@@ -82,7 +82,28 @@ const EDITORIAL = {
     nlP3:
       'If you have a balance that you cannot clear quickly, a persoonlijke lening at 5 to 9% APR from your bank can replace the card balance and cut your interest cost significantly. Run the numbers before you sign.',
     faqTitle: 'Frequently Asked Questions',
-    faqs: [] as [string, string][],
+    faqs: [
+      [
+        'How long does it take to pay off a credit card?',
+        'It depends on your balance, your APR, and what you pay each month. A 3,000 euro balance at 20% APR takes over 14 years paying only the 2% minimum — but just 42 months at a fixed 100 euros per month. Use the calculator above to see your exact payoff date.',
+      ],
+      [
+        'Should I pay more than the minimum on my credit card?',
+        'Yes, always. The minimum payment is designed to maximize the interest you pay, not to help you get out of debt. Even an extra 20 to 50 euros per month dramatically cuts your payoff time and total interest. Set a fixed payment you can sustain and automate it.',
+      ],
+      [
+        'What is the minimum payment trap?',
+        "Credit card minimum payments (typically 2% of the balance) barely cover the monthly interest. Most of your payment goes to interest rather than reducing the principal, so your balance barely moves. You end up paying interest on roughly the same amount month after month for years — often more in interest than the original debt.",
+      ],
+      [
+        'Is it better to pay off credit card debt or save?',
+        'If your credit card APR (typically 14–22%) is higher than your savings rate — which it almost always is — pay off the card first. Paying down 20% APR debt is equivalent to earning a guaranteed 20% return. Build a small emergency buffer first (one to two months of expenses), then attack the card balance aggressively.',
+      ],
+      [
+        'Can I consolidate my credit card debt into a personal loan?',
+        'Yes, and it is often worth it. Dutch personal loans (persoonlijke lening) typically charge 5 to 9% APR — far less than the 14 to 22% on most credit cards. Transferring the balance to a lower-rate loan and committing to a fixed repayment plan can save hundreds of euros in interest. Compare the total cost including any closing fees before switching.',
+      ],
+    ] as [string, string][],
   },
   nl: {
     trapTitle: 'De minimumbetaling val',
@@ -219,12 +240,15 @@ export default async function CreditCardPayoffPage({
             <h2 className="font-display text-2xl font-bold text-emerald-deep mb-8">
               {c.faqTitle}
             </h2>
-            <div className="space-y-6">
+            <div className="space-y-2">
               {c.faqs.map(([q, a], i) => (
-                <div key={i} className="border-b border-emerald-deep/10 pb-6 last:border-0 last:pb-0">
-                  <h3 className="font-semibold text-emerald-deep mb-2">{q}</h3>
-                  <p className="text-sm text-emerald-deep/70 leading-relaxed">{a}</p>
-                </div>
+                <details key={i} className="group border border-emerald-deep/10 bg-paper">
+                  <summary className="flex justify-between items-center gap-4 cursor-pointer px-6 py-5 font-semibold text-emerald-deep list-none hover:bg-emerald-deep/[0.03] transition-colors">
+                    {q}
+                    <span className="text-emerald-deep/30 shrink-0 transition-transform group-open:rotate-45">+</span>
+                  </summary>
+                  <p className="px-6 pb-5 text-sm text-emerald-deep/70 leading-relaxed">{a}</p>
+                </details>
               ))}
             </div>
           </section>

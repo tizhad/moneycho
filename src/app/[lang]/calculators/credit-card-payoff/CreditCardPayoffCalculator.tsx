@@ -70,7 +70,7 @@ function calcPayoff(balance: number, apr: number, payment: number) {
 const T = {
   en: {
     tag: 'Debt',
-    h1: 'Credit Card Payoff',
+    h1: 'Credit Card Payoff Calculator',
     intro: "See exactly how long it takes to pay off your balance and how much interest you'll pay. Increase your monthly payment to see the impact.",
     balance: 'Current Balance',
     apr: 'Annual Interest Rate (APR)',
@@ -88,7 +88,7 @@ const T = {
   },
   nl: {
     tag: 'Schuld',
-    h1: 'Creditcard Aflossen',
+    h1: 'Creditcard Aflossen Calculator',
     intro: 'Bereken precies hoe lang het duurt om je creditcard af te lossen en hoeveel rente je betaalt. Verhoog je maandbedrag om het verschil te zien.',
     balance: 'Huidig Saldo',
     apr: 'Jaarlijkse Rente (APR)',
