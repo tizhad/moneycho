@@ -1,11 +1,42 @@
 import Link from 'next/link';
 import type { Metadata } from 'next';
 
-export const metadata: Metadata = {
-  title: 'Free Personal Finance Calculators',
-  description:
-    'Free calculators for budgeting, compound interest, mortgage, credit card payoff, debt, investing, and retirement planning.',
-};
+const BASE = 'https://moneycho.com';
+
+const COPY = {
+  en: {
+    title: 'Free Personal Finance Calculators',
+    description: 'Free calculators for budgeting, compound interest, mortgage, credit card payoff, debt, investing, and retirement planning.',
+  },
+  nl: {
+    title: 'Gratis Financiële Calculators',
+    description: 'Gratis calculators voor budget, samengestelde rente, hypotheek, creditcard aflossen, schulden en beleggen.',
+  },
+} as const;
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ lang: string }>;
+}): Promise<Metadata> {
+  const { lang } = await params;
+  const l = lang === 'nl' ? 'nl' : 'en';
+  const { title, description } = COPY[l];
+  return {
+    title,
+    description,
+    alternates: {
+      canonical: `${BASE}/${lang}/calculators`,
+      languages: {
+        en: `${BASE}/en/calculators`,
+        nl: `${BASE}/nl/calculators`,
+        'x-default': `${BASE}/nl/calculators`,
+      },
+    },
+    openGraph: { title: `${title} | MoneyCho`, description, type: 'website', url: `${BASE}/${lang}/calculators` },
+    twitter: { card: 'summary', title: `${title} | MoneyCho`, description },
+  };
+}
 
 const calculators = [
   {
@@ -126,7 +157,12 @@ const comingSoon = [
   { title: 'Loan Calculator', tag: 'Debt', href: '#' },
 ];
 
-export default function CalculatorsIndexPage() {
+export default async function CalculatorsIndexPage({
+  params,
+}: {
+  params: Promise<{ lang: string }>;
+}) {
+  await params;
   return (
     <div className="max-w-7xl mx-auto px-6 md:py-24">
       <div className="mb-16 border-b border-emerald-deep/20 pb-8">
