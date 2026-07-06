@@ -49,35 +49,10 @@ export const relatedTools: Record<string, RelatedItem[]> = {
   ],
 };
 
+// Slugs whose page.tsx renders its own bilingual FAQ + FAQPage JSON-LD are
+// intentionally absent here (mortgage, compound-interest, savings-goal,
+// borrowing-capacity) — a second FAQ block would duplicate the schema.
 export const faqsBySlug: Record<string, FAQItem[]> = {
-  'compound-interest': [
-    {
-      q: 'What is compound interest?',
-      a: 'Compound interest is interest earned on both your original deposit and any interest already accumulated. Unlike simple interest (which only earns on the principal), compound interest snowballs: the longer you wait, the faster it grows.',
-    },
-    {
-      q: 'How does compounding frequency affect my returns?',
-      a: 'The more frequently interest compounds, the more you earn. Monthly compounding produces higher returns than annual compounding because interest is added to your balance more often, giving each addition more time to earn. Daily compounding is marginally better still.',
-    },
-    {
-      q: 'What is the Rule of 72?',
-      a: 'Divide 72 by your annual interest rate to estimate how many years it takes to double your money. At 4%, money doubles in roughly 18 years. At 8%, roughly 9 years. It\'s a quick mental check on the power of compounding.',
-    },
-  ],
-  mortgage: [
-    {
-      q: 'How is my monthly mortgage payment calculated?',
-      a: 'Using the annuity formula: M = L × [r(1+r)^n] / [(1+r)^n − 1], where L is the loan amount, r is the monthly interest rate (annual rate ÷ 12), and n is the total number of payments. Every euro paid early reduces the outstanding principal and the interest charged on it.',
-    },
-    {
-      q: 'Should I choose a shorter loan term?',
-      a: 'A shorter term means higher monthly payments but far less total interest. On a €300,000 loan at 4%, a 15-year term saves roughly €80,000 in interest compared to 30 years, though monthly payments are about €600 higher. Use the calculator to find the term that fits your cash flow.',
-    },
-    {
-      q: 'What counts as a good mortgage rate?',
-      a: 'It depends on the market and your lender. In the Netherlands, fixed rates for 10-year terms currently range from roughly 3–5%. Compare at least three lenders and factor in all fees, not just the headline rate, before committing.',
-    },
-  ],
   budget: [
     {
       q: 'What is the 50/30/20 rule?',
@@ -106,16 +81,6 @@ export const faqsBySlug: Record<string, FAQItem[]> = {
       a: 'Yes. Dutch employers are legally required to pay 8% vakantiegeld (holiday pay) on top of gross salary. This calculator adds it to your annual gross before computing net pay, which is how most payslips work.',
     },
   ],
-  'savings-goal': [
-    {
-      q: 'How does this calculator find how long it takes?',
-      a: 'It solves the future value formula for time: given your starting balance, monthly contribution, and interest rate, it finds the number of months until your balance reaches the target. It compounds monthly.',
-    },
-    {
-      q: 'What interest rate should I enter?',
-      a: 'Use the actual rate on your savings account or investment portfolio. Dutch high-yield savings accounts currently offer around 2–3%. For long-term equity investments, historical average returns are roughly 7% before inflation, though past returns don\'t guarantee future results.',
-    },
-  ],
   'debt-payoff': [
     {
       q: 'What\'s the difference between avalanche and snowball?',
@@ -134,16 +99,6 @@ export const faqsBySlug: Record<string, FAQItem[]> = {
     {
       q: 'What should I do with a monthly surplus?',
       a: 'First, build an emergency fund of 3–6 months\' expenses. Then split any surplus between accelerating debt repayment and investing. The Savings Goal and Budget calculators can help you model exactly where extra money should go.',
-    },
-  ],
-  'borrowing-capacity': [
-    {
-      q: 'What are VFN/Nibud norms?',
-      a: 'These are the borrowing standards set by Dutch consumer finance regulators (VFN) and the National Institute for Budget Information (Nibud). They cap monthly obligations (housing + loan payments) as a percentage of gross income: 20% for income below €1,500, rising to 35% above €4,000. Banks use these same norms when assessing applications.',
-    },
-    {
-      q: 'Does this include my partner\'s income?',
-      a: 'Yes. Enter both incomes and the calculator determines joint borrowing capacity. Dutch lenders typically count 100% of the primary earner\'s income and, for mortgages, a weighted portion of the secondary income.',
     },
   ],
   'credit-card-payoff': [
