@@ -16,7 +16,107 @@ function maxObligationFraction(netMonthlyIncome: number): number {
 // ─────────────────────────────────────────────────────────────────
 
 const TERMS = [12, 24, 36, 48, 60, 72, 84];
-const RATES = [4, 5, 6, 7, 8, 9, 10, 11, 12];
+
+const T = {
+  en: {
+    tag: 'Borrowing · Netherlands',
+    h1: 'How Much Can I Borrow?',
+    intro:
+      'Calculate the maximum personal loan you can take based on your net income and existing obligations. Based on VFN Gedragscode / Nibud norms used by Dutch lenders.',
+    ownIncome: 'Your Net Monthly Income',
+    ownIncomeHint: 'after tax · use the Take-Home Pay calculator if unsure',
+    partnerIncome: "Partner's Net Monthly Income",
+    partnerIncomeHint: 'leave 0 if not applicable',
+    housing: 'Monthly Housing Costs',
+    housingHint: 'rent or mortgage payment',
+    existingLoans: 'Other Monthly Loan Payments',
+    existingLoansHint: 'total of all existing loan repayments',
+    term: 'Loan Term',
+    months: 'months',
+    yearAbbr: 'yr',
+    rateLabel: (rate: string) => `Interest Rate: ${rate}% per year`,
+    rateHint: 'Current NL personal loan rates: ~5–9%',
+    estimateBold: 'Estimate only.',
+    estimateRest:
+      " Actual capacity depends on your credit history (BKR), employer type, and the individual lender's assessment. Compare live rates at geld.nl before applying.",
+    heroLabel: 'Maximum Loan Amount',
+    heroOverLimit: 'existing obligations exceed your borrowing limit',
+    heroSummary: (term: number, rate: number, payment: string) =>
+      `${term / 12 < 1 ? `${term} months` : `${term / 12} year`} · ${rate}% · ${payment}/mo`,
+    statMonthly: 'Monthly payment',
+    statTotal: 'Total repayment',
+    statInterest: 'Total interest',
+    allocation: 'Income allocation',
+    overCommitted: (committed: string, limit: string, pct: string) =>
+      `Your existing obligations (${committed}/mo) already exceed the lending limit (${limit}/mo at ${pct}% of income). Reducing housing costs or paying off existing loans increases capacity.`,
+    segHousing: 'Housing',
+    segLoans: 'Existing loans',
+    segNewLoan: 'New loan',
+    segFree: 'Free',
+    breakdown: "How it's calculated",
+    rowIncome: 'Total net income',
+    rowLimit: 'Obligation limit',
+    rowLimitPct: (pct: string) => `(${pct}% of income)`,
+    rowHousing: 'Housing costs',
+    rowLoans: 'Existing loan payments',
+    rowAvailable: 'Available for new loan',
+    rowTerm: 'Loan term',
+    rowTermValue: (m: number) => `${m} months`,
+    rowRate: 'Interest rate',
+    rowRateValue: (r: number) => `${r}% / year`,
+    rowMax: 'Max loan amount',
+    perMo: '/mo',
+  },
+  nl: {
+    tag: 'Lenen · Nederland',
+    h1: 'Hoeveel Kan Ik Lenen?',
+    intro:
+      'Bereken direct het maximale bedrag dat je kunt lenen op basis van je netto inkomen en bestaande verplichtingen. Gebaseerd op de VFN Gedragscode en Nibud-normen die Nederlandse kredietverstrekkers gebruiken.',
+    ownIncome: 'Jouw Netto Maandinkomen',
+    ownIncomeHint: 'na belasting · gebruik de Nettoloon Calculator als je het niet weet',
+    partnerIncome: 'Netto Maandinkomen Partner',
+    partnerIncomeHint: 'laat 0 staan indien niet van toepassing',
+    housing: 'Maandelijkse Woonlasten',
+    housingHint: 'huur of hypotheeklasten',
+    existingLoans: 'Overige Maandelijkse Aflossingen',
+    existingLoansHint: 'totaal van al je bestaande leningen',
+    term: 'Looptijd',
+    months: 'maanden',
+    yearAbbr: 'jr',
+    rateLabel: (rate: string) => `Rente: ${rate}% per jaar`,
+    rateHint: 'Actuele NL rentes persoonlijke lening: ~5–9%',
+    estimateBold: 'Indicatie.',
+    estimateRest:
+      ' De werkelijke leencapaciteit hangt af van je BKR-registratie, type dienstverband en de beoordeling van de kredietverstrekker. Vergelijk actuele rentes voordat je een lening aanvraagt.',
+    heroLabel: 'Maximaal Leenbedrag',
+    heroOverLimit: 'je bestaande verplichtingen overschrijden je leenruimte',
+    heroSummary: (term: number, rate: number, payment: string) =>
+      `${term / 12 < 1 ? `${term} maanden` : `${term / 12} jaar`} · ${rate}% · ${payment}/mnd`,
+    statMonthly: 'Maandlasten',
+    statTotal: 'Totaal terugbetaald',
+    statInterest: 'Totale rente',
+    allocation: 'Inkomensverdeling',
+    overCommitted: (committed: string, limit: string, pct: string) =>
+      `Je bestaande verplichtingen (${committed}/mnd) overschrijden de leennorm (${limit}/mnd bij ${pct}% van je inkomen). Lagere woonlasten of het aflossen van bestaande leningen vergroot je leenruimte.`,
+    segHousing: 'Wonen',
+    segLoans: 'Bestaande leningen',
+    segNewLoan: 'Nieuwe lening',
+    segFree: 'Vrij',
+    breakdown: 'Zo is het berekend',
+    rowIncome: 'Totaal netto inkomen',
+    rowLimit: 'Verplichtingennorm',
+    rowLimitPct: (pct: string) => `(${pct}% van inkomen)`,
+    rowHousing: 'Woonlasten',
+    rowLoans: 'Bestaande aflossingen',
+    rowAvailable: 'Beschikbaar voor nieuwe lening',
+    rowTerm: 'Looptijd',
+    rowTermValue: (m: number) => `${m} maanden`,
+    rowRate: 'Rente',
+    rowRateValue: (r: number) => `${r}% / jaar`,
+    rowMax: 'Maximaal leenbedrag',
+    perMo: '/mnd',
+  },
+} as const;
 
 const fmt = (n: number) =>
   "€ " + Math.round(n).toLocaleString("nl-NL");
@@ -112,7 +212,8 @@ function SegmentBar({
   );
 }
 
-export default function BorrowingCapacityPage() {
+export default function BorrowingCapacityCalculator({ lang }: { lang?: string }) {
+  const t = T[lang === 'nl' ? 'nl' : 'en'];
   const [ownIncome, setOwnIncome] = useState<number | "">(3000);
   const [partnerIncome, setPartnerIncome] = useState<number | "">(0);
   const [housing, setHousing] = useState<number | "">(900);
@@ -174,53 +275,51 @@ export default function BorrowingCapacityPage() {
       {/* ── Left: Inputs ── */}
       <div>
         <span className="text-xs font-bold text-gold tracking-[0.2em] uppercase block mb-4">
-          Borrowing · Netherlands
+          {t.tag}
         </span>
         <h1 className="font-display text-4xl md:text-5xl font-bold text-emerald-deep tracking-tight mb-4">
-          Borrowing Capacity
+          {t.h1}
         </h1>
         <p className="text-emerald-deep/60 leading-relaxed mb-12">
-          Calculate the maximum personal loan you can take based on your net
-          income and existing obligations. Based on VFN Gedragscode / Nibud
-          norms used by Dutch lenders.
+          {t.intro}
         </p>
 
         <div className="space-y-6">
-          <Field label="Your Net Monthly Income" hint="after tax · use Take-Home Pay #07 if unsure">
+          <Field label={t.ownIncome} hint={t.ownIncomeHint}>
             <NumberInput value={ownIncome} onChange={setOwnIncome} prefix="€" />
           </Field>
 
-          <Field label="Partner's Net Monthly Income" hint="leave 0 if not applicable">
+          <Field label={t.partnerIncome} hint={t.partnerIncomeHint}>
             <NumberInput value={partnerIncome} onChange={setPartnerIncome} prefix="€" />
           </Field>
 
-          <Field label="Monthly Housing Costs" hint="rent or mortgage payment">
+          <Field label={t.housing} hint={t.housingHint}>
             <NumberInput value={housing} onChange={setHousing} prefix="€" />
           </Field>
 
-          <Field label="Other Monthly Loan Payments" hint="total of all existing loan repayments">
+          <Field label={t.existingLoans} hint={t.existingLoansHint}>
             <NumberInput value={existingLoans} onChange={setExistingLoans} prefix="€" />
           </Field>
 
-          <Field label="Loan Term">
+          <Field label={t.term}>
             <div className="flex gap-2 flex-wrap">
-              {TERMS.map((t) => (
+              {TERMS.map((m) => (
                 <button
-                  key={t}
-                  onClick={() => setTermMonths(t)}
+                  key={m}
+                  onClick={() => setTermMonths(m)}
                   className={`px-4 py-2.5 text-xs font-bold uppercase tracking-widest border transition-colors cursor-pointer ${
-                    termMonths === t
+                    termMonths === m
                       ? "bg-emerald-deep text-paper border-emerald-deep"
                       : "bg-paper text-emerald-deep border-emerald-deep/20 hover:border-emerald-deep"
                   }`}
                 >
-                  {t < 12 ? `${t}m` : `${t / 12}yr`}
+                  {m < 12 ? `${m}m` : `${m / 12}${t.yearAbbr}`}
                 </button>
               ))}
             </div>
           </Field>
 
-          <Field label={`Interest Rate: ${annualRate.toFixed(1)}% per year`}>
+          <Field label={t.rateLabel(annualRate.toFixed(1))}>
             <input
               type="range"
               min={4}
@@ -233,7 +332,7 @@ export default function BorrowingCapacityPage() {
             <div className="flex justify-between text-xs text-emerald-deep/40 mt-1.5">
               <span>4%</span>
               <span className="text-emerald-deep/60 font-medium">
-                Current NL personal loan rates: ~5–9%
+                {t.rateHint}
               </span>
               <span>12%</span>
             </div>
@@ -242,11 +341,9 @@ export default function BorrowingCapacityPage() {
           <div className="border border-emerald-deep/10 p-4 bg-emerald-deep/[0.02]">
             <p className="text-xs text-emerald-deep/50 leading-relaxed">
               <span className="font-bold text-emerald-deep/70">
-                Estimate only.
-              </span>{" "}
-              Actual capacity depends on your credit history (BKR), employer
-              type, and the individual lender's assessment. Compare live
-              rates at geld.nl before applying.
+                {t.estimateBold}
+              </span>
+              {t.estimateRest}
             </p>
           </div>
         </div>
@@ -263,24 +360,24 @@ export default function BorrowingCapacityPage() {
           }`}
         >
           <p className="text-xs font-bold uppercase tracking-widest text-paper/50 mb-2">
-            Maximum Loan Amount
+            {t.heroLabel}
           </p>
           <p className="font-display text-5xl font-bold text-paper">
             {r.maxLoan <= 0 ? "€ 0" : fmtPrecise(r.maxLoan)}
           </p>
           <p className="text-paper/50 text-sm mt-2">
             {r.maxLoan <= 0
-              ? "existing obligations exceed your borrowing limit"
-              : `${termMonths / 12 < 1 ? `${termMonths} months` : `${termMonths / 12} year`} · ${annualRate}% · ${fmt(r.availablePayment)}/mo`}
+              ? t.heroOverLimit
+              : t.heroSummary(termMonths, annualRate, fmt(r.availablePayment))}
           </p>
         </div>
 
         {/* 3 stats */}
         <div className="grid grid-cols-3 gap-px bg-emerald-deep/10 border border-emerald-deep/10">
           {[
-            { label: "Monthly payment", value: fmt(r.availablePayment) },
-            { label: "Total repayment", value: fmt(r.totalRepayment) },
-            { label: "Total interest", value: fmt(r.totalInterest) },
+            { label: t.statMonthly, value: fmt(r.availablePayment) },
+            { label: t.statTotal, value: fmt(r.totalRepayment) },
+            { label: t.statInterest, value: fmt(r.totalInterest) },
           ].map((stat) => (
             <div key={stat.label} className="bg-paper p-4">
               <p className="text-[10px] font-bold uppercase tracking-widest text-emerald-deep/40 mb-1">
@@ -296,14 +393,15 @@ export default function BorrowingCapacityPage() {
         {/* Income allocation bar */}
         <div className="bg-paper border border-emerald-deep/10 p-6">
           <p className="text-xs font-bold uppercase tracking-widest text-emerald-deep/40 mb-4">
-            Income allocation
+            {t.allocation}
           </p>
           {r.overCommitted ? (
             <div className="text-xs text-red-600 font-medium bg-red-50 border border-red-200 p-3 mb-4">
-              Your existing obligations ({fmt(r.alreadyCommitted)}/mo) already
-              exceed the lending limit ({fmt(r.maxObligations)}/mo at{" "}
-              {(r.fraction * 100).toFixed(0)}% of income). Reducing housing
-              costs or paying off existing loans increases capacity.
+              {t.overCommitted(
+                fmt(r.alreadyCommitted),
+                fmt(r.maxObligations),
+                (r.fraction * 100).toFixed(0),
+              )}
             </div>
           ) : null}
           <SegmentBar
@@ -311,22 +409,22 @@ export default function BorrowingCapacityPage() {
               {
                 pct: Math.min(r.pctHousing, 100),
                 color: "bg-emerald-mid",
-                label: "Housing",
+                label: t.segHousing,
               },
               {
                 pct: Math.min(r.pctLoans, 100),
                 color: "bg-gold",
-                label: "Existing loans",
+                label: t.segLoans,
               },
               {
                 pct: r.pctNewLoan,
                 color: "bg-emerald-deep",
-                label: "New loan",
+                label: t.segNewLoan,
               },
               {
                 pct: r.pctFree,
                 color: "bg-gold-bright",
-                label: "Free",
+                label: t.segFree,
               },
             ]}
           />
@@ -335,66 +433,66 @@ export default function BorrowingCapacityPage() {
         {/* Breakdown */}
         <div className="bg-paper border border-emerald-deep/10 p-6">
           <p className="text-xs font-bold uppercase tracking-widest text-emerald-deep/40 mb-4">
-            How it's calculated
+            {t.breakdown}
           </p>
           <table className="w-full text-sm">
             <tbody className="divide-y divide-emerald-deep/5">
               <tr>
-                <td className="py-2.5 text-emerald-deep/70">Total net income</td>
+                <td className="py-2.5 text-emerald-deep/70">{t.rowIncome}</td>
                 <td className="py-2.5 text-right font-display font-bold text-emerald-deep tabular-nums">
-                  {fmt(r.totalIncome)}/mo
+                  {fmt(r.totalIncome)}{t.perMo}
                 </td>
               </tr>
               <tr>
                 <td className="py-2.5 text-emerald-deep/55 pl-3">
-                  Obligation limit{" "}
+                  {t.rowLimit}{" "}
                   <span className="text-emerald-deep/35 text-xs">
-                    ({(r.fraction * 100).toFixed(0)}% of income)
+                    {t.rowLimitPct((r.fraction * 100).toFixed(0))}
                   </span>
                 </td>
                 <td className="py-2.5 text-right font-display font-bold text-emerald-deep/70 tabular-nums">
-                  {fmt(r.maxObligations)}/mo
+                  {fmt(r.maxObligations)}{t.perMo}
                 </td>
               </tr>
               <tr>
-                <td className="py-2.5 text-emerald-deep/55 pl-3">Housing costs</td>
+                <td className="py-2.5 text-emerald-deep/55 pl-3">{t.rowHousing}</td>
                 <td className="py-2.5 text-right font-display font-bold text-emerald-deep/70 tabular-nums">
-                  −{fmt(typeof housing === "number" ? housing : 0)}/mo
+                  −{fmt(typeof housing === "number" ? housing : 0)}{t.perMo}
                 </td>
               </tr>
               <tr>
-                <td className="py-2.5 text-emerald-deep/55 pl-3">Existing loan payments</td>
+                <td className="py-2.5 text-emerald-deep/55 pl-3">{t.rowLoans}</td>
                 <td className="py-2.5 text-right font-display font-bold text-emerald-deep/70 tabular-nums">
-                  −{fmt(typeof existingLoans === "number" ? existingLoans : 0)}/mo
+                  −{fmt(typeof existingLoans === "number" ? existingLoans : 0)}{t.perMo}
                 </td>
               </tr>
               <tr className="bg-emerald-deep/[0.02]">
                 <td className="py-2.5 font-bold text-emerald-deep">
-                  Available for new loan
+                  {t.rowAvailable}
                 </td>
                 <td className="py-2.5 text-right font-display font-bold text-emerald-deep tabular-nums">
-                  {fmt(r.availablePayment)}/mo
+                  {fmt(r.availablePayment)}{t.perMo}
                 </td>
               </tr>
               <tr>
                 <td className="py-2.5 text-emerald-deep/55 pl-3">
-                  Loan term
+                  {t.rowTerm}
                 </td>
                 <td className="py-2.5 text-right font-display font-bold text-emerald-deep/70 tabular-nums">
-                  {termMonths} months
+                  {t.rowTermValue(termMonths)}
                 </td>
               </tr>
               <tr>
                 <td className="py-2.5 text-emerald-deep/55 pl-3">
-                  Interest rate
+                  {t.rowRate}
                 </td>
                 <td className="py-2.5 text-right font-display font-bold text-emerald-deep/70 tabular-nums">
-                  {annualRate}% / year
+                  {t.rowRateValue(annualRate)}
                 </td>
               </tr>
               <tr className="bg-emerald-deep/[0.02]">
                 <td className="py-3 font-bold text-emerald-deep">
-                  Max loan amount
+                  {t.rowMax}
                 </td>
                 <td className="py-3 text-right font-display font-bold text-base text-emerald-deep tabular-nums">
                   {r.maxLoan <= 0 ? "€ 0" : fmtPrecise(r.maxLoan)}

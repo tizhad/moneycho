@@ -8,8 +8,8 @@ const TERMS = [10, 15, 20, 25, 30];
 const T = {
   en: {
     tag: 'Real Estate',
-    h1: 'Dutch Mortgage Calculator',
-    intro: 'Calculate your monthly mortgage payment, total interest, and the true cost of your home loan. Built for Dutch mortgages.',
+    h1: 'Mortgage Calculator Netherlands',
+    intro: 'Calculate your monthly Dutch mortgage payment, total interest, and how much mortgage you can get in the Netherlands. Built for Dutch mortgages — free, no signup.',
     homePrice: 'Home Price',
     downPayment: 'Down Payment',
     rate: 'Annual Interest Rate',

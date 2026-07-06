@@ -9,7 +9,7 @@ const T = {
   en: {
     tag: 'Savings',
     h1: 'Savings Goal Calculator',
-    intro: 'Work backwards from your target: enter what you want to save and when, and find out exactly how much to set aside each month.',
+    intro: 'Work backwards from any money goal: enter what you want to save and when, and find out exactly how much to set aside each month.',
     modeTime: 'How long will it take?',
     modeMonthly: 'How much per month?',
     goalAmount: 'Goal Amount',

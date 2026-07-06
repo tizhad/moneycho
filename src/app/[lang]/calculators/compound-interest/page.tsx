@@ -12,7 +12,7 @@ const COPY = {
       'Free compound interest calculator — enter any starting balance, monthly contribution, and annual rate to project your future balance instantly. See how compounding accelerates growth.',
   },
   nl: {
-    title: 'Rente op Rente Calculator — Gratis & Direct',
+    title: 'Rente op Rente Calculator — Samengestelde Rente Berekenen',
     description:
       'Gratis rente op rente calculator — vul startbedrag, maandelijkse inleg en rente in en zie je eindwaarde direct. Ontdek de kracht van samengestelde rente.',
   },
@@ -136,9 +136,9 @@ const EDITORIAL = {
     ],
   },
   nl: {
-    whatTitle: 'Wat is rente op rente?',
+    whatTitle: 'Wat is rente op rente (samengestelde rente)?',
     whatP1:
-      'Rente op rente betekent dat je rente verdient over zowel je oorspronkelijke inleg als over de rente die je al hebt opgebouwd. Gewone rente groeit alleen over het startbedrag. Bij rente op rente groeit het over het totale saldo, zodat elke periode iets meer oplevert dan de vorige.',
+      'Rente op rente — ook wel samengestelde rente of compound interest genoemd — betekent dat je rente verdient over zowel je oorspronkelijke inleg als over de rente die je al hebt opgebouwd. Gewone rente groeit alleen over het startbedrag. Bij samengestelde rente groeit het over het totale saldo, zodat elke periode iets meer oplevert dan de vorige.',
     whatP2:
       'Het resultaat is een groeicurve, geen rechte lijn. In de eerste jaren lijkt de groei traag, daarna versnelt het sterk. Dat is geen magie — het is gewoon de wiskunde die zijn werk doet.',
     exampleTitle: 'Rekenvoorbeeld',
@@ -198,6 +198,10 @@ const EDITORIAL = {
         q: 'Wat is de Vuistregel van 72?',
         a: 'Deel 72 door je jaarlijkse rentepercentage om het aantal jaren te schatten dat het kost om je geld te verdubbelen. Bij 8% jaarlijks rendement: 72 ÷ 8 = 9 jaar om te verdubbelen. Dit werkt omdat ln(2) ≈ 0,693, en 72/r ≈ ln(2)/(ln(1+r)) voor kleine r.',
       },
+      {
+        q: 'Wat is samengestelde rente?',
+        a: 'Samengestelde rente is een ander woord voor rente op rente: rente die wordt berekend over het startbedrag én over alle eerder ontvangen rente. In het Engels heet dit compound interest. Deze calculator berekent samengestelde rente inclusief maandelijkse inleg, zodat je ziet wat sparen of beleggen over de jaren oplevert.',
+      },
     ],
   },
 } as const;
@@ -212,8 +216,22 @@ export default async function CompoundInterestPage({
   const ed = EDITORIAL[l];
   const rates = RATES[l];
 
+  const faqJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: ed.faqs.map(({ q, a }) => ({
+      '@type': 'Question',
+      name: q,
+      acceptedAnswer: { '@type': 'Answer', text: a },
+    })),
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+      />
       <CompoundInterestCalculator lang={lang} />
 
       <div className="mt-16 space-y-14 border-t border-emerald-deep/10 pt-12">

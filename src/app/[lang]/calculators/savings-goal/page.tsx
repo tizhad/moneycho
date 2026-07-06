@@ -7,9 +7,9 @@ const BASE = 'https://moneycho.com';
 
 const COPY = {
   en: {
-    title: 'Savings Goal Calculator — How Much to Save Per Month',
+    title: 'Savings Goal Calculator — How Much to Save Per Month (Free)',
     description:
-      'Enter your savings target and deadline, and get the exact monthly amount you need to save. Includes interest projections. Free and instant.',
+      'Enter your savings target and deadline, and get the exact monthly amount you need to save. Works for any money goal — emergency fund, house deposit, holiday. Free, with interest projections.',
   },
   nl: {
     title: 'Spaardoel Calculator — Hoeveel Per Maand Sparen?',
@@ -130,8 +130,22 @@ export default async function SavingsGoalPage({
   const l = lang === 'nl' ? 'nl' : 'en';
   const c = EDITORIAL[l];
 
+  const faqJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: c.faqs.map(([q, a]) => ({
+      '@type': 'Question',
+      name: q,
+      acceptedAnswer: { '@type': 'Answer', text: a },
+    })),
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+      />
       <SavingsGoalCalculator lang={lang} />
 
       <div className="mt-16 space-y-14 border-t border-emerald-deep/10 pt-12">

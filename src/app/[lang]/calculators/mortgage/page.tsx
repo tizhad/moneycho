@@ -7,9 +7,9 @@ const BASE = 'https://moneycho.com';
 
 const COPY = {
   en: {
-    title: 'Dutch Mortgage Calculator',
+    title: 'Mortgage Calculator Netherlands 2026 — Monthly Payment & Max Mortgage',
     description:
-      'Calculate your Dutch mortgage payments with Netherlands-specific rates, NHG guarantee, LTI norms, and hypotheekrenteaftrek. Free mortgage calculator for the Netherlands.',
+      'Free mortgage calculator for the Netherlands: monthly payments, maximum mortgage (up to 4.5× income), NHG, and 2026 Dutch rates. For residents and expats — no signup.',
   },
   nl: {
     title: 'Hypotheek Berekenen & Maximale Hypotheek Calculator',
@@ -101,7 +101,8 @@ const EDITORIAL = {
     ] as [string, string][],
     faqTitle: 'Frequently asked questions',
     faqs: [
-      ['How much can I borrow for a Dutch mortgage?', 'In the Netherlands your maximum mortgage is determined by your income (LTI — loan-to-income ratio) and the property value (LTV). As of 2026, you can generally borrow up to 4.5× your gross annual income. Two-income households can often borrow more. Use this calculator to see what the monthly payments look like at different amounts.'],
+      ['How much mortgage can I get in the Netherlands?', 'Your maximum mortgage in the Netherlands is determined by your income (LTI — loan-to-income ratio) and the property value (LTV). As of 2026, you can generally borrow up to 4.5× your gross annual income. Two-income households can often borrow more. Use this calculator to see what the monthly payments look like at different amounts.'],
+      ['Can expats get a mortgage in the Netherlands?', 'Yes. Expats living and working in the Netherlands can get a Dutch mortgage under the same income rules as Dutch nationals, and 30% ruling income is usually counted in full. Most lenders want a permanent contract or an employer\'s letter of intent; some are more flexible for internationals than others, so an advisor who specialises in expat mortgages often pays for itself.'],
       ['What is NHG and do I qualify?', 'NHG (Nationale Hypotheek Garantie) is a government-backed guarantee on mortgages below €435,000 (2026 limit). It lowers your interest rate by 0.5–0.7% and protects you if you must sell at a loss. Most first-time buyers in the Netherlands qualify. Your lender or hypotheekadviseur can confirm eligibility.'],
       ['What is hypotheekrenteaftrek?', 'Hypotheekrenteaftrek is Dutch mortgage interest tax deductibility. You can deduct the interest you pay on your mortgage from your taxable income, which reduces your effective interest cost. It applies for up to 30 years and only to your primary residence. The deduction rate has been gradually reduced and currently sits around 37%.'],
       ['What is a typical Dutch mortgage interest rate?', 'In 2026, Dutch fixed rates for a 10-year term run roughly 3.5%–5% depending on your LTV and NHG status. A lower LTV (more equity) and NHG eligibility both push rates down. Variable rates exist but most Dutch buyers prefer fixed-rate periods of 10–20 years for certainty.'],
@@ -192,7 +193,7 @@ const EDITORIAL = {
       ['Andere leningen en kredieten', 'BKR-geregistreerde schulden (persoonlijke lening, creditcard, roodstand) tellen direct mee en verlagen je leencapaciteit. Los deze zo mogelijk af vóór je hypotheekaanvraag.'],
       ['Alimentatieverplichtingen', 'Partner- of kinderalimentatie telt als vaste maandlast en vermindert de ruimte die overblijft voor hypotheeklasten.'],
     ] as [string, string][],
-    maxCta: 'Wil je je exacte leencapaciteit berekenen? Gebruik onze Maximale Hypotheek Calculator',
+    maxCta: 'Benieuwd hoeveel je naast je hypotheek kunt lenen? Gebruik onze Hoeveel Kan Ik Lenen calculator',
   },
 };
 
@@ -205,8 +206,22 @@ export default async function MortgagePage({
   const l = lang === 'nl' ? 'nl' : 'en';
   const c = EDITORIAL[l];
 
+  const faqJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: c.faqs.map(([q, a]) => ({
+      '@type': 'Question',
+      name: q,
+      acceptedAnswer: { '@type': 'Answer', text: a },
+    })),
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+      />
       <MortgageCalculator lang={lang} />
 
       <div className="mt-16 space-y-14 border-t border-emerald-deep/10 pt-12">
