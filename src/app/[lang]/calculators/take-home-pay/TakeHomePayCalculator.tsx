@@ -2,33 +2,105 @@
 
 import { useState, useMemo } from "react";
 
-// ── NL 2025 Box 1 tax engine ──────────────────────────────────────
+// ── NL 2026 Box 1 tax engine (below AOW age) ──────────────────────
+// Source: Belastingdienst voorlopige aanslag 2026 parameters.
+// Schijf 1: ≤ €38.883 → 35,75% · Schijf 2: ≤ €78.426 → 37,56% ·
+// Schijf 3: > €78.426 → 49,50%
 function box1Tax(income: number): number {
   if (income <= 0) return 0;
-  const B1 = 38441;
-  if (income <= B1) return income * 0.3582;
-  return B1 * 0.3582 + (income - B1) * 0.495;
+  const B1 = 38883;
+  const B2 = 78426;
+  if (income <= B1) return income * 0.3575;
+  if (income <= B2) return B1 * 0.3575 + (income - B1) * 0.3756;
+  return B1 * 0.3575 + (B2 - B1) * 0.3756 + (income - B2) * 0.495;
 }
 
-// Algemene heffingskorting — general tax credit
+// Algemene heffingskorting 2026 — max €3.115, afbouw 6,398% vanaf €29.736
 function ahk(income: number): number {
-  const max = 3362;
-  const phase = Math.max(0, (income - 24813) * 0.06095);
+  const max = 3115;
+  const phase = Math.max(0, (income - 29736) * 0.06398);
   return Math.max(0, max - phase);
 }
 
-// Arbeidskorting — labour tax credit (employed only)
+// Arbeidskorting 2026 — max €5.685, afbouw 6,510% vanaf €45.592
 function arbeidskorting(income: number): number {
   if (income <= 0) return 0;
-  if (income <= 11491) return income * 0.08231;
-  if (income <= 24820) return 945 + (income - 11491) * 0.3003;
-  if (income <= 39957) return 4947 + (income - 24820) * 0.014;
-  return Math.max(0, 5159 - (income - 39957) * 0.0651);
+  if (income <= 11965) return income * 0.08324;
+  if (income <= 25845) return 996 + (income - 11965) * 0.31009;
+  if (income <= 45592) return 5300 + (income - 25845) * 0.0195;
+  return Math.max(0, 5685 - (income - 45592) * 0.0651);
 }
 // ─────────────────────────────────────────────────────────────────
 
+const T = {
+  en: {
+    tag: 'Income · Netherlands',
+    h1: 'Take-Home Pay Calculator',
+    intro:
+      'Calculate your Dutch net salary after income tax, algemene heffingskorting, and arbeidskorting. Official NL 2026 rates.',
+    periodLabel: 'Salary Period',
+    monthly: 'Monthly',
+    annual: 'Annual',
+    grossLabel: 'Gross Salary',
+    grossHintMonthly: 'per month, excl. holiday pay',
+    grossHintAnnual: 'per year, excl. holiday pay',
+    infoBold: 'Netherlands 2026',
+    infoRest:
+      ' · Box 1: 35.75% up to €38,883 · 37.56% up to €78,426 · 49.50% above. Includes algemene heffingskorting and arbeidskorting. Assumes employed (loondienst), below AOW age.',
+    heroLabel: 'Net Monthly Take-Home',
+    heroSub: (annual: string, rate: string) => `${annual} / year · ${rate}% effective rate`,
+    splitLabel: 'How your gross is split',
+    netPct: 'Net',
+    taxPct: 'Tax',
+    breakdown: 'Breakdown',
+    rowGross: 'Gross salary (annual)',
+    rowVakantiegeld: 'Holiday pay',
+    rowVakantiegeldSub: '(vakantiegeld 8%)',
+    rowTaxable: 'Total taxable income',
+    rowBox1: 'Box 1 income tax',
+    rowAhk: 'AHK',
+    rowAhkSub: '(algemene heffingskorting)',
+    rowAk: 'Arbeidskorting',
+    rowNetTax: 'Net tax paid',
+    rowNetAnnual: 'Net income (annual)',
+    rowNetMonthly: 'Net income (monthly)',
+  },
+  nl: {
+    tag: 'Inkomen · Nederland',
+    h1: 'Nettoloon Berekenen',
+    intro:
+      'Bereken je netto salaris na inkomstenbelasting, algemene heffingskorting en arbeidskorting. Officiële NL-tarieven 2026.',
+    periodLabel: 'Salarisperiode',
+    monthly: 'Per maand',
+    annual: 'Per jaar',
+    grossLabel: 'Bruto Salaris',
+    grossHintMonthly: 'per maand, excl. vakantiegeld',
+    grossHintAnnual: 'per jaar, excl. vakantiegeld',
+    infoBold: 'Nederland 2026',
+    infoRest:
+      ' · Box 1: 35,75% tot € 38.883 · 37,56% tot € 78.426 · 49,50% daarboven. Inclusief algemene heffingskorting en arbeidskorting. Uitgangspunt: loondienst, onder AOW-leeftijd.',
+    heroLabel: 'Netto Per Maand',
+    heroSub: (annual: string, rate: string) => `${annual} / jaar · ${rate}% effectieve druk`,
+    splitLabel: 'Zo wordt je bruto verdeeld',
+    netPct: 'Netto',
+    taxPct: 'Belasting',
+    breakdown: 'Specificatie',
+    rowGross: 'Bruto salaris (jaar)',
+    rowVakantiegeld: 'Vakantiegeld',
+    rowVakantiegeldSub: '(8%)',
+    rowTaxable: 'Totaal belastbaar inkomen',
+    rowBox1: 'Box 1 inkomstenbelasting',
+    rowAhk: 'AHK',
+    rowAhkSub: '(algemene heffingskorting)',
+    rowAk: 'Arbeidskorting',
+    rowNetTax: 'Betaalde belasting',
+    rowNetAnnual: 'Netto inkomen (jaar)',
+    rowNetMonthly: 'Netto inkomen (maand)',
+  },
+} as const;
+
 const fmt = (n: number) =>
-  "€ " + Math.round(n).toLocaleString("nl-NL");
+  "€ " + Math.round(n).toLocaleString("nl-NL");
 
 function Field({
   label,
@@ -121,7 +193,8 @@ function Row({
 
 type Period = "monthly" | "annual";
 
-export default function TakeHomePayPage() {
+export default function TakeHomePayCalculator({ lang }: { lang?: string }) {
+  const t = T[lang === 'nl' ? 'nl' : 'en'];
   const [gross, setGross] = useState<number | "">(4000);
   const [period, setPeriod] = useState<Period>("monthly");
 
@@ -161,18 +234,17 @@ export default function TakeHomePayPage() {
       {/* ── Inputs ── */}
       <div>
         <span className="text-xs font-bold text-gold tracking-[0.2em] uppercase block mb-4">
-          Income · Netherlands
+          {t.tag}
         </span>
         <h1 className="font-display text-4xl md:text-5xl font-bold text-emerald-deep tracking-tight mb-4">
-          Take-Home Pay
+          {t.h1}
         </h1>
         <p className="text-emerald-deep/60 leading-relaxed mb-12">
-          Calculate your Dutch net salary after income tax, algemene
-          heffingskorting, and arbeidskorting. NL 2025 rates.
+          {t.intro}
         </p>
 
         <div className="space-y-6">
-          <Field label="Salary Period">
+          <Field label={t.periodLabel}>
             <div className="flex gap-2">
               {(["monthly", "annual"] as Period[]).map((p) => (
                 <button
@@ -184,19 +256,15 @@ export default function TakeHomePayPage() {
                       : "bg-paper text-emerald-deep border-emerald-deep/20 hover:border-emerald-deep"
                   }`}
                 >
-                  {p === "monthly" ? "Monthly" : "Annual"}
+                  {p === "monthly" ? t.monthly : t.annual}
                 </button>
               ))}
             </div>
           </Field>
 
           <Field
-            label="Gross Salary"
-            hint={
-              period === "monthly"
-                ? "per month, excl. holiday pay"
-                : "per year, excl. holiday pay"
-            }
+            label={t.grossLabel}
+            hint={period === "monthly" ? t.grossHintMonthly : t.grossHintAnnual}
           >
             <NumberInput value={gross} onChange={setGross} prefix="€" />
           </Field>
@@ -204,11 +272,9 @@ export default function TakeHomePayPage() {
           <div className="border border-emerald-deep/10 p-4 bg-emerald-deep/[0.02]">
             <p className="text-xs text-emerald-deep/50 leading-relaxed">
               <span className="font-bold text-emerald-deep/70">
-                Netherlands 2025
-              </span>{" "}
-              · Box 1: 35.82% up to €38,441 · 49.50% above. Includes
-              algemene heffingskorting and arbeidskorting. Assumes
-              employed (loondienst).
+                {t.infoBold}
+              </span>
+              {t.infoRest}
             </p>
           </div>
         </div>
@@ -219,21 +285,20 @@ export default function TakeHomePayPage() {
         {/* Hero number */}
         <div className="bg-emerald-deep text-paper p-8">
           <p className="text-xs font-bold uppercase tracking-widest text-paper/50 mb-2">
-            Net Monthly Take-Home
+            {t.heroLabel}
           </p>
           <p className="font-display text-5xl font-bold">
             {fmt(r.netMonthly)}
           </p>
           <p className="text-paper/50 text-sm mt-2">
-            {fmt(r.netAnnual)} / year · {r.effectiveRate.toFixed(1)}%
-            effective rate
+            {t.heroSub(fmt(r.netAnnual), r.effectiveRate.toFixed(1))}
           </p>
         </div>
 
         {/* Breakdown bar */}
         <div className="bg-paper border border-emerald-deep/10 p-6">
           <p className="text-xs font-bold uppercase tracking-widest text-emerald-deep/40 mb-4">
-            How your gross is split
+            {t.splitLabel}
           </p>
           <div className="flex h-4 overflow-hidden mb-3">
             <div
@@ -245,10 +310,10 @@ export default function TakeHomePayPage() {
           <div className="flex justify-between text-xs text-emerald-deep/50">
             <span className="flex items-center gap-1.5">
               <span className="inline-block w-2.5 h-2.5 bg-emerald-deep rounded-sm" />
-              Net {r.netPct.toFixed(0)}%
+              {t.netPct} {r.netPct.toFixed(0)}%
             </span>
             <span className="flex items-center gap-1.5">
-              Tax {(100 - r.netPct).toFixed(0)}%
+              {t.taxPct} {(100 - r.netPct).toFixed(0)}%
               <span className="inline-block w-2.5 h-2.5 bg-gold rounded-sm" />
             </span>
           </div>
@@ -257,38 +322,38 @@ export default function TakeHomePayPage() {
         {/* Detailed breakdown */}
         <div className="bg-paper border border-emerald-deep/10 p-6">
           <p className="text-xs font-bold uppercase tracking-widest text-emerald-deep/40 mb-4">
-            Breakdown
+            {t.breakdown}
           </p>
           <table className="w-full text-sm">
             <tbody className="divide-y divide-emerald-deep/5">
-              <Row label="Gross salary (annual)" value={fmt(grossAnnual)} />
+              <Row label={t.rowGross} value={fmt(grossAnnual)} />
               <Row
                 label={
                   <>
-                    Holiday pay{" "}
+                    {t.rowVakantiegeld}{" "}
                     <span className="text-emerald-deep/40 text-xs">
-                      (vakantiegeld 8%)
+                      {t.rowVakantiegeldSub}
                     </span>
                   </>
                 }
                 value={`+${fmt(r.vakantiegeld)}`}
               />
               <Row
-                label="Total taxable income"
+                label={t.rowTaxable}
                 value={fmt(r.totalGross)}
                 bold
               />
               <Row
-                label="Box 1 income tax"
+                label={t.rowBox1}
                 value={`−${fmt(r.taxBefore)}`}
                 negative
               />
               <Row
                 label={
                   <>
-                    AHK{" "}
+                    {t.rowAhk}{" "}
                     <span className="text-emerald-deep/40 text-xs">
-                      (algemene heffingskorting)
+                      {t.rowAhkSub}
                     </span>
                   </>
                 }
@@ -297,24 +362,24 @@ export default function TakeHomePayPage() {
                 positive
               />
               <Row
-                label="Arbeidskorting"
+                label={t.rowAk}
                 value={`+${fmt(r.creditAC)}`}
                 sub
                 positive
               />
               <Row
-                label="Net tax paid"
+                label={t.rowNetTax}
                 value={`−${fmt(r.incomeTax)}`}
                 negative
                 bold
               />
               <Row
-                label="Net income (annual)"
+                label={t.rowNetAnnual}
                 value={fmt(r.netAnnual)}
                 bold
               />
               <Row
-                label="Net income (monthly)"
+                label={t.rowNetMonthly}
                 value={fmt(r.netMonthly)}
                 bold
               />

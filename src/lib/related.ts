@@ -69,12 +69,12 @@ export const faqsBySlug: Record<string, FAQItem[]> = {
   ],
   'take-home-pay': [
     {
-      q: 'What tax brackets apply in the Netherlands in 2025?',
-      a: 'Box 1 (wages) is taxed at 35.82% on income up to €38,441, and 49.50% above that. These rates include national insurance contributions (volksverzekeringen); not just income tax.',
+      q: 'What tax brackets apply in the Netherlands in 2026?',
+      a: 'Box 1 (wages) is taxed at 35.75% on income up to €38,883, 37.56% from €38,883 to €78,426, and 49.50% above that. These rates include national insurance contributions (volksverzekeringen), not just income tax.',
     },
     {
       q: 'What is the Arbeidskorting?',
-      a: 'The Arbeidskorting (employment tax credit) directly reduces the tax you owe as an employee. In 2025, the maximum credit is approximately €5,159, reached at an income of around €39,957. Above that threshold, it phases out at 6.51% per euro.',
+      a: 'The Arbeidskorting (employment tax credit) directly reduces the tax you owe as an employee. In 2026, the maximum credit is €5,685, reached at an income of €45,592. Above that threshold, it phases out at 6.51% per euro, disappearing around €132,920.',
     },
     {
       q: 'Is vakantiegeld included in the calculation?',
