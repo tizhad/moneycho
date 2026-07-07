@@ -2,11 +2,11 @@
 
 import { useState, useMemo } from "react";
 
-const NHG_LIMIT = 435_000;
-const STARTER_LIMIT = 510_000;
+const NHG_LIMIT = 470_000;
+const STARTER_LIMIT = 555_000;
 const TRANSFER_RATE = 0.02;
 const INVESTOR_RATE = 0.104;
-const NHG_RATE = 0.006;
+const NHG_RATE = 0.004;
 
 type BuyerType = "starter" | "owner" | "investor";
 
@@ -41,8 +41,8 @@ const T = {
     inspectionFee: "Building inspection",
     agentFee: "Buyer's agent",
     est: "estimate",
-    nhgWarning: "NHG not available — mortgage exceeds €435,000 limit",
-    starterWarning: "Starter exemption does not apply above €510,000 purchase price",
+    nhgWarning: "NHG not available — mortgage exceeds €470,000 limit",
+    starterWarning: "Starter exemption does not apply above €555,000 purchase price",
     disclaimer:
       "Ranges are estimates. Exact notary and advisor fees vary by provider. Always request itemised quotes.",
   },
@@ -76,8 +76,8 @@ const T = {
     inspectionFee: "Bouwkundige keuring",
     agentFee: "Aankoopmakelaar",
     est: "schatting",
-    nhgWarning: "NHG niet beschikbaar — hypotheek overschrijdt grens van € 435.000",
-    starterWarning: "Startersvrijstelling geldt niet boven € 510.000 koopprijs",
+    nhgWarning: "NHG niet beschikbaar — hypotheek overschrijdt grens van € 470.000",
+    starterWarning: "Startersvrijstelling geldt niet boven € 555.000 koopprijs",
     disclaimer:
       "Schattingen. Exacte notaris- en advieskosten verschillen per aanbieder. Vraag altijd gespecificeerde offertes op.",
   },

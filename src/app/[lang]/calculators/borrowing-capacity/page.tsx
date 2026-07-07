@@ -128,7 +128,7 @@ const EDITORIAL = {
       ],
       [
         'Does a partner increase how much I can borrow?',
-        'Yes. Lenders typically count 100% of the higher income and 90% of the lower income for personal loans, and both incomes fully for mortgages since 2020. Two incomes almost always increase the maximum significantly.',
+        'Yes. Lenders typically count 100% of the higher income and 90% of the lower income for personal loans, and both incomes fully for mortgages since 2023. Two incomes almost always increase the maximum significantly.',
       ],
     ] as [string, string][],
   },
@@ -213,7 +213,7 @@ const EDITORIAL = {
       ],
       [
         'Kan ik meer lenen met een partner?',
-        'Ja. Voor persoonlijke leningen rekenen verstrekkers doorgaans met 100% van het hoogste en 90% van het laagste inkomen; voor hypotheken tellen sinds 2020 beide inkomens volledig mee. Twee inkomens verhogen het maximum vrijwel altijd aanzienlijk.',
+        'Ja. Voor persoonlijke leningen rekenen verstrekkers doorgaans met 100% van het hoogste en 90% van het laagste inkomen; voor hypotheken tellen sinds 2023 beide inkomens volledig mee. Twee inkomens verhogen het maximum vrijwel altijd aanzienlijk.',
       ],
     ] as [string, string][],
   },

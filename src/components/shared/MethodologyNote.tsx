@@ -4,8 +4,8 @@ const LAST_VERIFIED = { en: 'July 2026', nl: 'juli 2026' } as const;
 // an entry fall back to the generic formula line.
 const SOURCES: Record<string, { en: string; nl: string }> = {
   mortgage: {
-    en: 'NIBUD loan-to-income tables 2026 · NHG cost limit €435,000 (2026) · Belastingdienst (hypotheekrenteaftrek) · indicative lender rates from public market data',
-    nl: 'NIBUD-leennormen 2026 · NHG-kostengrens € 435.000 (2026) · Belastingdienst (hypotheekrenteaftrek) · indicatieve rentes op basis van openbare marktdata',
+    en: 'NIBUD loan-to-income tables 2026 · NHG cost limit €470,000 (2026) · Belastingdienst (hypotheekrenteaftrek) · indicative lender rates from public market data',
+    nl: 'NIBUD-leennormen 2026 · NHG-kostengrens € 470.000 (2026) · Belastingdienst (hypotheekrenteaftrek) · indicatieve rentes op basis van openbare marktdata',
   },
   'borrowing-capacity': {
     en: 'VFN Gedragscode Consumptief Krediet · Nibud lending norms · AFM toetsrente',
