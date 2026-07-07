@@ -5,7 +5,6 @@ import { usePathname } from 'next/navigation';
 import { relatedTools, faqsBySlug } from '@/lib/related';
 import { RelatedTools } from '@/components/shared/RelatedTools';
 import { FAQ } from '@/components/shared/FAQ';
-import { EmailCapture } from '@/components/shared/EmailCapture';
 import { MethodologyNote } from '@/components/shared/MethodologyNote';
 
 export default function CalculatorsLayout({
@@ -35,7 +34,6 @@ export default function CalculatorsLayout({
         <>
           {faqs.length > 0 && <FAQ items={faqs} lang={lang} />}
           {slug && <MethodologyNote slug={slug} lang={lang} />}
-          <EmailCapture lang={lang} />
           {related.length > 0 && <RelatedTools items={related} lang={lang} />}
         </>
       )}
