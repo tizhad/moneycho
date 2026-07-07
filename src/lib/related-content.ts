@@ -172,6 +172,8 @@ const RELATED_MAP: Record<string, string[]> = {
   'calculator:mortgage': [
     'calculator:kosten-koper',
     'calculator:borrowing-capacity',
+    'article:overdrachtsbelasting-2026',
+    'article:transfer-tax-netherlands-2026',
     'article:hypotheek-berekenen',
     'calculator:annuiteit',
   ],
@@ -212,10 +214,25 @@ const RELATED_MAP: Record<string, string[]> = {
     'article:financieel-adviseur-kiezen',
   ],
   'calculator:kosten-koper': [
+    'article:overdrachtsbelasting-2026',
+    'article:transfer-tax-netherlands-2026',
     'calculator:mortgage',
     'calculator:borrowing-capacity',
-    'calculator:annuiteit',
     'article:hypotheek-berekenen',
+  ],
+
+  // ── Transfer tax guides (NL + EN) ─────────────────────────────
+  'overdrachtsbelasting-2026': [
+    'calculator:kosten-koper',
+    'calculator:mortgage',
+    'article:hypotheek-berekenen',
+    'calculator:borrowing-capacity',
+  ],
+  'transfer-tax-netherlands-2026': [
+    'calculator:kosten-koper',
+    'calculator:mortgage',
+    'article:calculating-dutch-mortgage',
+    'calculator:borrowing-capacity',
   ],
 };
 
