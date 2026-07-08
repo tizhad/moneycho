@@ -12,19 +12,12 @@ const BUCKETS = [
   { name: "Savings & Debt", pct: 20, color: SLICE_COLORS[2] },
 ].map((b) => ({ ...b, value: INCOME * (b.pct / 100) }));
 
-function fmt(v: number) {
-  return `$${v.toLocaleString("en-US")}`;
-}
-
 export function BudgetPreview({ href }: { href: string }) {
   return (
     <div className="bg-white-card border border-border-light rounded-2xl overflow-hidden flex flex-col">
-      <div className="px-7 pt-7 pb-5">
+      <div className="px-7 pt-5 pb-3">
         <p className="text-[0.62rem] font-bold uppercase tracking-[0.2em] text-gold mb-1">
           Budgeting
-        </p>
-        <p className="text-[0.8rem] text-text-tertiary">
-          $5,000/mo after-tax income · 50/30/20 rule
         </p>
       </div>
 
@@ -64,24 +57,11 @@ export function BudgetPreview({ href }: { href: string }) {
         </div>
       </div>
 
-      <div className="px-7 py-6 flex flex-col flex-1">
-        <div className="flex gap-6 mb-5">
-          {BUCKETS.map((b) => (
-            <div key={b.name}>
-              <p
-                className="text-[1.15rem] font-bold font-serif leading-none"
-                style={{ color: b.color }}
-              >
-                {fmt(b.value)}
-              </p>
-              <p className="text-[0.68rem] text-text-tertiary mt-0.5">{b.name}</p>
-            </div>
-          ))}
-        </div>
+      <div className="px-7 py-5 flex flex-col flex-1">
         <h3 className="font-serif font-bold text-[1.15rem] text-emerald-deep mb-2">
           50/30/20 Budget Planner
         </h3>
-        <p className="text-[0.84rem] text-text-secondary leading-relaxed mb-6 flex-1">
+        <p className="text-[0.84rem] text-text-secondary leading-relaxed mb-4 flex-1">
           Enter your income and instantly see where every dollar should go — needs, wants, and savings, broken down to the cent.
         </p>
         <Link

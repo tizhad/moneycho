@@ -25,8 +25,6 @@ const DATA = Array.from({ length: 21 }, (_, yr) => {
   };
 });
 
-const FINAL = DATA[20].contributions + DATA[20].interest;
-
 function fmtK(v: number) {
   if (v >= 1_000_000) return `$${(v / 1_000_000).toFixed(1)}M`;
   if (v >= 1_000) return `$${Math.round(v / 1_000)}K`;
@@ -36,12 +34,9 @@ function fmtK(v: number) {
 export function CompoundPreview({ href }: { href: string }) {
   return (
     <div className="bg-white-card border border-border-light rounded-2xl overflow-hidden flex flex-col">
-      <div className="px-7 pt-7 pb-5">
+      <div className="px-7 pt-5 pb-3">
         <p className="text-[0.62rem] font-bold uppercase tracking-[0.2em] text-gold mb-1">
           Savings &amp; Investing
-        </p>
-        <p className="text-[0.8rem] text-text-tertiary">
-          $10K start · $500/mo · 7% annual · 20 years
         </p>
       </div>
 
@@ -111,17 +106,11 @@ export function CompoundPreview({ href }: { href: string }) {
         </div>
       </div>
 
-      <div className="px-7 py-6 flex flex-col flex-1">
-        <p className="font-serif font-bold text-[2.2rem] text-emerald-deep leading-none">
-          {fmtK(FINAL)}
-        </p>
-        <p className="text-[0.74rem] text-text-tertiary mt-1 mb-5">
-          projected after 20 years
-        </p>
+      <div className="px-7 py-5 flex flex-col flex-1">
         <h3 className="font-serif font-bold text-[1.15rem] text-emerald-deep mb-2">
           Compound Interest Calculator
         </h3>
-        <p className="text-[0.84rem] text-text-secondary leading-relaxed mb-6 flex-1">
+        <p className="text-[0.84rem] text-text-secondary leading-relaxed mb-4 flex-1">
           Watch how monthly deposits and compounding growth build wealth — adjust any variable and see the curve shift in real time.
         </p>
         <Link

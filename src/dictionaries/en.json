@@ -9,7 +9,7 @@
     "allTools": "All Tools"
   },
   "footer": {
-    "tagline": "Free financial calculators, guides, and tools helping people make smarter money decisions. No sign-up required.",
+    "tagline": "Free financial calculators, guides, and tools helping people make smarter money decisions.",
     "columns": {
       "calculators": "Calculators",
       "learn": "Learn",
@@ -37,7 +37,7 @@
   },
   "home": {
     "hero": {
-      "eyebrow": "Free Financial Tools · No Sign-Up",
+      "eyebrow": "Free Financial Tools & Guides",
       "h1_1": "Budget, Invest, Save.",
       "h1_2": "Backed by",
       "h1_em": "Better Math.",
@@ -192,8 +192,8 @@
       ]
     },
     "journal": {
-      "heading": "Financial Insights & Analysis",
-      "viewAll": "Browse Archives →",
+      "heading": "Personal Finance Guides",
+      "viewAll": "All Articles →",
       "items": [
         {
           "featured": true,

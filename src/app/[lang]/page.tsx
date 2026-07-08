@@ -61,7 +61,7 @@ export default async function HomePage({
   return (
     <>
       {/* HERO */}
-      <section className="bg-emerald-deep min-h-[400px] flex flex-col justify-center px-8 py-16 lg:px-20 xl:px-28">
+      <section className="bg-emerald-deep min-h-50 flex flex-col justify-center px-8 py-8 lg:px-20 xl:px-28">
         <div className="max-w-[700px]">
           <p className="text-[0.65rem] font-bold uppercase tracking-[0.2em] text-gold-bright mb-5">
             {t.hero.eyebrow}
@@ -78,13 +78,13 @@ export default async function HomePage({
           <div className="flex gap-3 flex-wrap">
             <Link
               href={p('/calculators')}
-              className="inline-flex items-center px-6 py-3 bg-paper text-emerald-deep text-[0.85rem] font-semibold rounded-md hover:bg-gold hover:text-paper transition-all no-underline"
+              className="inline-flex items-center px-3 py-3 bg-paper text-emerald-deep text-[0.85rem] font-semibold rounded-md hover:bg-gold hover:text-paper transition-all no-underline"
             >
               {t.hero.cta_primary}
             </Link>
             <Link
               href={p('/guides')}
-              className="inline-flex items-center px-6 py-3 border border-paper/30 text-paper text-[0.85rem] font-semibold rounded-md hover:bg-paper/10 transition-all no-underline"
+              className="inline-flex items-center px-3 py-3 border border-paper/30 text-paper text-[0.85rem] font-semibold rounded-md hover:bg-paper/10 transition-all no-underline"
             >
               {t.hero.cta_secondary}
             </Link>
@@ -94,9 +94,9 @@ export default async function HomePage({
 
       {/* JOURNAL */}
       {latestGuides.length > 0 && (
-        <section className="max-w-7xl mx-auto px-6 py-20">
+        <section className="max-w-7xl mx-auto px-6 py-15">
           <div className="flex items-baseline justify-between mb-10 flex-wrap gap-3">
-            <h2 className="font-serif font-black text-[clamp(1.8rem,3vw,2.4rem)] text-emerald-deep">
+            <h2 className="font-serif font-black text-2xl sm:text-[clamp(1.8rem,3vw,2.4rem)] text-emerald-deep">
               {t.journal.heading}
             </h2>
             <Link
@@ -146,7 +146,7 @@ export default async function HomePage({
       )}
 
       {/* FEATURED CALCULATORS */}
-      <section className="max-w-7xl mx-auto px-6 py-20">
+      <section className="max-w-7xl mx-auto px-6 py-15">
         <div className="flex items-baseline justify-between mb-10 flex-wrap gap-3">
           <h2 className="font-serif font-black text-[clamp(1.8rem,3vw,2.4rem)] text-emerald-deep">
             See Them in Action

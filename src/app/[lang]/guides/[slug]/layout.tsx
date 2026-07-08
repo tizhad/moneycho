@@ -13,7 +13,7 @@ export default function ArticleLayout({
   const lang = segments[0] ?? 'nl';
 
   return (
-    <div className="max-w-7xl mx-auto px-6 py-16 md:py-24">
+    <div className="max-w-7xl mx-auto px-6 pt-8 md:pt-12 pb-16 md:pb-24">
       <Link
         href={`/${lang}/guides`}
         className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-emerald-deep/40 hover:text-emerald-deep transition-colors mb-12"
