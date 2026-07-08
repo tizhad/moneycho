@@ -63,10 +63,10 @@ export function MethodologyNote({ slug, lang }: { slug: string; lang?: string })
       <p className="text-xs font-bold uppercase tracking-widest text-emerald-deep/40 mb-3">
         {c.heading}
       </p>
-      <p className="text-xs text-emerald-deep/50 leading-relaxed mb-2">
+      <p className="text-sm text-emerald-deep/50 leading-relaxed mb-2">
         {sources} · <span className="font-semibold">{c.verified}</span> {LAST_VERIFIED[l]}
       </p>
-      <p className="text-xs text-emerald-deep/35 leading-relaxed">{c.disclaimer}</p>
+      <p className="text-sm text-emerald-deep/35 leading-relaxed">{c.disclaimer}</p>
     </div>
   );
 }

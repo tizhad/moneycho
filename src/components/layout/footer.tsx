@@ -77,8 +77,8 @@ export function Footer({ lang, dict }: { lang: Locale; dict: FooterDict }) {
         </div>
 
         <div className="border-t border-paper/10 pt-6 flex flex-col md:flex-row justify-between items-center gap-3">
-          <span className="text-[0.75rem] text-paper/50">© {new Date().getFullYear()} MoneyCho. {dict.copyright}</span>
-          <span className="text-[0.75rem] text-paper/50">{dict.disclaimer}</span>
+          <span className="text-sm text-paper/50">© {new Date().getFullYear()} MoneyCho. {dict.copyright}</span>
+          <span className="text-sm text-paper/50">{dict.disclaimer}</span>
         </div>
       </div>
     </footer>

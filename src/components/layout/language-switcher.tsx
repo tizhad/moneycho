@@ -19,7 +19,7 @@ export function LanguageSwitcher({ lang }: { lang: Locale }) {
         <button
           key={locale}
           onClick={() => switchLocale(locale)}
-          className={`px-2 py-1 rounded transition-colors uppercase tracking-wider cursor-pointer ${
+          className={`min-w-11 min-h-11 px-2 py-1 rounded transition-colors uppercase tracking-wider cursor-pointer flex items-center justify-center ${
             locale === lang
               ? "text-emerald-deep font-semibold"
               : "text-text-tertiary hover:text-emerald-deep"

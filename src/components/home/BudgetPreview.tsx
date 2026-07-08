@@ -48,7 +48,7 @@ export function BudgetPreview({ href }: { href: string }) {
                 className="w-2.5 h-2.5 rounded-sm inline-block"
                 style={{ background: b.color }}
               />
-              <span className="text-[0.72rem] text-text-tertiary">
+              <span className="text-xs text-text-tertiary">
                 {b.name}{" "}
                 <span className="font-semibold text-emerald-deep">{b.pct}%</span>
               </span>

@@ -38,7 +38,7 @@ export function EmailSection({ lang }: { lang: string }) {
         </p>
 
         {done ? (
-          <p className="text-gold font-semibold text-lg">
+          <p role="status" aria-live="polite" className="text-gold font-semibold text-lg">
             {isNL ? "Bedankt — je hoort van ons!" : "You're in — talk soon!"}
           </p>
         ) : (

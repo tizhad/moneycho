@@ -49,7 +49,7 @@ export default async function GuidesPage({
             <Link
               key={guide.slug}
               href={`/${lang}/guides/${guide.slug}`}
-              className="group bg-paper p-8 md:p-12 hover:bg-emerald-deep/[0.03] transition-colors flex flex-col md:flex-row md:items-start md:justify-between gap-6"
+              className="group bg-paper p-5 md:p-6 hover:bg-emerald-deep/[0.03] transition-colors flex flex-col md:flex-row md:items-start md:justify-between gap-6"
             >
               <div className="flex-1">
                 <div className="flex items-center gap-4 mb-4">

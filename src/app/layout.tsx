@@ -34,6 +34,9 @@ export const metadata: Metadata = {
     siteName: "MoneyCho",
     type: "website",
   },
+  twitter: {
+    card: "summary_large_image",
+  },
 };
 
 export default async function RootLayout({

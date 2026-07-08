@@ -38,7 +38,7 @@ export async function generateMetadata({
       type: 'website',
       url: `${BASE}/${lang}`,
     },
-    twitter: { card: 'summary', title, description },
+    twitter: { card: 'summary_large_image', title, description },
   };
 }
 
@@ -109,7 +109,7 @@ export default async function HomePage({
           <div className="grid min-[930px]:grid-cols-2 gap-8">
             <Link
               href={p(`/guides/${latestGuides[0].slug}`)}
-              className="min-[930px]:row-span-2 p-10 bg-emerald-deep rounded-lg flex flex-col justify-end min-h-90 hover:-translate-y-0.5 transition-all no-underline"
+              className="min-[930px]:row-span-2 p-6 bg-emerald-deep rounded-lg flex flex-col justify-end min-h-90 hover:-translate-y-0.5 transition-all no-underline"
             >
               <span className="text-[0.7rem] font-semibold tracking-[0.08em] uppercase text-gold-bright mb-3 block">
                 {latestGuides[0].tag}
@@ -125,7 +125,7 @@ export default async function HomePage({
               <Link
                 key={guide.slug}
                 href={p(`/guides/${guide.slug}`)}
-                className="p-7 border border-border-light rounded-lg flex flex-col hover:border-gold-muted hover:-translate-y-px transition-all no-underline"
+                className="p-5 border border-border-light rounded-lg flex flex-col hover:border-gold-muted hover:-translate-y-px transition-all no-underline"
               >
                 <span className="self-end text-[0.6rem] font-semibold tracking-[0.08em] uppercase text-gold bg-gold/10 px-2 py-0.5 rounded-sm mb-4">
                   {guide.tag}
@@ -136,7 +136,7 @@ export default async function HomePage({
                 <p className="text-[0.82rem] text-text-secondary leading-relaxed">
                   {guide.description}
                 </p>
-                <span className="text-[0.72rem] text-text-tertiary mt-3">
+                <span className="text-sm text-text-tertiary mt-3">
                   {guide.date}
                 </span>
               </Link>
@@ -149,7 +149,7 @@ export default async function HomePage({
       <section className="max-w-7xl mx-auto px-6 py-15">
         <div className="flex items-baseline justify-between mb-10 flex-wrap gap-3">
           <h2 className="font-serif font-black text-[clamp(1.8rem,3vw,2.4rem)] text-emerald-deep">
-            See Them in Action
+            Try a Calculator
           </h2>
           <Link
             href={p('/calculators')}

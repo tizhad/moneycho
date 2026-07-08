@@ -97,11 +97,11 @@ export function CompoundPreview({ href }: { href: string }) {
         <div className="flex gap-5 mt-1 mb-2">
           <div className="flex items-center gap-1.5">
             <span className="w-3 h-2 rounded-sm inline-block opacity-60" style={{ background: COLORS.emerald }} />
-            <span className="text-[0.7rem] text-text-tertiary">Contributions</span>
+            <span className="text-xs text-text-tertiary">Contributions</span>
           </div>
           <div className="flex items-center gap-1.5">
             <span className="w-3 h-2 rounded-sm inline-block opacity-70" style={{ background: COLORS.gold }} />
-            <span className="text-[0.7rem] text-text-tertiary">Interest earned</span>
+            <span className="text-xs text-text-tertiary">Interest earned</span>
           </div>
         </div>
       </div>
