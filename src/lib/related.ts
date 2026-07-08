@@ -51,7 +51,7 @@ export const relatedTools: Record<string, RelatedItem[]> = {
 
 // Slugs whose page.tsx renders its own bilingual FAQ + FAQPage JSON-LD are
 // intentionally absent here (mortgage, compound-interest, savings-goal,
-// borrowing-capacity) — a second FAQ block would duplicate the schema.
+// borrowing-capacity, take-home-pay) — a second FAQ block would duplicate the schema.
 export const faqsBySlug: Record<string, FAQItem[]> = {
   budget: [
     {
@@ -65,20 +65,6 @@ export const faqsBySlug: Record<string, FAQItem[]> = {
     {
       q: 'What if I can\'t reach 20% savings?',
       a: 'Start where you are. Even 5–10% is vastly better than nothing, because compound growth rewards consistency. The goal is to gradually increase the savings percentage as income rises or discretionary spending falls.',
-    },
-  ],
-  'take-home-pay': [
-    {
-      q: 'What tax brackets apply in the Netherlands in 2026?',
-      a: 'Box 1 (wages) is taxed at 35.75% on income up to €38,883, 37.56% from €38,883 to €78,426, and 49.50% above that. These rates include national insurance contributions (volksverzekeringen), not just income tax.',
-    },
-    {
-      q: 'What is the Arbeidskorting?',
-      a: 'The Arbeidskorting (employment tax credit) directly reduces the tax you owe as an employee. In 2026, the maximum credit is €5,685, reached at an income of €45,592. Above that threshold, it phases out at 6.51% per euro, disappearing around €132,920.',
-    },
-    {
-      q: 'Is vakantiegeld included in the calculation?',
-      a: 'Yes. Dutch employers are legally required to pay 8% vakantiegeld (holiday pay) on top of gross salary. This calculator adds it to your annual gross before computing net pay, which is how most payslips work.',
     },
   ],
   'debt-payoff': [
