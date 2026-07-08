@@ -125,8 +125,22 @@ export default async function AnnuiteitPage({
   const l = lang === 'nl' ? 'nl' : 'en';
   const c = EDITORIAL[l];
 
+  const faqJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: c.faqs.map(([q, a]) => ({
+      '@type': 'Question',
+      name: q,
+      acceptedAnswer: { '@type': 'Answer', text: a },
+    })),
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+      />
       <AnnuiteitCalculator lang={lang} />
 
       <div className="mt-16 space-y-14 border-t border-emerald-deep/10 pt-12">
