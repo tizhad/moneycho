@@ -37,7 +37,7 @@ const COPY = {
     ],
     principles: [
       { n: '01', title: 'Show the math', body: 'Every calculator shows the formula behind the result. No black boxes. You should be able to verify every number we give you.' },
-      { n: '02', title: 'No conflicts of interest', body: 'We do not sell financial products. We do not take referral fees. Our tools are built to give you accurate answers, not to steer you toward a product.' },
+      { n: '02', title: 'Transparent about money', body: 'Our calculators contain no paid placement, and a commission never changes a number. Some outbound links may earn us a commission — we label them, and we explain our full revenue model openly.' },
       { n: '03', title: 'Always free', body: 'Core calculators and guides are free, forever. Financial literacy should not have a paywall.' },
       { n: '04', title: 'Updated regularly', body: 'Tax brackets, interest rates, and regulatory figures change. We update our models when they do and show the source.' },
     ],
@@ -77,7 +77,7 @@ const COPY = {
     ],
     principles: [
       { n: '01', title: 'Laat de berekening zien', body: 'Elke calculator toont de formule achter het resultaat. Geen zwarte dozen. Je kunt elk getal dat we je geven zelf verifiëren.' },
-      { n: '02', title: 'Geen belangenconflicten', body: 'We verkopen geen financiële producten. We ontvangen geen verwijzingsvergoedingen. Onze tools zijn gebouwd om nauwkeurige antwoorden te geven, niet om je naar een product te sturen.' },
+      { n: '02', title: 'Transparant over geld', body: 'Onze calculators bevatten geen betaalde plaatsing, en een commissie verandert nooit een getal. Sommige uitgaande links kunnen ons commissie opleveren — die labelen we, en ons volledige verdienmodel leggen we open uit.' },
       { n: '03', title: 'Altijd gratis', body: 'Onze calculators en gidsen zijn gratis, voor altijd. Financiële kennis mag geen prijskaartje hebben.' },
       { n: '04', title: 'Regelmatig bijgewerkt', body: 'Belastingschijven, rentetarieven en wettelijke cijfers veranderen. We werken onze modellen bij wanneer dat nodig is en vermelden de bron.' },
     ],

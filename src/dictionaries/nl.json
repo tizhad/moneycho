@@ -26,7 +26,9 @@
       "insights": "Inzichten",
       "about": "Over ons",
       "careers": "Vacatures",
-      "contact": "Contact"
+      "contact": "Contact",
+      "privacy": "Privacybeleid",
+      "disclosure": "Verdienmodel"
     },
     "copyright": "Alle rechten voorbehouden.",
     "disclaimer": "Geen financieel advies. Gebruik op eigen risico."
@@ -46,64 +48,212 @@
       "cta_secondary": "Lees Gratis Gidsen"
     },
     "heroGrid": [
-      { "icon": "📊", "label": "Budgetcalculator", "desc": "50/30/20 regel, aangepaste verdeling", "href": "/calculators/budget" },
-      { "icon": "📈", "label": "Samengestelde Rente", "desc": "Visualiseer groei over tijd", "href": "/calculators/compound-interest" },
-      { "icon": "⚖️", "label": "Schuld Aflossen", "desc": "Sneeuwbal vs lawine vergelijking", "href": "/calculators/debt-payoff" },
-      { "icon": "🏠", "label": "Hypotheekcalculator", "desc": "Maandlasten & werkelijke kosten", "href": "/calculators/mortgage" }
+      {
+        "icon": "📊",
+        "label": "Budgetcalculator",
+        "desc": "50/30/20 regel, aangepaste verdeling",
+        "href": "/calculators/budget"
+      },
+      {
+        "icon": "📈",
+        "label": "Samengestelde Rente",
+        "desc": "Visualiseer groei over tijd",
+        "href": "/calculators/compound-interest"
+      },
+      {
+        "icon": "⚖️",
+        "label": "Schuld Aflossen",
+        "desc": "Sneeuwbal vs lawine vergelijking",
+        "href": "/calculators/debt-payoff"
+      },
+      {
+        "icon": "🏠",
+        "label": "Hypotheekcalculator",
+        "desc": "Maandlasten & werkelijke kosten",
+        "href": "/calculators/mortgage"
+      }
     ],
     "trust": [
-      { "number": "6+", "label": "Gratis financiële calculators, altijd bijgewerkt" },
-      { "number": "100%", "label": "Gratis, geen registratie, geen data verkoop" },
-      { "number": "2026", "label": "Modellen bijgewerkt met de laatste tarieven" },
-      { "number": "Globaal", "label": "Werkt in 37 valuta's wereldwijd" }
+      {
+        "number": "6+",
+        "label": "Gratis financiële calculators, altijd bijgewerkt"
+      },
+      {
+        "number": "100%",
+        "label": "Gratis, geen registratie, geen data verkoop"
+      },
+      {
+        "number": "2026",
+        "label": "Modellen bijgewerkt met de laatste tarieven"
+      },
+      {
+        "number": "Globaal",
+        "label": "Werkt in 37 valuta's wereldwijd"
+      }
     ],
     "categories": {
       "heading": "Verken op Onderwerp",
       "viewAll": "Alle Onderwerpen →",
       "items": [
-        { "icon": "💰", "name": "Budgetteren", "count": "2 calculators · 2 gidsen", "href": "/calculators/budget" },
-        { "icon": "📈", "name": "Investeren", "count": "1 calculator · 2 gidsen", "href": "/calculators/compound-interest" },
-        { "icon": "⚖️", "name": "Schuld Aflossen", "count": "2 calculators · 1 gids", "href": "/calculators/debt-payoff" },
-        { "icon": "🌅", "name": "Pensioen", "count": "Binnenkort beschikbaar", "href": "/calculators" },
-        { "icon": "🏠", "name": "Wonen & Hypotheek", "count": "1 calculator · 1 gids", "href": "/calculators/mortgage" },
-        { "icon": "🧾", "name": "Belastingplanning", "count": "Binnenkort beschikbaar", "href": "/calculators" }
+        {
+          "icon": "💰",
+          "name": "Budgetteren",
+          "count": "2 calculators · 2 gidsen",
+          "href": "/calculators/budget"
+        },
+        {
+          "icon": "📈",
+          "name": "Investeren",
+          "count": "1 calculator · 2 gidsen",
+          "href": "/calculators/compound-interest"
+        },
+        {
+          "icon": "⚖️",
+          "name": "Schuld Aflossen",
+          "count": "2 calculators · 1 gids",
+          "href": "/calculators/debt-payoff"
+        },
+        {
+          "icon": "🌅",
+          "name": "Pensioen",
+          "count": "Binnenkort beschikbaar",
+          "href": "/calculators"
+        },
+        {
+          "icon": "🏠",
+          "name": "Wonen & Hypotheek",
+          "count": "1 calculator · 1 gids",
+          "href": "/calculators/mortgage"
+        },
+        {
+          "icon": "🧾",
+          "name": "Belastingplanning",
+          "count": "Binnenkort beschikbaar",
+          "href": "/calculators"
+        }
       ]
     },
     "calculators": {
       "heading": "Financiële Calculators",
       "viewAll": "Alle Calculators →",
       "items": [
-        { "n": "01", "name": "50/30/20 Budgetcalculator", "desc": "Modelleer uw maandelijkse cashflow. Verdeel kapitaal over behoeften, wensen en spaargeld.", "action": "Budget Maken →", "href": "/calculators/budget" },
-        { "n": "02", "name": "Samengestelde Rente Calculator", "desc": "Visualiseer de snelheid van kapitaalgroei. Maandelijkse bijdragen samengesteld over elke tijdshorizon.", "action": "Analyse Uitvoeren →", "href": "/calculators/compound-interest" },
-        { "n": "03", "name": "Schuld Aflos Calculator", "desc": "Sneeuwbal vs lawine vergelijking. Zie precies hoeveel rente elke strategie bespaart.", "action": "Vergelijk Tarieven →", "href": "/calculators/debt-payoff" },
-        { "n": "04", "name": "Hypotheekcalculator", "desc": "Maandlasten, totale rente en de werkelijke kosten van uw hypotheek over elke looptijd.", "action": "Bereken →", "href": "/calculators/mortgage" },
-        { "n": "05", "name": "Spaardoel Calculator", "desc": "Hoe lang duurt het om een doel te bereiken, of hoeveel moet u maandelijks sparen.", "action": "Doel Plannen →", "href": "/calculators/savings-goal" },
-        { "n": "06", "name": "Creditcard Aflossen", "desc": "Zie hoe lang het duurt om uw saldo af te betalen en hoeveel rente u betaalt.", "action": "Nu Berekenen →", "href": "/calculators/credit-card-payoff" }
+        {
+          "n": "01",
+          "name": "50/30/20 Budgetcalculator",
+          "desc": "Modelleer uw maandelijkse cashflow. Verdeel kapitaal over behoeften, wensen en spaargeld.",
+          "action": "Budget Maken →",
+          "href": "/calculators/budget"
+        },
+        {
+          "n": "02",
+          "name": "Samengestelde Rente Calculator",
+          "desc": "Visualiseer de snelheid van kapitaalgroei. Maandelijkse bijdragen samengesteld over elke tijdshorizon.",
+          "action": "Analyse Uitvoeren →",
+          "href": "/calculators/compound-interest"
+        },
+        {
+          "n": "03",
+          "name": "Schuld Aflos Calculator",
+          "desc": "Sneeuwbal vs lawine vergelijking. Zie precies hoeveel rente elke strategie bespaart.",
+          "action": "Vergelijk Tarieven →",
+          "href": "/calculators/debt-payoff"
+        },
+        {
+          "n": "04",
+          "name": "Hypotheekcalculator",
+          "desc": "Maandlasten, totale rente en de werkelijke kosten van uw hypotheek over elke looptijd.",
+          "action": "Bereken →",
+          "href": "/calculators/mortgage"
+        },
+        {
+          "n": "05",
+          "name": "Spaardoel Calculator",
+          "desc": "Hoe lang duurt het om een doel te bereiken, of hoeveel moet u maandelijks sparen.",
+          "action": "Doel Plannen →",
+          "href": "/calculators/savings-goal"
+        },
+        {
+          "n": "06",
+          "name": "Creditcard Aflossen",
+          "desc": "Zie hoe lang het duurt om uw saldo af te betalen en hoeveel rente u betaalt.",
+          "action": "Nu Berekenen →",
+          "href": "/calculators/credit-card-payoff"
+        }
       ]
     },
     "guides": {
       "heading": "Stapsgewijze Gidsen",
       "viewAll": "Alle Gidsen →",
       "items": [
-        { "tag": "Sparen", "title": "Sparen en Budgetteren: Hoe Je Grip Krijgt op Je Financiële Toekomst", "desc": "Waarom budgetteren belangrijker is dan je denkt, hoe je jezelf beschermt tegen financiële tegenslag, en de eerste stap naar grip op je geld.", "href": "/guides/sparen-en-budgetteren" },
-        { "tag": "Investeren", "title": "Hoe te Beginnen met Investeren met €500 of Minder", "desc": "Indexfondsen, fractionele aandelen en samengestelde groei: uw eerste portfolio in minder dan een uur.", "href": "/guides" },
-        { "tag": "Schuld", "title": "Schuld Aflossen Strategieën: Sneeuwbal vs Lawine Vergeleken", "desc": "Welke methode bespaart meer geld? Welke houdt u gemotiveerd? De wiskunde en psychologie, zij aan zij.", "href": "/guides" },
-        { "tag": "Veiligheidsnet", "title": "Hoeveel Noodfonds Heb Je Eigenlijk Nodig?", "desc": "De 3–6 maanden regel is te simpel. Hier is een kader gebaseerd op uw werkelijke risicoprofiel.", "href": "/guides" }
+        {
+          "tag": "Sparen",
+          "title": "Sparen en Budgetteren: Hoe Je Grip Krijgt op Je Financiële Toekomst",
+          "desc": "Waarom budgetteren belangrijker is dan je denkt, hoe je jezelf beschermt tegen financiële tegenslag, en de eerste stap naar grip op je geld.",
+          "href": "/guides/sparen-en-budgetteren"
+        },
+        {
+          "tag": "Investeren",
+          "title": "Hoe te Beginnen met Investeren met €500 of Minder",
+          "desc": "Indexfondsen, fractionele aandelen en samengestelde groei: uw eerste portfolio in minder dan een uur.",
+          "href": "/guides"
+        },
+        {
+          "tag": "Schuld",
+          "title": "Schuld Aflossen Strategieën: Sneeuwbal vs Lawine Vergeleken",
+          "desc": "Welke methode bespaart meer geld? Welke houdt u gemotiveerd? De wiskunde en psychologie, zij aan zij.",
+          "href": "/guides"
+        },
+        {
+          "tag": "Veiligheidsnet",
+          "title": "Hoeveel Noodfonds Heb Je Eigenlijk Nodig?",
+          "desc": "De 3–6 maanden regel is te simpel. Hier is een kader gebaseerd op uw werkelijke risicoprofiel.",
+          "href": "/guides"
+        }
       ]
     },
     "journal": {
       "heading": "Financiële Inzichten & Analyse",
       "viewAll": "Archief Bekijken →",
       "items": [
-        { "featured": true, "tag": "Fiscaal Beleid // Juni 2026", "title": "De Omgekeerde Rentecurve Paradox: Strategieën voor Verlengde Volatiliteit", "desc": "Een verkenning van historische precedenten en moderne risicobeperking in hoge-rente omgevingen.", "href": "/guides" },
-        { "tag": "Aandelen", "title": "Architectuur van een Privé Family Office: Lessen van de 1%", "desc": "Structurele vereisten voor het bewaren en beheren van multigenerationeel vermogen.", "date": "Bijgewerkt 14 juni 2026", "href": "/guides" },
-        { "tag": "Macro", "title": "Reële Activa als Inflatiehedge: Wat de Data Werkelijk Laat Zien", "desc": "Goud, vastgoed, TIPS en grondstoffen: historische prestaties tijdens inflatie sinds 1970.", "date": "Bijgewerkt 8 juni 2026", "href": "/guides" }
+        {
+          "featured": true,
+          "tag": "Fiscaal Beleid // Juni 2026",
+          "title": "De Omgekeerde Rentecurve Paradox: Strategieën voor Verlengde Volatiliteit",
+          "desc": "Een verkenning van historische precedenten en moderne risicobeperking in hoge-rente omgevingen.",
+          "href": "/guides"
+        },
+        {
+          "tag": "Aandelen",
+          "title": "Architectuur van een Privé Family Office: Lessen van de 1%",
+          "desc": "Structurele vereisten voor het bewaren en beheren van multigenerationeel vermogen.",
+          "date": "Bijgewerkt 14 juni 2026",
+          "href": "/guides"
+        },
+        {
+          "tag": "Macro",
+          "title": "Reële Activa als Inflatiehedge: Wat de Data Werkelijk Laat Zien",
+          "desc": "Goud, vastgoed, TIPS en grondstoffen: historische prestaties tijdens inflatie sinds 1970.",
+          "date": "Bijgewerkt 8 juni 2026",
+          "href": "/guides"
+        }
       ]
     },
     "eeat": [
-      { "icon": "🔬", "title": "Methodologie Eerst", "desc": "Elke calculator toont zijn formule. Elk model citeert zijn databron. Volledige transparantie, altijd." },
-      { "icon": "🔄", "title": "Maandelijks Bijgewerkt", "desc": "Rentetarieven, belastingschijven en marktdata vernieuwd bij elke economische cyclus verschuiving." },
-      { "icon": "🛡️", "title": "Geen Conflicten", "desc": "Wij verkopen geen financiële producten. Geen affiliate bias. Tools gebouwd puur voor gebruikersnauwkeurigheid." }
+      {
+        "icon": "🔬",
+        "title": "Methodologie Eerst",
+        "desc": "Elke calculator toont zijn formule. Elk model citeert zijn databron. Volledige transparantie, altijd."
+      },
+      {
+        "icon": "🔄",
+        "title": "Maandelijks Bijgewerkt",
+        "desc": "Rentetarieven, belastingschijven en marktdata vernieuwd bij elke economische cyclus verschuiving."
+      },
+      {
+        "icon": "🛡️",
+        "title": "Transparant Verdienmodel",
+        "desc": "Onze calculators bevatten geen betaalde plaatsing. Sommige uitgaande links kunnen ons commissie opleveren — dat verandert nooit onze berekeningen."
+      }
     ]
   }
 }

@@ -26,7 +26,9 @@
       "insights": "Insights",
       "about": "About",
       "careers": "Careers",
-      "contact": "Contact"
+      "contact": "Contact",
+      "privacy": "Privacy Policy",
+      "disclosure": "How We Make Money"
     },
     "copyright": "All rights reserved.",
     "disclaimer": "No financial advice. Use at your own discretion."
@@ -46,64 +48,212 @@
       "cta_secondary": "Read Free Guides"
     },
     "heroGrid": [
-      { "icon": "📊", "label": "Budget Calculator", "desc": "50/30/20 rule, custom allocation", "href": "/calculators/budget" },
-      { "icon": "📈", "label": "Compound Interest", "desc": "Visualise growth over time", "href": "/calculators/compound-interest" },
-      { "icon": "⚖️", "label": "Debt Payoff", "desc": "Avalanche vs snowball comparison", "href": "/calculators/debt-payoff" },
-      { "icon": "🏠", "label": "Mortgage Calculator", "desc": "Monthly payments & true cost", "href": "/calculators/mortgage" }
+      {
+        "icon": "📊",
+        "label": "Budget Calculator",
+        "desc": "50/30/20 rule, custom allocation",
+        "href": "/calculators/budget"
+      },
+      {
+        "icon": "📈",
+        "label": "Compound Interest",
+        "desc": "Visualise growth over time",
+        "href": "/calculators/compound-interest"
+      },
+      {
+        "icon": "⚖️",
+        "label": "Debt Payoff",
+        "desc": "Avalanche vs snowball comparison",
+        "href": "/calculators/debt-payoff"
+      },
+      {
+        "icon": "🏠",
+        "label": "Mortgage Calculator",
+        "desc": "Monthly payments & true cost",
+        "href": "/calculators/mortgage"
+      }
     ],
     "trust": [
-      { "number": "6+", "label": "Free financial calculators, always updated" },
-      { "number": "100%", "label": "Free, no sign-up, no data selling" },
-      { "number": "2026", "label": "Models updated with latest rates and data" },
-      { "number": "Global", "label": "Works in 37 currencies worldwide" }
+      {
+        "number": "6+",
+        "label": "Free financial calculators, always updated"
+      },
+      {
+        "number": "100%",
+        "label": "Free, no sign-up, no data selling"
+      },
+      {
+        "number": "2026",
+        "label": "Models updated with latest rates and data"
+      },
+      {
+        "number": "Global",
+        "label": "Works in 37 currencies worldwide"
+      }
     ],
     "categories": {
       "heading": "Explore by Topic",
       "viewAll": "View All Topics →",
       "items": [
-        { "icon": "💰", "name": "Budgeting", "count": "2 calculators · 2 guides", "href": "/calculators/budget" },
-        { "icon": "📈", "name": "Investing", "count": "1 calculator · 2 guides", "href": "/calculators/compound-interest" },
-        { "icon": "⚖️", "name": "Debt Payoff", "count": "2 calculators · 1 guide", "href": "/calculators/debt-payoff" },
-        { "icon": "🌅", "name": "Retirement", "count": "Coming soon", "href": "/calculators" },
-        { "icon": "🏠", "name": "Housing & Mortgage", "count": "1 calculator · 1 guide", "href": "/calculators/mortgage" },
-        { "icon": "🧾", "name": "Tax Planning", "count": "Coming soon", "href": "/calculators" }
+        {
+          "icon": "💰",
+          "name": "Budgeting",
+          "count": "2 calculators · 2 guides",
+          "href": "/calculators/budget"
+        },
+        {
+          "icon": "📈",
+          "name": "Investing",
+          "count": "1 calculator · 2 guides",
+          "href": "/calculators/compound-interest"
+        },
+        {
+          "icon": "⚖️",
+          "name": "Debt Payoff",
+          "count": "2 calculators · 1 guide",
+          "href": "/calculators/debt-payoff"
+        },
+        {
+          "icon": "🌅",
+          "name": "Retirement",
+          "count": "Coming soon",
+          "href": "/calculators"
+        },
+        {
+          "icon": "🏠",
+          "name": "Housing & Mortgage",
+          "count": "1 calculator · 1 guide",
+          "href": "/calculators/mortgage"
+        },
+        {
+          "icon": "🧾",
+          "name": "Tax Planning",
+          "count": "Coming soon",
+          "href": "/calculators"
+        }
       ]
     },
     "calculators": {
       "heading": "Financial Calculators",
       "viewAll": "All Calculators →",
       "items": [
-        { "n": "01", "name": "50/30/20 Budget Calculator", "desc": "Model your monthly cash flow. Allocate capital across needs, wants, and savings with precision.", "action": "Build Budget →", "href": "/calculators/budget" },
-        { "n": "02", "name": "Compound Interest Calculator", "desc": "Visualise the velocity of capital. Monthly contributions compounded across any time horizon.", "action": "Run Analysis →", "href": "/calculators/compound-interest" },
-        { "n": "03", "name": "Debt Payoff Calculator", "desc": "Snowball vs avalanche comparison. See exactly how much interest each strategy saves.", "action": "Compare Rates →", "href": "/calculators/debt-payoff" },
-        { "n": "04", "name": "Mortgage Calculator", "desc": "Monthly payments, total interest, and the true cost of your home loan across any term.", "action": "Calculate →", "href": "/calculators/mortgage" },
-        { "n": "05", "name": "Savings Goal Calculator", "desc": "How long to reach any target, or how much to save each month to get there.", "action": "Plan Goal →", "href": "/calculators/savings-goal" },
-        { "n": "06", "name": "Credit Card Payoff", "desc": "See how long to pay off your balance and how much interest you'll pay at any payment level.", "action": "Calculate Now →", "href": "/calculators/credit-card-payoff" }
+        {
+          "n": "01",
+          "name": "50/30/20 Budget Calculator",
+          "desc": "Model your monthly cash flow. Allocate capital across needs, wants, and savings with precision.",
+          "action": "Build Budget →",
+          "href": "/calculators/budget"
+        },
+        {
+          "n": "02",
+          "name": "Compound Interest Calculator",
+          "desc": "Visualise the velocity of capital. Monthly contributions compounded across any time horizon.",
+          "action": "Run Analysis →",
+          "href": "/calculators/compound-interest"
+        },
+        {
+          "n": "03",
+          "name": "Debt Payoff Calculator",
+          "desc": "Snowball vs avalanche comparison. See exactly how much interest each strategy saves.",
+          "action": "Compare Rates →",
+          "href": "/calculators/debt-payoff"
+        },
+        {
+          "n": "04",
+          "name": "Mortgage Calculator",
+          "desc": "Monthly payments, total interest, and the true cost of your home loan across any term.",
+          "action": "Calculate →",
+          "href": "/calculators/mortgage"
+        },
+        {
+          "n": "05",
+          "name": "Savings Goal Calculator",
+          "desc": "How long to reach any target, or how much to save each month to get there.",
+          "action": "Plan Goal →",
+          "href": "/calculators/savings-goal"
+        },
+        {
+          "n": "06",
+          "name": "Credit Card Payoff",
+          "desc": "See how long to pay off your balance and how much interest you'll pay at any payment level.",
+          "action": "Calculate Now →",
+          "href": "/calculators/credit-card-payoff"
+        }
       ]
     },
     "guides": {
       "heading": "Step-by-Step Guides",
       "viewAll": "All Guides →",
       "items": [
-        { "tag": "Saving", "title": "Saving and Budgeting: How to Take Control of Your Financial Future", "desc": "Why budgeting matters more than you think, how to protect yourself from financial disruption, and the first step to taking control.", "href": "/guides/saving-and-budgeting" },
-        { "tag": "Investing", "title": "How to Start Investing with €500 or Less", "desc": "Index funds, fractional shares, and compound growth: your first portfolio in under an hour.", "href": "/guides" },
-        { "tag": "Debt", "title": "Debt Payoff Strategies: Snowball vs Avalanche Compared", "desc": "Which method saves more money? Which keeps you motivated? The math and psychology, side by side.", "href": "/guides" },
-        { "tag": "Safety Net", "title": "How Much Emergency Fund Do You Actually Need?", "desc": "The 3–6 month rule is too simple. Here's a framework based on your real risk profile.", "href": "/guides" }
+        {
+          "tag": "Saving",
+          "title": "Saving and Budgeting: How to Take Control of Your Financial Future",
+          "desc": "Why budgeting matters more than you think, how to protect yourself from financial disruption, and the first step to taking control.",
+          "href": "/guides/saving-and-budgeting"
+        },
+        {
+          "tag": "Investing",
+          "title": "How to Start Investing with €500 or Less",
+          "desc": "Index funds, fractional shares, and compound growth: your first portfolio in under an hour.",
+          "href": "/guides"
+        },
+        {
+          "tag": "Debt",
+          "title": "Debt Payoff Strategies: Snowball vs Avalanche Compared",
+          "desc": "Which method saves more money? Which keeps you motivated? The math and psychology, side by side.",
+          "href": "/guides"
+        },
+        {
+          "tag": "Safety Net",
+          "title": "How Much Emergency Fund Do You Actually Need?",
+          "desc": "The 3–6 month rule is too simple. Here's a framework based on your real risk profile.",
+          "href": "/guides"
+        }
       ]
     },
     "journal": {
       "heading": "Financial Insights & Analysis",
       "viewAll": "Browse Archives →",
       "items": [
-        { "featured": true, "tag": "Fiscal Policy // June 2026", "title": "The Inverted Yield Curve Paradox: Strategies for Extended Volatility", "desc": "An exploration of historical precedence and modern risk mitigation in high-interest environments.", "href": "/guides" },
-        { "tag": "Equities", "title": "Architecture of a Private Family Office: Lessons from the 1%", "desc": "Structural requirements for multi-generational wealth preservation and governance.", "date": "Updated June 14, 2026", "href": "/guides" },
-        { "tag": "Macro", "title": "Real Assets as Inflation Hedge: What the Data Actually Shows", "desc": "Gold, real estate, TIPS, and commodities: historical performance during inflationary periods since 1970.", "date": "Updated June 8, 2026", "href": "/guides" }
+        {
+          "featured": true,
+          "tag": "Fiscal Policy // June 2026",
+          "title": "The Inverted Yield Curve Paradox: Strategies for Extended Volatility",
+          "desc": "An exploration of historical precedence and modern risk mitigation in high-interest environments.",
+          "href": "/guides"
+        },
+        {
+          "tag": "Equities",
+          "title": "Architecture of a Private Family Office: Lessons from the 1%",
+          "desc": "Structural requirements for multi-generational wealth preservation and governance.",
+          "date": "Updated June 14, 2026",
+          "href": "/guides"
+        },
+        {
+          "tag": "Macro",
+          "title": "Real Assets as Inflation Hedge: What the Data Actually Shows",
+          "desc": "Gold, real estate, TIPS, and commodities: historical performance during inflationary periods since 1970.",
+          "date": "Updated June 8, 2026",
+          "href": "/guides"
+        }
       ]
     },
     "eeat": [
-      { "icon": "🔬", "title": "Methodology First", "desc": "Every calculator shows its formula. Every model cites its data source. Full transparency, always." },
-      { "icon": "🔄", "title": "Updated Monthly", "desc": "Interest rates, tax brackets, and market data refreshed with every economic cycle shift." },
-      { "icon": "🛡️", "title": "No Conflicts", "desc": "We don't sell financial products. No affiliate bias. Tools built purely for user accuracy." }
+      {
+        "icon": "🔬",
+        "title": "Methodology First",
+        "desc": "Every calculator shows its formula. Every model cites its data source. Full transparency, always."
+      },
+      {
+        "icon": "🔄",
+        "title": "Updated Monthly",
+        "desc": "Interest rates, tax brackets, and market data refreshed with every economic cycle shift."
+      },
+      {
+        "icon": "🛡️",
+        "title": "Transparent About Money",
+        "desc": "Our calculators contain no paid placement. Some outbound links may earn us a commission — that never changes the math."
+      }
     ]
   }
 }

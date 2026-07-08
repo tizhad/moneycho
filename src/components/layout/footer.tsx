@@ -37,6 +37,11 @@ export function Footer({ lang, dict }: { lang: Locale; dict: FooterDict }) {
         { label: dict.links.about, href: p("/about") },
         { label: dict.links.careers, href: p("/careers") },
         { label: dict.links.contact, href: p("/contact") },
+        { label: dict.links.privacy, href: p("/privacy") },
+        {
+          label: dict.links.disclosure,
+          href: lang === "nl" ? "/nl/verdienmodel" : "/en/how-we-make-money",
+        },
       ],
     },
   ];
