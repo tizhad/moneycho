@@ -46,7 +46,9 @@ async function dfsPost(endpoint, body) {
   });
   const json = await res.json();
   if (json.status_code !== 20000) throw new Error(`DFS error: ${json.status_message}`);
-  return json.tasks[0].result ?? [];
+  const task = json.tasks[0];
+  if (task.status_code !== 20000) throw new Error(`DFS task error (${task.status_code}): ${task.status_message}`);
+  return task.result ?? [];
 }
 
 // ---------- Fetch keyword universe ----------
