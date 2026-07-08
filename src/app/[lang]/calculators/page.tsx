@@ -147,11 +147,19 @@ const calculators = [
     action: 'Bereken kosten',
     tag: 'Eigen woning',
   },
+  {
+    index: '13',
+    title: 'Rent vs Buy',
+    description:
+      'Compare the long-term net worth of renting vs buying, including overdrachtsbelasting, NHG, and eigenwoningforfait. See your breakeven year.',
+    href: '/calculators/rent-vs-buy',
+    action: 'Compare',
+    tag: 'Real Estate',
+  },
 ];
 
 const comingSoon = [
   { title: 'Net Worth', tag: 'Planning', href: '#' },
-  { title: 'Rent vs Buy', tag: 'Real Estate', href: '#' },
   { title: 'Investment Growth', tag: 'Investing', href: '#' },
   { title: 'FIRE Number', tag: 'Retirement', href: '#' },
   { title: 'Loan Calculator', tag: 'Debt', href: '#' },

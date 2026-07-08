@@ -14,6 +14,7 @@ const CALCULATOR_SLUGS = [
   'cash-flow',
   'annuiteit',
   'kosten-koper',
+  'rent-vs-buy',
 ];
 
 const nextConfig: NextConfig = {
