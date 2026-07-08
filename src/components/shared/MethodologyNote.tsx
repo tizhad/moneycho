@@ -19,6 +19,10 @@ const SOURCES: Record<string, { en: string; nl: string }> = {
     en: 'Belastingdienst transfer tax (overdrachtsbelasting) 2026 incl. starter exemption · indicative notary and appraisal fees',
     nl: 'Belastingdienst overdrachtsbelasting 2026 incl. startersvrijstelling · indicatieve notaris- en taxatiekosten',
   },
+  'rent-vs-buy': {
+    en: 'Belastingdienst overdrachtsbelasting and hypotheekrenteaftrek cap (2026) · NHG cost limit €470,000 (2026) · eigenwoningforfait modelled as a simplified flat rate (indicative, not the tiered official schedule) · standard annuity mortgage math; no external data feeds',
+    nl: 'Belastingdienst overdrachtsbelasting en cap hypotheekrenteaftrek (2026) · NHG-kostengrens € 470.000 (2026) · eigenwoningforfait gemodelleerd als vereenvoudigd vast percentage (indicatief, niet de officiële schijvenregeling) · standaard annuïteitenwiskunde; geen externe databronnen',
+  },
   'budget-planner': {
     en: '50/30/20 budgeting method · Nibud reference budgets',
     nl: '50/30/20-budgetmethode · Nibud-referentiebudgetten',

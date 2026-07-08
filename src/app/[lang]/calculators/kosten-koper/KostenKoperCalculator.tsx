@@ -5,7 +5,7 @@ import { useState, useMemo } from "react";
 const NHG_LIMIT = 470_000;
 const STARTER_LIMIT = 555_000;
 const TRANSFER_RATE = 0.02;
-const INVESTOR_RATE = 0.104;
+const INVESTOR_RATE = 0.08; // 2026 rate (dropped from 10.4% in prior years)
 const NHG_RATE = 0.004;
 
 type BuyerType = "starter" | "owner" | "investor";

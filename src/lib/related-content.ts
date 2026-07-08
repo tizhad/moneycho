@@ -51,6 +51,10 @@ const CALCULATORS: Record<string, Record<Locale, { title: string; description: s
     en: { title: "Dutch Buyer's Costs Calculator", description: 'Calculate all closing costs when buying a home in the Netherlands: transfer tax, notary, NHG, and more.', tag: 'Real Estate' },
     nl: { title: 'Kosten Koper Calculator', description: 'Bereken alle bijkomende kosten bij het kopen van een huis: overdrachtsbelasting, notariskosten, NHG en meer.', tag: 'Eigen woning' },
   },
+  'rent-vs-buy': {
+    en: { title: 'Rent vs Buy Calculator', description: 'Compare the long-term net worth of renting vs buying, including overdrachtsbelasting, NHG, and eigenwoningforfait.', tag: 'Real Estate' },
+    nl: { title: 'Huren vs Kopen Calculator', description: 'Vergelijk het vermogen van huren en kopen op lange termijn, inclusief overdrachtsbelasting, NHG en eigenwoningforfait.', tag: 'Eigen woning' },
+  },
 };
 
 // Related content map: article/calculator slug → related slugs (type:slug format)
@@ -172,6 +176,7 @@ const RELATED_MAP: Record<string, string[]> = {
   'calculator:mortgage': [
     'calculator:kosten-koper',
     'calculator:borrowing-capacity',
+    'calculator:rent-vs-buy',
     'article:overdrachtsbelasting-2026',
     'article:transfer-tax-netherlands-2026',
     'article:hypotheek-berekenen',
@@ -217,8 +222,16 @@ const RELATED_MAP: Record<string, string[]> = {
     'article:overdrachtsbelasting-2026',
     'article:transfer-tax-netherlands-2026',
     'calculator:mortgage',
+    'calculator:rent-vs-buy',
     'calculator:borrowing-capacity',
     'article:hypotheek-berekenen',
+  ],
+  'calculator:rent-vs-buy': [
+    'calculator:mortgage',
+    'calculator:kosten-koper',
+    'calculator:borrowing-capacity',
+    'article:hypotheek-berekenen',
+    'article:calculating-dutch-mortgage',
   ],
 
   // ── Transfer tax guides (NL + EN) ─────────────────────────────
