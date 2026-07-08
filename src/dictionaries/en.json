@@ -25,10 +25,8 @@
       "allGuides": "All Guides",
       "insights": "Insights",
       "about": "About",
-      "careers": "Careers",
       "contact": "Contact",
-      "privacy": "Privacy Policy",
-      "disclosure": "How We Make Money"
+      "privacy": "Privacy Policy"
     },
     "copyright": "All rights reserved.",
     "disclaimer": "No financial advice. Use at your own discretion."
@@ -43,7 +41,7 @@
       "h1_1": "Budget, Invest, Save.",
       "h1_2": "Backed by",
       "h1_em": "Better Math.",
-      "body": "Free calculators for every money decision: budget, debt, savings, mortgage, and retirement. Clear results, honest math. No sign-up, no fees.",
+      "body": "Free calculators for every money decision: budget, debt, savings, mortgage, and retirement. Clear results, honest math.",
       "cta_primary": "Try Our Calculators →",
       "cta_secondary": "Read Free Guides"
     },
@@ -71,24 +69,6 @@
         "label": "Mortgage Calculator",
         "desc": "Monthly payments & true cost",
         "href": "/calculators/mortgage"
-      }
-    ],
-    "trust": [
-      {
-        "number": "6+",
-        "label": "Free financial calculators, always updated"
-      },
-      {
-        "number": "100%",
-        "label": "Free, no sign-up, no data selling"
-      },
-      {
-        "number": "2026",
-        "label": "Models updated with latest rates and data"
-      },
-      {
-        "number": "Global",
-        "label": "Works in 37 currencies worldwide"
       }
     ],
     "categories": {

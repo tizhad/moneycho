@@ -20,7 +20,7 @@ export async function generateMetadata({
     : 'Free Financial Calculators & Money Guides | MoneyCho';
   const description = isNL
     ? 'Gratis calculators voor budget, schulden, sparen, hypotheek en pensioen. Stap-voor-stap gidsen. Geen aanmelding vereist.'
-    : 'Free calculators for budget, debt, savings, mortgage, and retirement. Step-by-step guides and expert analysis. No sign-up, no fees.';
+    : 'Free calculators for budget, debt, savings, mortgage, and retirement. Step-by-step guides and expert analysis.';
   return {
     title,
     description,
@@ -54,7 +54,9 @@ export default async function HomePage({
   const t = dict.home;
   const p = (path: string) => `/${lang}${path}`;
 
-  const latestGuides = [...(guides[lang as Locale] ?? [])].reverse().slice(0, 3);
+  const latestGuides = [...(guides[lang as Locale] ?? [])]
+    .reverse()
+    .slice(0, 3);
 
   return (
     <>
@@ -89,22 +91,6 @@ export default async function HomePage({
           </div>
         </div>
       </section>
-
-      {/* TRUST BAR */}
-      <div className="hidden md:block bg-emerald-deep py-5 px-6">
-        <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-6">
-          {t.trust.map((s) => (
-            <div key={s.number} className="flex items-center gap-3 text-paper">
-              <span className="font-serif font-normal text-[1.4rem] text-gold-bright">
-                {s.number}
-              </span>
-              <span className="text-[0.8rem] opacity-85 leading-snug max-w-[18ch]">
-                {s.label}
-              </span>
-            </div>
-          ))}
-        </div>
-      </div>
 
       {/* JOURNAL */}
       {latestGuides.length > 0 && (

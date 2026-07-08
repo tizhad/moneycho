@@ -25,10 +25,8 @@
       "allGuides": "Alle Gidsen",
       "insights": "Inzichten",
       "about": "Over ons",
-      "careers": "Vacatures",
       "contact": "Contact",
-      "privacy": "Privacybeleid",
-      "disclosure": "Verdienmodel"
+      "privacy": "Privacybeleid"
     },
     "copyright": "Alle rechten voorbehouden.",
     "disclaimer": "Geen financieel advies. Gebruik op eigen risico."
@@ -71,24 +69,6 @@
         "label": "Hypotheekcalculator",
         "desc": "Maandlasten & werkelijke kosten",
         "href": "/calculators/mortgage"
-      }
-    ],
-    "trust": [
-      {
-        "number": "6+",
-        "label": "Gratis financiële calculators, altijd bijgewerkt"
-      },
-      {
-        "number": "100%",
-        "label": "Gratis, geen registratie, geen data verkoop"
-      },
-      {
-        "number": "2026",
-        "label": "Modellen bijgewerkt met de laatste tarieven"
-      },
-      {
-        "number": "Globaal",
-        "label": "Werkt in 37 valuta's wereldwijd"
       }
     ],
     "categories": {
