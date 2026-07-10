@@ -202,6 +202,10 @@ const EDITORIAL = {
         q: 'Wat is samengestelde rente?',
         a: 'Samengestelde rente is een ander woord voor rente op rente: rente die wordt berekend over het startbedrag én over alle eerder ontvangen rente. In het Engels heet dit compound interest. Deze calculator berekent samengestelde rente inclusief maandelijkse inleg, zodat je ziet wat sparen of beleggen over de jaren oplevert.',
       },
+      {
+        q: 'Is samengestelde interest hetzelfde als samengestelde rente?',
+        a: 'Ja, samengestelde interest en samengestelde rente zijn dezelfde term — "interest" is de Engelse leenwoord-variant die je vaak in het Nederlands tegenkomt. Beide betekenen rente op rente: je verdient rente over je startbedrag én over alle rente die je al hebt opgebouwd. Deze calculator berekent samengestelde interest/rente inclusief maandelijkse inleg.',
+      },
     ],
   },
 } as const;
