@@ -20,7 +20,7 @@ export async function generateMetadata({
     : 'Free Financial Calculators & Money Guides | MoneyCho';
   const description = isNL
     ? 'Gratis calculators voor budget, schulden, sparen, hypotheek en pensioen. Stap-voor-stap gidsen. Geen aanmelding vereist.'
-    : 'Free calculators for budget, debt, savings, mortgage, and retirement. Step-by-step guides and expert analysis. No sign-up, no fees.';
+    : 'Free calculators for budget, debt, savings, mortgage, and retirement. Step-by-step guides and expert analysis.';
   return {
     title,
     description,
@@ -38,7 +38,7 @@ export async function generateMetadata({
       type: 'website',
       url: `${BASE}/${lang}`,
     },
-    twitter: { card: 'summary', title, description },
+    twitter: { card: 'summary_large_image', title, description },
   };
 }
 
@@ -54,12 +54,14 @@ export default async function HomePage({
   const t = dict.home;
   const p = (path: string) => `/${lang}${path}`;
 
-  const latestGuides = [...(guides[lang as Locale] ?? [])].reverse().slice(0, 3);
+  const latestGuides = [...(guides[lang as Locale] ?? [])]
+    .reverse()
+    .slice(0, 3);
 
   return (
     <>
       {/* HERO */}
-      <section className="bg-emerald-deep min-h-[400px] flex flex-col justify-center px-8 py-16 lg:px-20 xl:px-28">
+      <section className="bg-emerald-deep min-h-50 flex flex-col justify-center px-8 py-8 lg:px-20 xl:px-28">
         <div className="max-w-[700px]">
           <p className="text-[0.65rem] font-bold uppercase tracking-[0.2em] text-gold-bright mb-5">
             {t.hero.eyebrow}
@@ -76,13 +78,13 @@ export default async function HomePage({
           <div className="flex gap-3 flex-wrap">
             <Link
               href={p('/calculators')}
-              className="inline-flex items-center px-6 py-3 bg-paper text-emerald-deep text-[0.85rem] font-semibold rounded-md hover:bg-gold hover:text-paper transition-all no-underline"
+              className="inline-flex items-center px-3 py-3 bg-paper text-emerald-deep text-[0.85rem] font-semibold rounded-md hover:bg-gold hover:text-paper transition-all no-underline"
             >
               {t.hero.cta_primary}
             </Link>
             <Link
               href={p('/guides')}
-              className="inline-flex items-center px-6 py-3 border border-paper/30 text-paper text-[0.85rem] font-semibold rounded-md hover:bg-paper/10 transition-all no-underline"
+              className="inline-flex items-center px-3 py-3 border border-paper/30 text-paper text-[0.85rem] font-semibold rounded-md hover:bg-paper/10 transition-all no-underline"
             >
               {t.hero.cta_secondary}
             </Link>
@@ -90,27 +92,11 @@ export default async function HomePage({
         </div>
       </section>
 
-      {/* TRUST BAR */}
-      <div className="hidden md:block bg-emerald-deep py-5 px-6">
-        <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-6">
-          {t.trust.map((s) => (
-            <div key={s.number} className="flex items-center gap-3 text-paper">
-              <span className="font-serif font-normal text-[1.4rem] text-gold-bright">
-                {s.number}
-              </span>
-              <span className="text-[0.8rem] opacity-85 leading-snug max-w-[18ch]">
-                {s.label}
-              </span>
-            </div>
-          ))}
-        </div>
-      </div>
-
       {/* JOURNAL */}
       {latestGuides.length > 0 && (
-        <section className="max-w-7xl mx-auto px-6 py-20">
+        <section className="max-w-7xl mx-auto px-6 py-15">
           <div className="flex items-baseline justify-between mb-10 flex-wrap gap-3">
-            <h2 className="font-serif font-black text-[clamp(1.8rem,3vw,2.4rem)] text-emerald-deep">
+            <h2 className="font-serif font-black text-2xl sm:text-[clamp(1.8rem,3vw,2.4rem)] text-emerald-deep">
               {t.journal.heading}
             </h2>
             <Link
@@ -123,7 +109,7 @@ export default async function HomePage({
           <div className="grid min-[930px]:grid-cols-2 gap-8">
             <Link
               href={p(`/guides/${latestGuides[0].slug}`)}
-              className="min-[930px]:row-span-2 p-10 bg-emerald-deep rounded-lg flex flex-col justify-end min-h-90 hover:-translate-y-0.5 transition-all no-underline"
+              className="min-[930px]:row-span-2 p-6 bg-emerald-deep rounded-lg flex flex-col justify-end min-h-90 hover:-translate-y-0.5 transition-all no-underline"
             >
               <span className="text-[0.7rem] font-semibold tracking-[0.08em] uppercase text-gold-bright mb-3 block">
                 {latestGuides[0].tag}
@@ -139,7 +125,7 @@ export default async function HomePage({
               <Link
                 key={guide.slug}
                 href={p(`/guides/${guide.slug}`)}
-                className="p-7 border border-border-light rounded-lg flex flex-col hover:border-gold-muted hover:-translate-y-px transition-all no-underline"
+                className="p-5 border border-border-light rounded-lg flex flex-col hover:border-gold-muted hover:-translate-y-px transition-all no-underline"
               >
                 <span className="self-end text-[0.6rem] font-semibold tracking-[0.08em] uppercase text-gold bg-gold/10 px-2 py-0.5 rounded-sm mb-4">
                   {guide.tag}
@@ -150,7 +136,7 @@ export default async function HomePage({
                 <p className="text-[0.82rem] text-text-secondary leading-relaxed">
                   {guide.description}
                 </p>
-                <span className="text-[0.72rem] text-text-tertiary mt-3">
+                <span className="text-sm text-text-tertiary mt-3">
                   {guide.date}
                 </span>
               </Link>
@@ -160,10 +146,10 @@ export default async function HomePage({
       )}
 
       {/* FEATURED CALCULATORS */}
-      <section className="max-w-7xl mx-auto px-6 py-20">
+      <section className="max-w-7xl mx-auto px-6 py-15">
         <div className="flex items-baseline justify-between mb-10 flex-wrap gap-3">
           <h2 className="font-serif font-black text-[clamp(1.8rem,3vw,2.4rem)] text-emerald-deep">
-            See Them in Action
+            Try a Calculator
           </h2>
           <Link
             href={p('/calculators')}

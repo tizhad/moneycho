@@ -43,11 +43,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...urls("/guides", 0.8, "weekly"),
     ...guideUrls,
     ...urls("/about", 0.5, "yearly"),
-    ...urls("/careers", 0.5, "monthly"),
     ...urls("/contact", 0.4, "yearly"),
     ...urls("/privacy", 0.3, "yearly"),
-    // Disclosure page has locale-specific slugs
-    { url: `${BASE_URL}/nl/verdienmodel`, lastModified: now, changeFrequency: "yearly" as const, priority: 0.3 },
-    { url: `${BASE_URL}/en/how-we-make-money`, lastModified: now, changeFrequency: "yearly" as const, priority: 0.3 },
   ];
 }

@@ -9,7 +9,7 @@
     "allTools": "Alle Tools"
   },
   "footer": {
-    "tagline": "Gratis financiële calculators, gidsen en tools die mensen helpen slimmere geldbeslissingen te nemen. Geen registratie vereist.",
+    "tagline": "Gratis financiële calculators, gidsen en tools die mensen helpen slimmere geldbeslissingen te nemen.",
     "columns": {
       "calculators": "Calculators",
       "learn": "Leren",
@@ -25,10 +25,8 @@
       "allGuides": "Alle Gidsen",
       "insights": "Inzichten",
       "about": "Over ons",
-      "careers": "Vacatures",
       "contact": "Contact",
-      "privacy": "Privacybeleid",
-      "disclosure": "Verdienmodel"
+      "privacy": "Privacybeleid"
     },
     "copyright": "Alle rechten voorbehouden.",
     "disclaimer": "Geen financieel advies. Gebruik op eigen risico."
@@ -39,11 +37,11 @@
   },
   "home": {
     "hero": {
-      "eyebrow": "Gratis Financiële Tools · Geen Registratie",
+      "eyebrow": "Gratis Financiële Tools & Gidsen",
       "h1_1": "Budgetteren, Beleggen, Sparen.",
       "h1_2": "onderbouwd met",
       "h1_em": "Betere Wiskunde.",
-      "body": "Gratis calculators voor elke geldbeslissing: budget, schulden, sparen, hypotheek en pensioen. Heldere resultaten, eerlijke wiskunde. Geen registratie, geen kosten.",
+      "body": "Gratis calculators voor elke geldbeslissing: budget, schulden, sparen, hypotheek en pensioen. Heldere resultaten, eerlijke wiskunde.",
       "cta_primary": "Probeer Onze Calculators →",
       "cta_secondary": "Lees Gratis Gidsen"
     },
@@ -71,24 +69,6 @@
         "label": "Hypotheekcalculator",
         "desc": "Maandlasten & werkelijke kosten",
         "href": "/calculators/mortgage"
-      }
-    ],
-    "trust": [
-      {
-        "number": "6+",
-        "label": "Gratis financiële calculators, altijd bijgewerkt"
-      },
-      {
-        "number": "100%",
-        "label": "Gratis, geen registratie, geen data verkoop"
-      },
-      {
-        "number": "2026",
-        "label": "Modellen bijgewerkt met de laatste tarieven"
-      },
-      {
-        "number": "Globaal",
-        "label": "Werkt in 37 valuta's wereldwijd"
       }
     ],
     "categories": {
@@ -212,8 +192,8 @@
       ]
     },
     "journal": {
-      "heading": "Financiële Inzichten & Analyse",
-      "viewAll": "Archief Bekijken →",
+      "heading": "Financiële Gidsen",
+      "viewAll": "Alle Artikelen →",
       "items": [
         {
           "featured": true,

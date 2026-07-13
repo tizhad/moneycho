@@ -35,7 +35,7 @@ export const metadata = {
 
 ### 2. Title and H1
 
-- [ ] H1 (`# Title`) is present and matches `metadata.title` exactly
+- [ ] Article body does NOT start with its own `# Title` line — the H1 is rendered by the page shell from `metadata.title` (avoids a duplicate H1)
 - [ ] Title contains the primary keyword (ideally near the start)
 - [ ] Title is 50–65 characters (fits Google's title display)
 - [ ] No clickbait; title delivers on what the article actually covers

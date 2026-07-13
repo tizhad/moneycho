@@ -115,11 +115,14 @@ export default async function ArticlePage({
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <div className="border-b border-emerald-deep/10 mb-12">
+      <div className="border-b border-emerald-deep/10 pb-6 mb-8">
         <span className="text-xs font-bold text-gold tracking-[0.2em] uppercase block mb-4">
           {metadata?.tag}
         </span>
-        <div className="flex items-center gap-3 mb-12">
+        <h1 className="font-display text-4xl md:text-5xl font-bold text-emerald-deep tracking-tight mb-4">
+          {metadata?.title}
+        </h1>
+        <div className="flex items-center gap-3">
           <p className="text-xs uppercase tracking-widest text-emerald-deep/40">
             {metadata?.date}
           </p>

@@ -28,7 +28,7 @@ export function Header({ lang, nav }: { lang: Locale; nav: Nav }) {
   ];
 
   return (
-    <nav className="sticky top-0 z-50 bg-paper border-b border-border-light">
+    <header role="banner" className="sticky top-0 z-50 bg-paper border-b border-border-light">
       <div className="max-w-[1280px] mx-auto px-6 flex items-center justify-between h-16">
         <Link
           href={p("/")}
@@ -39,18 +39,20 @@ export function Header({ lang, nav }: { lang: Locale; nav: Nav }) {
         </Link>
 
         {/* Desktop nav */}
-        <ul className="hidden md:flex items-center gap-8 list-none">
-          {links.map((link) => (
-            <li key={link.href}>
-              <Link
-                href={link.href}
-                className="text-sm font-medium text-text-secondary hover:text-emerald-deep tracking-[0.02em] transition-colors no-underline"
-              >
-                {link.label}
-              </Link>
-            </li>
-          ))}
-        </ul>
+        <nav aria-label="Main">
+          <ul className="hidden md:flex items-center gap-8 list-none">
+            {links.map((link) => (
+              <li key={link.href}>
+                <Link
+                  href={link.href}
+                  className="text-sm font-medium text-text-secondary hover:text-emerald-deep tracking-[0.02em] transition-colors no-underline"
+                >
+                  {link.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
 
         <div className="flex items-center gap-3">
           <LanguageSwitcher lang={lang} />
@@ -62,7 +64,7 @@ export function Header({ lang, nav }: { lang: Locale; nav: Nav }) {
           </Link>
           <button
             onClick={() => setOpen(!open)}
-            className="md:hidden p-2 -mr-2 text-emerald-deep"
+            className="md:hidden min-w-11 min-h-11 flex items-center justify-center -mr-2 text-emerald-deep"
             aria-label={open ? "Close menu" : "Open menu"}
             aria-expanded={open}
           >
@@ -73,7 +75,7 @@ export function Header({ lang, nav }: { lang: Locale; nav: Nav }) {
 
       {/* Mobile dropdown */}
       {open && (
-        <div className="md:hidden bg-paper border-t border-border-light">
+        <nav aria-label="Mobile" className="md:hidden bg-paper border-t border-border-light">
           <div className="max-w-[1280px] mx-auto px-6 py-4 flex flex-col gap-1">
             {links.map((link) => (
               <Link
@@ -93,8 +95,8 @@ export function Header({ lang, nav }: { lang: Locale; nav: Nav }) {
               {nav.allTools}
             </Link>
           </div>
-        </div>
+        </nav>
       )}
-    </nav>
+    </header>
   );
 }
